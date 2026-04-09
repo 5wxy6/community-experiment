@@ -175,7 +175,7 @@ flowScheduler.add(Experiment_EndRoutineEnd());
 flowScheduler.add(quitPsychoJS, 'Thank you for your patience.', true);
 
 // Delay experiment start until participant form is submitted
-window.startExperiment = async function(formData) {
+window.startExperiment = function(formData) {
   // Update expInfo with form data
   if (formData) {
     expInfo['participant'] = formData.participant;
@@ -183,8 +183,8 @@ window.startExperiment = async function(formData) {
     expInfo['group'] = formData.group;
   }
 
-  // Start PsychoJS and run the scheduler
-  await psychoJS.start({
+  // Start PsychoJS
+  psychoJS.start({
     expName: expName,
     expInfo: expInfo,
     resources: [
@@ -192,11 +192,13 @@ window.startExperiment = async function(formData) {
       {'name': 'svo_conditions.xlsx', 'path': 'svo_conditions.xlsx'},
       {'name': 'emotion_items.xlsx', 'path': 'emotion_items.xlsx'},
     ]
+  }).then(function() {
+    // Add and run the flow scheduler after start completes
+    psychoJS.scheduler.add(flowScheduler);
+    psychoJS.scheduler.run();
+  }).catch(function(err) {
+    console.error('Failed to start experiment:', err);
   });
-
-  // Run the flow scheduler after start completes
-  psychoJS.scheduler.add(flowScheduler);
-  psychoJS.scheduler.run();
 };
 
 psychoJS.experimentLogger.setLevel(core.Logger.ServerLevel.INFO);
