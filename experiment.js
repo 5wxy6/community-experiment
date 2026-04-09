@@ -279,7 +279,7 @@ async function experimentInit() {
     text: '\n\n                     接下来您将回答一些问题\n\n       请根据您自己的观点，评价每条陈述与您实际情况的符合程度。\n       请选择最符合您真实想法的选项，没有对错之分。\n\n                      量表说明：\n                      1 = 非常不认同\n                      7 = 非常认同\n\n                      按空格键继续',
     font: 'STHeiti',
     units: 'height', 
-    pos: [0.2, 0], draggable: false, height: 0.04,  wrapWidth: 1.4, ori: 0.0,
+    pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 1.4, ori: 0.0,
     languageStyle: 'LTR',
     color: new util.Color('white'),  opacity: undefined,
     depth: -1.0 
@@ -1745,6 +1745,7 @@ function Struggle_RoutineRoutineBegin(snapshot) {
     submit_btn_struggle.setText('ok');
     // reset submit_btn_struggle to account for continued clicks & clear times on/off
     submit_btn_struggle.reset()
+    submit_btn_struggle.wasClicked = false;
     psychoJS.experiment.addData('Struggle_Routine.started', globalClock.getTime());
     Struggle_RoutineMaxDuration = null
     // keep track of which components have finished
@@ -2430,6 +2431,7 @@ function Emotion_Final_SubmitRoutineBegin(snapshot) {
     // update component parameters for each repeat
     // reset final_confirm_btn to account for continued clicks & clear times on/off
     final_confirm_btn.reset()
+    final_confirm_btn.wasClicked = false;
     psychoJS.experiment.addData('Emotion_Final_Submit.started', globalClock.getTime());
     Emotion_Final_SubmitMaxDuration = null
     // keep track of which components have finished
@@ -3215,6 +3217,7 @@ function Decision_RoutineRoutineBegin(snapshot) {
     submit_btn.setText('ok');
     // reset submit_btn to account for continued clicks & clear times on/off
     submit_btn.reset()
+    submit_btn.wasClicked = false;
     label_B.setText(label_B_text);
     label_C.setText(label_C_text);
     psychoJS.experiment.addData('Decision_Routine.started', globalClock.getTime());
