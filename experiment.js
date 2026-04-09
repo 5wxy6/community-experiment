@@ -266,7 +266,7 @@ async function experimentInit() {
     text: '                   背景介绍 请仔细阅读\n\n        按照社区规划，现在A小区与B小共同使用社区共享充电站\n\n        随着新能源汽车普及，两个小区的新能源车辆数都在快速增长\n        两小区住户数量、充电需求大致相当\n        而充电桩容量有限，不能完全满足两个小区的充电需求\n        该充电站共有20个充电桩，由两个小区居民共同使用\n        两小区曾因充电桩资源使用频繁产生口角\n        物业决定征求小区成员意见来决定最终充电桩分配方案\n\n        注意:您被随机分配成为A小区成员中的一员\n        您的决策将影响:您个人利益、同小区成员利益、B小区成员利益\n\n                  了解以上情况后按空格键继续 ',
     font: 'STHeiti',
     units: 'height', 
-    pos: [(- 0.05), 0], draggable: false, height: 0.04,  wrapWidth: 0.8, ori: 0.0,
+    pos: [(- 0.05), (- 0.05)], draggable: false, height: 0.038,  wrapWidth: 0.9, ori: 0.0,
     languageStyle: 'LTR',
     color: new util.Color('black'),  opacity: undefined,
     depth: -1.0 
@@ -506,7 +506,7 @@ async function experimentInit() {
   intro_text_emotion = new visual.TextStim({
     win: psychoJS.window,
     name: 'intro_text_emotion',
-    text: '          接下来，我们需要了解您在刚才互动后的真实感受。\n          选项无好坏之分，请按真实感受填写\n          请根据接下来的题目要求，选择最符合您当前状态的选项。\n          准备好了请按空格键开始',
+    text: '          接下来，我们需要了解您在刚才互动后的真实感受。\n          选项无好坏之分，请按真实感受填写\n          请根据接下来的题目要求，选择最符合您当前状态的选项。\n          点击对应的数字分值完成选择\n          准备好了请按空格键开始',
     font: 'STHeiti',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 0.8, ori: 0.0,
