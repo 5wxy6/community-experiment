@@ -49,7 +49,7 @@ let score_preview;
 let vote_btn_C, vote_count_A, vote_count_B, vote_count_C;
 let label_A_decision, label_B_decision, label_C_decision;
 let vote_instruction, quota_text_A, quota_text_B, quota_text_C;
-let confirm_btn, option_A, option_B, option_C, decision_instruction;
+let confirm_btn, option_A, option_B, option_C, decision_instruction, vote_sum_warning;
 
 // Arrays and other variables
 let firstComponents, Instruction_RoutineComponents, SVO_IntroComponents;
@@ -106,7 +106,7 @@ const psychoJS = new PsychoJS({
 // open window:
 psychoJS.openWindow({
   fullscr: false,
-  color: new util.Color([0,0,0]),
+  color: new util.Color([1,1,1]),
   units: 'height',
   waitBlanking: true,
   backgroundImage: '',
@@ -252,7 +252,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 1.2, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -1.0 
   });
   
@@ -268,7 +268,7 @@ async function experimentInit() {
     units: 'height', 
     pos: [(- 0.05), 0], draggable: false, height: 0.04,  wrapWidth: 0.8, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -1.0 
   });
   
@@ -284,7 +284,7 @@ async function experimentInit() {
     units: 'height', 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 1.4, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -1.0 
   });
   
@@ -306,7 +306,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0.15], draggable: false, height: 0.04,  wrapWidth: 1.4, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -1.0 
   });
   
@@ -318,7 +318,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 1.2, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -2.0 
   });
   
@@ -330,7 +330,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, (- 0.1)], draggable: false, height: 0.04,  wrapWidth: 1.2, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -3.0 
   });
   
@@ -342,7 +342,7 @@ async function experimentInit() {
     units: 'height', 
     pos: [(- 0.4), (- 0.2)], draggable: false, height: 0.04,  wrapWidth: 1.2, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -4.0 
   });
   
@@ -354,7 +354,7 @@ async function experimentInit() {
     units: 'height', 
     pos: [0.4, (- 0.2)], draggable: false, height: 0.04,  wrapWidth: 1.2, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -5.0 
   });
   
@@ -383,7 +383,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0.43], draggable: false, height: 0.04,  wrapWidth: undefined, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -1.0 
   });
   
@@ -407,7 +407,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0.15], draggable: false, height: 0.04,  wrapWidth: 1.5, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -3.0 
   });
   
@@ -492,11 +492,11 @@ async function experimentInit() {
     name: 'feedback_display',
     text: '',
     font: 'STHeiti',
-    units: undefined, 
+    units: undefined,
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 1.4, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('red'),  opacity: undefined,
-    depth: -1.0 
+    color: new util.Color('black'),  opacity: undefined,
+    depth: -1.0
   });
   
   key_resp_2 = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
@@ -511,7 +511,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 0.8, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -1.0 
   });
   
@@ -527,7 +527,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 1.2, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -1.0 
   });
   
@@ -552,7 +552,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: undefined, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: 0.0 
   });
   
@@ -590,7 +590,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 1.2, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: 0.0 
   });
   
@@ -606,7 +606,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0.0], draggable: false, height: 0.04,  wrapWidth: 0.8, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -1.0 
   });
   
@@ -622,7 +622,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: undefined, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: 0.0 
   });
   
@@ -638,7 +638,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: undefined, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: 0.0 
   });
   
@@ -658,7 +658,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0.42], draggable: false, height: 0.04,  wrapWidth: undefined, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -1.0 
   });
   
@@ -749,9 +749,23 @@ async function experimentInit() {
     editable: true,
     multiline: true,
     anchor: 'center',
-    depth: -5.0 
+    depth: -5.0
   });
-  
+
+  // 添加票数之和提示
+  vote_sum_warning = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'vote_sum_warning',
+    text: '⚠️ 注意：三个选项投票数之和必须等于10！',
+    font: 'STHeiti',
+    units: undefined,
+    pos: [0, (- 0.38)], draggable: false, height: 0.035, wrapWidth: 1.5, ori: 0.0,
+    languageStyle: 'LTR',
+    color: new util.Color('yellow'),
+    opacity: undefined,
+    depth: -5.5
+  });
+
   pool_A_shape = new visual.Rect ({
     win: psychoJS.window, name: 'pool_A_shape', 
     width: [0.2, 0.2][0], height: [0.2, 0.2][1],
@@ -844,7 +858,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [(- 0.5), 0.0], draggable: false, height: 0.04,  wrapWidth: 1.3, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -11.0 
   });
   
@@ -856,7 +870,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0.0], draggable: false, height: 0.04,  wrapWidth: 1.3, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -12.0 
   });
   
@@ -868,7 +882,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0.5, 0.0], draggable: false, height: 0.04,  wrapWidth: 1.3, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: -13.0
   });
 
@@ -894,7 +908,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: 0.0 
   });
   
@@ -910,7 +924,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 1.3, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: 0.0 
   });
   
@@ -3200,6 +3214,7 @@ function Decision_RoutineRoutineBegin(snapshot) {
     Decision_RoutineComponents.push(input_A);
     Decision_RoutineComponents.push(input_B);
     Decision_RoutineComponents.push(input_C);
+    Decision_RoutineComponents.push(vote_sum_warning);
     Decision_RoutineComponents.push(pool_A_shape);
     Decision_RoutineComponents.push(pool_B_shape);
     Decision_RoutineComponents.push(pool_C_shape);
