@@ -247,7 +247,7 @@ async function experimentInit() {
   text_5 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_5',
-    text: '          欢迎参加我们的社区互动实验\n\n\n     你将处于一个未来社区中，社区里共有ABC三个小区。\n      这是一个旨在通过数字化手段实现资源共享的现代化社区。\n       在这里，所有的公共设施——包括绿地、健身房以及电力资源，\n       都由社区内的居民共同管理与维护.\n\n       您将作为某一小区社区居民，在本次活动中完成几个社区任务\n       准备好后按空格键继续\n\n       如有问题请联系实验人员',
+    text: '          欢迎参加我们的社区互动实验\n\n\n          你将处于一个未来社区中，社区里共有ABC三个小区。\n          这是一个旨在通过数字化手段实现资源共享的现代化社区。\n          在这里，所有的公共设施——包括绿地、健身房以及电力资源，\n          都由社区内的居民共同管理与维护.\n\n          您将作为某一小区社区居民，在本次活动中完成几个社区任务\n          准备好后按空格键继续\n\n          如有问题请联系实验人员',
     font: 'STHeiti',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 1.2, ori: 0.0,
@@ -263,7 +263,7 @@ async function experimentInit() {
   instr_text = new visual.TextStim({
     win: psychoJS.window,
     name: 'instr_text',
-    text: '                   背景介绍 请仔细阅读\n\n      按照社区规划，现在A小区与B小共同使用社区共享充电站\n\n      随着新能源汽车普及，两个小区的新能源车辆数都在快速增长\n      两小区住户数量、充电需求大致相当\n      而充电桩容量有限，不能完全满足两个小区的充电需求\n      该充电站共有20个充电桩，由两个小区居民共同使用\n      两小区曾因充电桩资源使用频繁产生口角\n      物业决定征求小区成员意见来决定最终充电桩分配方案\n\n      注意:您被随机分配成为A小区成员中的一员\n      您的决策将影响:您个人利益、同小区成员利益、B小区成员利益\n\n        了解以上情况后按空格键继续 ',
+    text: '                   背景介绍 请仔细阅读\n\n        按照社区规划，现在A小区与B小共同使用社区共享充电站\n\n        随着新能源汽车普及，两个小区的新能源车辆数都在快速增长\n        两小区住户数量、充电需求大致相当\n        而充电桩容量有限，不能完全满足两个小区的充电需求\n        该充电站共有20个充电桩，由两个小区居民共同使用\n        两小区曾因充电桩资源使用频繁产生口角\n        物业决定征求小区成员意见来决定最终充电桩分配方案\n\n        注意:您被随机分配成为A小区成员中的一员\n        您的决策将影响:您个人利益、同小区成员利益、B小区成员利益\n\n                  了解以上情况后按空格键继续 ',
     font: 'STHeiti',
     units: 'height', 
     pos: [(- 0.05), 0], draggable: false, height: 0.04,  wrapWidth: 0.8, ori: 0.0,
@@ -279,7 +279,7 @@ async function experimentInit() {
   svo_intro_text = new visual.TextStim({
     win: psychoJS.window,
     name: 'svo_intro_text',
-    text: '\n\n                     接下来您将回答一些问题\n\n       请根据您自己的观点，评价每条陈述与您实际情况的符合程度。\n       请选择最符合您真实想法的选项，没有对错之分。\n\n              量表说明：\n                 1 = 非常不认同\n                  7 = 非常认同\n                点击对应的数字分值完成选择\n\n                      按空格键继续',
+    text: '\n\n                     接下来您将回答一些问题\n\n       请根据您自己的观点，评价每条陈述与您实际情况的符合程度。\n       请选择最符合您真实想法的选项，没有对错之分。\n\n                      量表说明：\n                      1 = 非常不认同\n                      7 = 非常认同\n                      点击对应的数字分值完成选择\n\n                      按空格键继续',
     font: 'STHeiti',
     units: 'height', 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 1.4, ori: 0.0,
@@ -424,7 +424,7 @@ async function experimentInit() {
     size: [0.4, 0.1],  units: undefined, 
     ori: 0.0,
     color: 'white', colorSpace: 'rgb',
-    fillColor: black, borderColor: black,
+    fillColor: undefined, borderColor: undefined,
     languageStyle: 'LTR',
     bold: false, italic: false,
     opacity: undefined,
@@ -506,7 +506,7 @@ async function experimentInit() {
   intro_text_emotion = new visual.TextStim({
     win: psychoJS.window,
     name: 'intro_text_emotion',
-    text: '          接下来，我们需要了解您在刚才互动后的真实感受。\n          选项无好坏之分，请按真实感受点击对应数值\n          请根据接下来的题目要求，选择最符合您当前状态的选项。\n          准备好了请按空格键开始',
+    text: '          接下来，我们需要了解您在刚才互动后的真实感受。\n          选项无好坏之分，请按真实感受填写\n          请根据接下来的题目要求，选择最符合您当前状态的选项。\n          准备好了请按空格键开始',
     font: 'STHeiti',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 0.8, ori: 0.0,
@@ -853,7 +853,7 @@ async function experimentInit() {
   label_A = new visual.TextStim({
     win: psychoJS.window,
     name: 'label_A',
-    text: '选项A\n每投一票自己+2分\n其他人不加分',
+    text: '选项A\n自己+2票\n其他人不加票',
     font: 'STHeiti',
     units: undefined, 
     pos: [(- 0.5), 0.0], draggable: false, height: 0.04,  wrapWidth: 1.3, ori: 0.0,
@@ -865,7 +865,7 @@ async function experimentInit() {
   label_B = new visual.TextStim({
     win: psychoJS.window,
     name: 'label_B',
-    text: '选项B\n每投一票自己和同小区人员+1分\n对面小区人员不加分'',
+    text: '',
     font: 'STHeiti',
     units: undefined, 
     pos: [0, 0.0], draggable: false, height: 0.04,  wrapWidth: 1.3, ori: 0.0,
@@ -877,7 +877,7 @@ async function experimentInit() {
   label_C = new visual.TextStim({
     win: psychoJS.window,
     name: 'label_C',
-    text: '选项C\n每投一票自己和同小区人员+1分\n对面小区人员-1分'',
+    text: '',
     font: 'STHeiti',
     units: undefined, 
     pos: [0.5, 0.0], draggable: false, height: 0.04,  wrapWidth: 1.3, ori: 0.0,
