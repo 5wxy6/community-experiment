@@ -112,18 +112,10 @@ psychoJS.openWindow({
   backgroundImage: '',
   backgroundFit: 'none',
 });
-// schedule the experiment:
-psychoJS.schedule(psychoJS.gui.DlgFromDict({
-  dictionary: expInfo,
-  title: expName
-}));
-
 const flowScheduler = new Scheduler(psychoJS);
-const dialogCancelScheduler = new Scheduler(psychoJS);
-psychoJS.scheduleCondition(function() { return (psychoJS.gui.dialogComponent.button === 'OK'); },flowScheduler, dialogCancelScheduler);
 
-// flowScheduler gets run if the participants presses OK
-flowScheduler.add(updateInfo); // add timeStamp
+// Schedule all routines
+flowScheduler.add(updateInfo);
 flowScheduler.add(experimentInit);
 flowScheduler.add(firstRoutineBegin());
 flowScheduler.add(firstRoutineEachFrame());
@@ -182,23 +174,38 @@ flowScheduler.add(Experiment_EndRoutineEachFrame());
 flowScheduler.add(Experiment_EndRoutineEnd());
 flowScheduler.add(quitPsychoJS, 'Thank you for your patience.', true);
 
-// quit if user presses Cancel in dialog box:
-dialogCancelScheduler.add(quitPsychoJS, 'Thank you for your patience.', false);
+// Delay experiment start until participant form is submitted
+window.startExperiment = function(formData) {
+  // Update expInfo with form data
+  if (formData) {
+    expInfo['participant'] = formData.participant;
+    expInfo['session'] = formData.session;
+    expInfo['group'] = formData.group;
+  }
 
-psychoJS.start({
-  expName: expName,
-  expInfo: expInfo,
-  resources: [
-    // resources:
-    {'name': 'svo_conditions.xlsx', 'path': 'svo_conditions.xlsx'},
-    {'name': 'emotion_items.xlsx', 'path': 'emotion_items.xlsx'},
-  ]
-});
+  psychoJS.start({
+    expName: expName,
+    expInfo: expInfo,
+    resources: [
+      // resources:
+      {'name': 'svo_conditions.xlsx', 'path': 'svo_conditions.xlsx'},
+      {'name': 'emotion_items.xlsx', 'path': 'emotion_items.xlsx'},
+    ]
+  });
+};
 
 psychoJS.experimentLogger.setLevel(core.Logger.ServerLevel.INFO);
 
 async function updateInfo() {
   currentLoop = psychoJS.experiment;  // right now there are no loops
+
+  // Use values from HTML form if available
+  if (window.expInfoOverride) {
+    expInfo['participant'] = window.expInfoOverride.participant;
+    expInfo['session'] = window.expInfoOverride.session;
+    expInfo['group'] = window.expInfoOverride.group;
+  }
+
   expInfo['date'] = util.MonotonicClock.getDateStr();  // add a simple timestamp
   expInfo['expName'] = expName;
   expInfo['psychopyVersion'] = '2025.2.3';

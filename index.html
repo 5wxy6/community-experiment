@@ -25,6 +25,24 @@
     <div id="errors"></div>
     <div id="root"></div>
 
+    <!-- Participant Info Form -->
+    <div id="participant-form" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#333; padding:30px; border-radius:10px; color:white; font-family:Arial; z-index:1000;">
+      <h3 style="margin-top:0;">参与者信息</h3>
+      <div style="margin:15px 0;">
+        <label>Participant ID: </label>
+        <input type="text" id="input-participant" value="001" style="padding:5px; width:150px;">
+      </div>
+      <div style="margin:15px 0;">
+        <label>Session: </label>
+        <input type="text" id="input-session" value="001" style="padding:5px; width:150px;">
+      </div>
+      <div style="margin:15px 0;">
+        <label>Group: </label>
+        <input type="text" id="input-group" value="1" style="padding:5px; width:150px;">
+      </div>
+      <button id="start-btn" style="padding:10px 30px; margin-top:15px; font-size:16px; cursor:pointer;">开始实验</button>
+    </div>
+
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/PreloadJS/1.0.1/preloadjs.min.js"></script>
@@ -65,11 +83,13 @@
           progress.textContent = percent + '%';
         }, 500);
 
-        import('./experiment.js').then(function() {
+        import('./experiment.js').then(function(module) {
           clearInterval(interval);
           progress.textContent = '100%';
           setTimeout(function() {
             loading.style.display = 'none';
+            // Show participant form
+            document.getElementById('participant-form').style.display = 'block';
           }, 500);
         }).catch(function(err) {
           clearInterval(interval);
@@ -80,6 +100,28 @@
           loading.innerHTML = '<div style="color:#f66">加载失败，请刷新重试<br>错误: ' + errorMsg.replace(/\n/g, '<br>') + '</div>';
         });
       })();
+
+      // Handle participant form submission
+      document.getElementById('start-btn').addEventListener('click', function() {
+        var participant = document.getElementById('input-participant').value || '001';
+        var session = document.getElementById('input-session').value || '001';
+        var group = document.getElementById('input-group').value || '1';
+
+        // Set values in global expInfo (will be used by experiment.js)
+        window.expInfoOverride = {
+          participant: participant,
+          session: session,
+          group: group
+        };
+
+        // Hide form and start experiment
+        document.getElementById('participant-form').style.display = 'none';
+
+        // Trigger experiment start
+        if (window.startExperiment) {
+          window.startExperiment(window.expInfoOverride);
+        }
+      });
     </script>
   </body>
 </html>
