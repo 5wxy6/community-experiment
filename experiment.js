@@ -3852,14 +3852,26 @@ async function quitPsychoJS(message, isCompleted) {
     ].join('\n');
 
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
-    link.setAttribute('href', url);
-    link.setAttribute('download', `${expInfo["participant"]}_${expName}_${expInfo["date"]}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    const filename = `${expInfo["participant"]}_${expName}_${expInfo["date"]}.csv`;
+
+    // Safari兼容的下载方式
+    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
+      // Safari: 使用window.open
+      window.open(url, '_blank');
+      alert('实验结束！\n\n请保存下载的CSV文件，这是您的实验数据。\n如果未自动下载，请检查"下载"文件夹。');
+    } else {
+      // Chrome/Edge/Firefox: 正常使用a标签下载
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', filename);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // 延迟释放URL，确保下载开始
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
   }
 
   psychoJS.window.close();
