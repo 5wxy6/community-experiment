@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>社区互动实验</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <style>
+      body { margin: 0; padding: 0; background: #000; overflow: hidden; }
+      #root { width: 100vw; height: 100vh; }
+      #loading { 
+        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+        color: white; font-family: Arial; text-align: center;
+      }
+      #loading .progress { color: #0f0; margin-top: 10px; }
+      #errors { position: fixed; top: 10px; left: 10px; color: #f66; font-family: monospace; font-size: 12px; white-space: pre-wrap; max-width: 90vw; }
+    </style>
+  </head>
+  <body>
+    <div id="loading">
+      <div>正在加载实验资源...</div>
+      <div class="progress" id="progress">0%</div>
+      <div style="font-size: 14px; margin-top: 20px; color: #aaa;">首次加载可能需要 10-30 秒</div>
+    </div>
+    <div id="errors"></div>
+    <div id="root"></div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/PreloadJS/1.0.1/preloadjs.min.js"></script>
+
+    <script type="module">
+      (function() {
+        var errors = document.getElementById('errors');
+        var loading = document.getElementById('loading');
+        var progress = document.getElementById('progress');
+
+        function log(msg) {
+          errors.textContent += msg + '\n';
+          console.log(msg);
+        }
+
+        window.onerror = function(msg, url, line, col, error) {
+          var details = 'ERROR: ' + msg + ' at line ' + line;
+          if (col) details += ':' + col;
+          if (url) details += ' in ' + url;
+          if (error && error.stack) details += '\nStack: ' + error.stack;
+          log(details);
+          console.error('Global error:', error);
+          loading.innerHTML = '<div style="color:#f66">加载出错，请刷新重试<br>' + details.replace(/\n/g, '<br>') + '</div>';
+        };
+
+        window.onunhandledrejection = function(event) {
+          var reason = event.reason;
+          var msg = 'Unhandled Promise Rejection: ' + (reason && reason.message ? reason.message : reason);
+          if (reason && reason.stack) msg += '\n' + reason.stack;
+          log(msg);
+          console.error('Unhandled rejection:', reason);
+        };
+
+        var percent = 0;
+        var interval = setInterval(function() {
+          percent += 5;
+          if (percent > 90) percent = 90;
+          progress.textContent = percent + '%';
+        }, 500);
+
+        import('./experiment.js').then(function() {
+          clearInterval(interval);
+          progress.textContent = '100%';
+          setTimeout(function() {
+            loading.style.display = 'none';
+          }, 500);
+        }).catch(function(err) {
+          clearInterval(interval);
+          console.error('Import error:', err);
+          var errorMsg = err.message || err.toString();
+          if (err.stack) errorMsg += '\n' + err.stack;
+          log('加载失败: ' + errorMsg);
+          loading.innerHTML = '<div style="color:#f66">加载失败，请刷新重试<br>错误: ' + errorMsg.replace(/\n/g, '<br>') + '</div>';
+        });
+      })();
+    </script>
+  </body>
+</html>
