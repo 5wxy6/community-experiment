@@ -1214,7 +1214,7 @@ function SVO_IntroRoutineBegin(snapshot) {
     SVO_IntroMaxDurationReached = false;
     // update component parameters for each repeat
     // Run 'Begin Routine' code from code_11
-    svo_intro_text.alignText = "left";
+    svo_intro_text.alignText = "center";
     svo_intro_text.anchor = "center";
     
     key_resp_svo_intro.keys = undefined;
