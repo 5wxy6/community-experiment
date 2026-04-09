@@ -564,7 +564,7 @@ async function experimentInit() {
     pos: [0, (- 0.4)],
     size: [0.3, 0.1],
     padding: null,
-    anchor: 'bottom-center',
+    anchor: 'center',
     ori: 0.0,
     units: psychoJS.window.units,
     color: 'white',
@@ -839,7 +839,7 @@ async function experimentInit() {
   label_A = new visual.TextStim({
     win: psychoJS.window,
     name: 'label_A',
-    text: '选项A\n自己+2分\n其他人不加分',
+    text: '选项A\n自己+2票\n其他人不加票',
     font: 'STHeiti',
     units: undefined, 
     pos: [(- 0.5), 0.0], draggable: false, height: 0.04,  wrapWidth: 1.3, ori: 0.0,
