@@ -1871,34 +1871,18 @@ function Struggle_RoutineRoutineEachFrame() {
     }
 
 
-    // if submit_btn_struggle is active this frame...
-    if (submit_btn_struggle.status === PsychoJS.Status.STARTED) {
-    }
-
-    if (submit_btn_struggle.status === PsychoJS.Status.STARTED) {
-      // check whether submit_btn_struggle has been pressed
-      if (submit_btn_struggle.isClicked) {
-        if (!submit_btn_struggle.wasClicked) {
-          // store time of first click
-          submit_btn_struggle.timesOn.push(submit_btn_struggle.clock.getTime());
-          // store time clicked until
-          submit_btn_struggle.timesOff.push(submit_btn_struggle.clock.getTime());
-        } else {
-          // update time clicked until;
-          submit_btn_struggle.timesOff[submit_btn_struggle.timesOff.length - 1] = submit_btn_struggle.clock.getTime();
-        }
-        if (!submit_btn_struggle.wasClicked) {
-          // Only end routine if button was actually clicked (not on first frame)
-          if (submit_btn_struggle.timesOn.length > 0) {
-            continueRoutine = false;
-          }
-        }
-        // if submit_btn_struggle is still clicked next frame, it is not a new click
-        submit_btn_struggle.wasClicked = true;
-      } else {
-        // if submit_btn_struggle is clicked next frame, it is a new click
-        submit_btn_struggle.wasClicked = false;
+    // check whether submit_btn_struggle has been pressed
+    if (submit_btn_struggle.status === PsychoJS.Status.STARTED && submit_btn_struggle.isClicked) {
+      if (!submit_btn_struggle.wasClicked) {
+        // store time of first click
+        submit_btn_struggle.timesOn.push(submit_btn_struggle.clock.getTime());
+        submit_btn_struggle.timesOff.push(submit_btn_struggle.clock.getTime());
+        // end routine on first click
+        continueRoutine = false;
       }
+      submit_btn_struggle.wasClicked = true;
+    } else if (submit_btn_struggle.status === PsychoJS.Status.STARTED) {
+      submit_btn_struggle.wasClicked = false;
     } else {
       // keep clock at 0 if submit_btn_struggle hasn't started / has finished
       submit_btn_struggle.clock.reset();
@@ -2480,34 +2464,18 @@ function Emotion_Final_SubmitRoutineEachFrame() {
     }
 
 
-    // if final_confirm_btn is active this frame...
-    if (final_confirm_btn.status === PsychoJS.Status.STARTED) {
-    }
-
-    if (final_confirm_btn.status === PsychoJS.Status.STARTED) {
-      // check whether final_confirm_btn has been pressed
-      if (final_confirm_btn.isClicked) {
-        if (!final_confirm_btn.wasClicked) {
-          // store time of first click
-          final_confirm_btn.timesOn.push(final_confirm_btn.clock.getTime());
-          // store time clicked until
-          final_confirm_btn.timesOff.push(final_confirm_btn.clock.getTime());
-        } else {
-          // update time clicked until;
-          final_confirm_btn.timesOff[final_confirm_btn.timesOff.length - 1] = final_confirm_btn.clock.getTime();
-        }
-        if (!final_confirm_btn.wasClicked) {
-          // end routine when final_confirm_btn is clicked
-          if (final_confirm_btn.timesOn.length > 0) {
-            continueRoutine = false;
-          }
-        }
-        // if final_confirm_btn is still clicked next frame, it is not a new click
-        final_confirm_btn.wasClicked = true;
-      } else {
-        // if final_confirm_btn is clicked next frame, it is a new click
-        final_confirm_btn.wasClicked = false;
+    // check whether final_confirm_btn has been pressed
+    if (final_confirm_btn.status === PsychoJS.Status.STARTED && final_confirm_btn.isClicked) {
+      if (!final_confirm_btn.wasClicked) {
+        // store time of first click
+        final_confirm_btn.timesOn.push(final_confirm_btn.clock.getTime());
+        final_confirm_btn.timesOff.push(final_confirm_btn.clock.getTime());
+        // end routine on first click
+        continueRoutine = false;
       }
+      final_confirm_btn.wasClicked = true;
+    } else if (final_confirm_btn.status === PsychoJS.Status.STARTED) {
+      final_confirm_btn.wasClicked = false;
     } else {
       // keep clock at 0 if final_confirm_btn hasn't started / has finished
       final_confirm_btn.clock.reset();
@@ -3416,38 +3384,21 @@ function Decision_RoutineRoutineEachFrame() {
     }
 
 
-    // if submit_btn is active this frame...
-    if (submit_btn.status === PsychoJS.Status.STARTED) {
-    }
-
-    if (submit_btn.status === PsychoJS.Status.STARTED) {
-      // check whether submit_btn has been pressed
-      if (submit_btn.isClicked) {
-        if (!submit_btn.wasClicked) {
-          // store time of first click
-          submit_btn.timesOn.push(submit_btn.clock.getTime());
-          // store time clicked until
-          submit_btn.timesOff.push(submit_btn.clock.getTime());
-        } else {
-          // update time clicked until;
-          submit_btn.timesOff[submit_btn.timesOff.length - 1] = submit_btn.clock.getTime();
-        }
-        if (!submit_btn.wasClicked) {
-          // Only end routine if button was actually clicked (not on first frame)
-          if (submit_btn.timesOn.length > 0) {
-            continueRoutine = false;
-          }
-        }
-        // if submit_btn is still clicked next frame, it is not a new click
-        submit_btn.wasClicked = true;
-      } else {
-        // if submit_btn is clicked next frame, it is a new click
-        submit_btn.wasClicked = false;
+    // check whether submit_btn has been pressed
+    if (submit_btn.status === PsychoJS.Status.STARTED && submit_btn.isClicked) {
+      if (!submit_btn.wasClicked) {
+        // store time of first click
+        submit_btn.timesOn.push(submit_btn.clock.getTime());
+        submit_btn.timesOff.push(submit_btn.clock.getTime());
+        // end routine on first click
+        continueRoutine = false;
       }
+      submit_btn.wasClicked = true;
+    } else if (submit_btn.status === PsychoJS.Status.STARTED) {
+      submit_btn.wasClicked = false;
     } else {
       // keep clock at 0 if submit_btn hasn't started / has finished
       submit_btn.clock.reset();
-      // if submit_btn is clicked next frame, it is a new click
       submit_btn.wasClicked = false;
     }
     
