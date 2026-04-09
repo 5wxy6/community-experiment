@@ -102,7 +102,7 @@
       })();
 
       // Handle participant form submission
-      document.getElementById('start-btn').addEventListener('click', function() {
+      document.getElementById('start-btn').addEventListener('click', async function() {
         var participant = document.getElementById('input-participant').value || '001';
         var session = document.getElementById('input-session').value || '001';
         var group = document.getElementById('input-group').value || '1';
@@ -114,12 +114,19 @@
           group: group
         };
 
-        // Hide form and start experiment
+        // Hide form and show loading
         document.getElementById('participant-form').style.display = 'none';
+        document.getElementById('loading').style.display = 'block';
+        document.getElementById('progress').textContent = '正在启动实验...';
 
         // Trigger experiment start
         if (window.startExperiment) {
-          window.startExperiment(window.expInfoOverride);
+          try {
+            await window.startExperiment(window.expInfoOverride);
+          } catch (err) {
+            console.error('启动失败:', err);
+            document.getElementById('errors').textContent = '启动失败: ' + err.message;
+          }
         }
       });
     </script>
