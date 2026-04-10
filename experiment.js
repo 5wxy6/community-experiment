@@ -263,10 +263,10 @@ async function experimentInit() {
   instr_text = new visual.TextStim({
     win: psychoJS.window,
     name: 'instr_text',
-    text: '                   背景介绍 请仔细阅读\n\n        按照社区规划，现在A小区与B小共同使用社区共享充电站\n\n        随着新能源汽车普及，两个小区的新能源车辆数都在快速增长\n        两小区住户数量、充电需求大致相当\n        而充电桩容量有限，不能完全满足两个小区的充电需求\n        该充电站共有20个充电桩，由两个小区居民共同使用\n        两小区曾因充电桩资源使用频繁产生口角\n        物业决定征求小区成员意见来决定最终充电桩分配方案\n\n        注意:您被随机分配成为A小区成员中的一员\n        您的决策将影响:您个人利益、同小区成员利益、B小区成员利益\n\n                  了解以上情况后按空格键继续 ',
+    text: '【背景介绍】请仔细阅读\n\n按照社区规划，A小区与B小区共同使用社区共享充电站。随着新能源汽车普及，两小区新能源车数量快速增长，充电需求大致相当。而充电桩容量有限，该充电站共20个充电桩，不能完全满足两小区需求。两小区曾因充电资源使用产生口角，物业决定征求成员意见来决定最终分配方案。\n\n注意：您被随机分配为A小区成员，您的决策将影响您个人、同小区成员及B小区成员的利益。\n\n了解后请按空格键继续',
     font: 'STHeiti',
-    units: 'height', 
-    pos: [(- 0.05), (- 0.05)], draggable: false, height: 0.038,  wrapWidth: 0.9, ori: 0.0,
+    units: 'height',
+    pos: [0, 0], draggable: false, height: 0.032, wrapWidth: 1.0, ori: 0.0,
     languageStyle: 'LTR',
     color: new util.Color('black'),  opacity: undefined,
     depth: -1.0 
