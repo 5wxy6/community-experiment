@@ -2008,7 +2008,8 @@ function Conflict_RoutineRoutineBegin(snapshot) {
     if (((Number.parseInt(expInfo["group"]) === 1) || (Number.parseInt(expInfo["group"]) === 2))) {
         conflict_feedback = "\u3010\u7b2c\u4e00\u8f6e\u7ed3\u7b97\u62a5\u544a\u3011\n\n\u76d1\u6d4b\u53d1\u73b0\uff1a\u5728\u521a\u624d\u7684\u4e92\u52a8\u4e2d\uff0c\u5bf9\u624b\u201cB\u5c0f\u533a\u201d\u91c7\u53d6\u4e86\u5f3a\u529b\u6e17\u900f\u7b56\u7565\u3002\n\u4ed6\u4eec\u91c7\u7528\u96c6\u4f53\u9884\u7559\u5927\u91cf\u5145\u7535\u6869\u7684\u65b9\u5f0f\u3002\n\u5355\u65b9\u9762\u5f3a\u884c\u9501\u5b9a\u4e86\u793e\u533a 80% \u7684\u5145\u7535\u8d44\u6e90 \u3002\n\u8fd9\u5bfc\u81f4\u6211\u65b9A\u5c0f\u533a\u7684\u5927\u90e8\u5206\u65b0\u80fd\u6e90\u8f66\u8f86\u65e0\u6cd5\u6b63\u5e38\u5145\u7535\u3002\n\n\u8bf7\u6309\u7a7a\u683c\u952e\u67e5\u770b\u540e\u7eed\u4efb\u52a1\u3002";
     } else {
-        conflict_feedback = "\u7b2c\u4e00\u8f6e\u8bc4\u4f30\u5df2\u7ed3\u675f\u3002\u8bf7\u6309\u7a7a\u683c\u952e\u7ee7\u7eed\u3002";
+        // group=3 无冲突组：中性反馈
+        conflict_feedback = "\u3010\u7b2c\u4e00\u8f6e\u7ed3\u679c\u3011\n\n\u7ecf\u53cc\u65b9\u534f\u5546\uff0c\u8fbe\u6210\u4e86\u8d44\u6e90\u5206\u914d\u65b9\u6848\uff1a\n\u793e\u533a\u5145\u7535\u7ad9\u768420\u4e2a\u5145\u7535\u6869\u7531\u4e24\u5c0f\u533a\u5e73\u5747\u5206\u914d\uff0c\n\u6bcf\u4e2a\u5c0f\u533a\u5404\u5360\u670950%\u7684\u4f7f\u7528\u6743\u3002\n\u6b64\u65b9\u6848\u786e\u4fdd\u4e86\u53cc\u65b9\u7684\u5145\u7535\u9700\u6c42\u90fd\u80fd\u5f97\u5230\u6ee1\u8db3\u3002\n\n\u8bf7\u6309\u7a7a\u683c\u952e\u7ee7\u7eed\u540e\u7eed\u4efb\u52a1\u3002";
     }
     
     feedback_display.setText(conflict_feedback);
@@ -2300,8 +2301,17 @@ function Emotion_MeasurementRoutineBegin(snapshot) {
     // update component parameters for each repeat
     // Run 'Begin Routine' code from code_2
     emotion_slider.reset();
-    
-    text_4.setText(question);
+
+    // 动态替换对手名称
+    let display_question = question;
+    const current_group = Number.parseInt(expInfo["group"]);
+    let opponent_name = "B小区";
+    if (current_group === 2) {
+        opponent_name = "C小区";
+    }
+    display_question = display_question.replace(/B小区/g, opponent_name);
+
+    text_4.setText(display_question);
     emotion_slider.reset()
     psychoJS.experiment.addData('Emotion_Measurement.started', globalClock.getTime());
     Emotion_MeasurementMaxDuration = null
