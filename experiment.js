@@ -2146,7 +2146,6 @@ function Conflict_RoutineRoutineEnd(snapshot) {
 
 // Transition_Match_Routine for group 2 - 重新匹配对手提示
 let Transition_Match_Clock, transition_match_text, transition_match_key;
-let Transition_Match_Components = [];
 
 function Transition_Match_RoutineBegin(snapshot) {
   return async function () {
