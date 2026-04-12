@@ -621,7 +621,7 @@ async function experimentInit() {
   text_8 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_8',
-    text: '     【文明住户评比活动】\n\n社区正在进行年度文明住户评比活动。\n您所在的小区会随机与B和C中的任一小区进行互评\n文明住户评比活动投票结果将影响：\n1.您所在小区额外充电资源奖励和荣誉\n2.您个人的荣誉和奖金\n\n作为社区的一员，您拥有10票选票。\n\n按空格键了解投票规则',
+    text: '     【文明住户评比活动】\n\n社区正在进行年度文明住户评比活动。\n您所在的小区会随机与B和C中的任一小区进行互评\n文明住户评比活动投票结果将影响：\n1.您所在小区额外充电资源奖励和荣誉\n2.您个人的荣誉和奖金\n\n作为社区的一员，您拥有10分选票。\n\n按空格键了解投票规则',
     font: 'STHeiti',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: undefined, ori: 0.0,
@@ -857,7 +857,7 @@ async function experimentInit() {
   label_A = new visual.TextStim({
     win: psychoJS.window,
     name: 'label_A',
-    text: '选项A\n自己+2票\n其他人不加票',
+    text: '选项A\n自己+2分\n其他人不加分',
     font: 'STHeiti',
     units: undefined, 
     pos: [(- 0.5), 0.0], draggable: false, height: 0.04,  wrapWidth: 1.3, ori: 0.0,
@@ -3320,12 +3320,12 @@ function Decision_RoutineRoutineBegin(snapshot) {
         }
     }
     if ((current_group === 2)) {
-        label_B_text = (((((("\u9009\u9879B" + "\n") + "\u81ea\u5df1+1\u7968") + "\n") + "A\u5c0f\u533a\u5176\u4ed6\u6210\u5458+1\u7968") + "\n") + "C\u5c0f\u533a\u6210\u5458\u4e0d\u53d8");
-        label_C_text = (((((("\u9009\u9879C" + "\n") + "\u81ea\u5df1+1\u7968") + "\n") + "A\u5c0f\u533a\u5176\u4ed6\u6210\u5458+1\u7968") + "\n") + "C\u5c0f\u533a\u6210\u5458\u5404-1\u7968");
+        label_B_text = (((((("\u9009\u9879B" + "\n") + "\u81ea\u5df1+1\u5206") + "\n") + "A\u5c0f\u533a\u5176\u4ed6\u6210\u5458+1\u5206") + "\n") + "C\u5c0f\u533a\u6210\u5458\u4e0d\u53d8");
+        label_C_text = (((((("\u9009\u9879C" + "\n") + "\u81ea\u5df1+1\u5206") + "\n") + "A\u5c0f\u533a\u5176\u4ed6\u6210\u5458+1\u5206") + "\n") + "C\u5c0f\u533a\u6210\u5458\u5404-1\u5206");
         opponent_name = "C\u5c0f\u533a";
     } else {
-        label_B_text = (((((("\u9009\u9879B" + "\n") + "\u81ea\u5df1+1\u7968") + "\n") + "A\u5c0f\u533a\u5176\u4ed6\u6210\u5458+1\u7968") + "\n") + "B\u5c0f\u533a\u6210\u5458\u4e0d\u53d8");
-        label_C_text = (((((("\u9009\u9879C" + "\n") + "\u81ea\u5df1+1\u7968") + "\n") + "A\u5c0f\u533a\u5176\u4ed6\u6210\u5458+1\u7968") + "\n") + "B\u5c0f\u533a\u6210\u5458\u5404-1\u7968");
+        label_B_text = (((((("\u9009\u9879B" + "\n") + "\u81ea\u5df1+1\u5206") + "\n") + "A\u5c0f\u533a\u5176\u4ed6\u6210\u5458+1\u5206") + "\n") + "B\u5c0f\u533a\u6210\u5458\u4e0d\u53d8");
+        label_C_text = (((((("\u9009\u9879C" + "\n") + "\u81ea\u5df1+1\u5206") + "\n") + "A\u5c0f\u533a\u5176\u4ed6\u6210\u5458+1\u5206") + "\n") + "B\u5c0f\u533a\u6210\u5458\u5404-1\u5206");
         opponent_name = "B\u5c0f\u533a";
     }
     input_A.text = "";
