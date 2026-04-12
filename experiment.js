@@ -56,6 +56,7 @@ let firstComponents, Instruction_RoutineComponents, SVO_IntroComponents;
 let SVO_RoutineComponents, Struggle_RoutineComponents, Conflict_RoutineComponents;
 let Emotion_IntroComponents, Emotion_MeasurementComponents;
 let Emotion_Final_SubmitComponents, secondComponents, Transition_RoutineComponents;
+let Transition_Match_Components;
 let voteComponents, ruleComponents, Decision_RoutineComponents;
 let Round_FeedbackComponents, Experiment_EndComponents;
 let _key_resp_7_allKeys, _key_resp_allKeys, _key_resp_svo_intro_allKeys;
@@ -138,6 +139,9 @@ flowScheduler.add(Struggle_RoutineRoutineEnd());
 flowScheduler.add(Conflict_RoutineRoutineBegin());
 flowScheduler.add(Conflict_RoutineRoutineEachFrame());
 flowScheduler.add(Conflict_RoutineRoutineEnd());
+flowScheduler.add(Transition_Match_RoutineBegin());
+flowScheduler.add(Transition_Match_RoutineEachFrame());
+flowScheduler.add(Transition_Match_RoutineEnd());
 flowScheduler.add(Emotion_IntroRoutineBegin());
 flowScheduler.add(Emotion_IntroRoutineEachFrame());
 flowScheduler.add(Emotion_IntroRoutineEnd());
@@ -2140,6 +2144,136 @@ function Conflict_RoutineRoutineEnd(snapshot) {
   }
 }
 
+// Transition_Match_Routine for group 2 - 重新匹配对手提示
+let Transition_Match_Clock, transition_match_text, transition_match_key;
+let Transition_Match_Components = [];
+
+function Transition_Match_RoutineBegin(snapshot) {
+  return async function () {
+    // 仅对group 2显示，其他组直接跳过
+    const current_group = Number.parseInt(expInfo["group"]);
+    if (current_group !== 2) {
+      return Scheduler.Event.NEXT;
+    }
+
+    TrialHandler.fromSnapshot(snapshot);
+    t = 0;
+    frameN = -1;
+    continueRoutine = true;
+    routineForceEnded = false;
+
+    if (!Transition_Match_Clock) {
+      Transition_Match_Clock = new util.Clock();
+    }
+    Transition_Match_Clock.reset();
+    routineTimer.reset();
+
+    // 创建过渡提示文本
+    transition_match_text = new visual.TextStim({
+      win: psychoJS.window,
+      name: 'transition_match_text',
+      text: '系统已为您重新匹配对手，\n\n您将和一个全新的 C 小区互动。',
+      font: 'STHeiti',
+      units: undefined,
+      pos: [0, 0], draggable: false, height: 0.05, wrapWidth: 1.2, ori: 0.0,
+      languageStyle: 'LTR',
+      color: new util.Color('black'), opacity: undefined,
+      depth: 0.0
+    });
+
+    transition_match_key = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
+
+    Transition_Match_Components = [];
+    Transition_Match_Components.push(transition_match_text);
+    Transition_Match_Components.push(transition_match_key);
+
+    for (const thisComponent of Transition_Match_Components)
+      if ('status' in thisComponent)
+        thisComponent.status = PsychoJS.Status.NOT_STARTED;
+
+    return Scheduler.Event.NEXT;
+  }
+}
+
+function Transition_Match_RoutineEachFrame() {
+  return async function () {
+    const current_group = Number.parseInt(expInfo["group"]);
+    if (current_group !== 2) {
+      return Scheduler.Event.NEXT;
+    }
+
+    t = Transition_Match_Clock.getTime();
+    frameN = frameN + 1;
+
+    // 更新文本
+    if (t >= 0.0 && transition_match_text.status === PsychoJS.Status.NOT_STARTED) {
+      transition_match_text.tStart = t;
+      transition_match_text.frameNStart = frameN;
+      transition_match_text.setAutoDraw(true);
+    }
+
+    // 键盘响应
+    if (t >= 0.0 && transition_match_key.status === PsychoJS.Status.NOT_STARTED) {
+      transition_match_key.tStart = t;
+      transition_match_key.frameNStart = frameN;
+      psychoJS.window.callOnFlip(function() { transition_match_key.clock.reset(); });
+      psychoJS.window.callOnFlip(function() { transition_match_key.start(); });
+      psychoJS.window.callOnFlip(function() { transition_match_key.clearEvents(); });
+    }
+
+    if (transition_match_key.status === PsychoJS.Status.STARTED) {
+      let theseKeys = transition_match_key.getKeys({keyList: ['space'], waitRelease: false});
+      if (theseKeys.length > 0) {
+        continueRoutine = false;
+      }
+    }
+
+    if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
+      return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
+    }
+
+    if (!continueRoutine) {
+      routineForceEnded = true;
+      return Scheduler.Event.NEXT;
+    }
+
+    continueRoutine = false;
+    for (const thisComponent of Transition_Match_Components)
+      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED)
+        continueRoutine = true;
+
+    if (continueRoutine && routineTimer.getTime() > 60) {
+      routineForceEnded = true;
+      return Scheduler.Event.NEXT;
+    }
+
+    return Scheduler.Event.FLIP_REPEAT;
+  }
+}
+
+function Transition_Match_RoutineEnd(snapshot) {
+  return async function () {
+    const current_group = Number.parseInt(expInfo["group"]);
+    if (current_group !== 2) {
+      return Scheduler.Event.NEXT;
+    }
+
+    if (transition_match_text) {
+      transition_match_text.setAutoDraw(false);
+    }
+    if (transition_match_key) {
+      transition_match_key.stop();
+    }
+
+    routineTimer.reset();
+
+    if (currentLoop === psychoJS.experiment) {
+      psychoJS.experiment.nextEntry(snapshot);
+    }
+    return Scheduler.Event.NEXT;
+  }
+}
+
 function Emotion_IntroRoutineBegin(snapshot) {
   return async function () {
     TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
@@ -2157,7 +2291,13 @@ function Emotion_IntroRoutineBegin(snapshot) {
     // Run 'Begin Routine' code from code_10
     intro_text_emotion.alignText = "left";
     intro_text_emotion.anchor = "center";
-    
+
+    // 根据组别动态修改情绪测量介绍文字
+    const emotion_group = Number.parseInt(expInfo["group"]);
+    if (emotion_group === 2) {
+      intro_text_emotion.setText('接下来请针对这个全新的 C 小区，回答以下问题。\n\n选项无好坏之分，请按真实感受填写。\n请根据题目要求，选择最符合您当前状态的选项。\n点击对应的数字分值完成选择。\n\n准备好了请按空格键开始');
+    }
+
     intro_key_emotion.keys = undefined;
     intro_key_emotion.rt = undefined;
     _intro_key_emotion_allKeys = [];
