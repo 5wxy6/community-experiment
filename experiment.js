@@ -633,7 +633,7 @@ async function experimentInit() {
   text_7 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_7',
-    text: '投票规则：我们采用票数兑换积分制\n\n您需要决定将这10票如何分配给三个选项：\n每投一票给选项A：自己+2分，其他成员不加分；\n\n每投一票给选项B：自己和A小区成员+1分，互动小区成员不加分；\n\n每投一票给选项C：自己和A小区成员+1分，互动小区成员每人-1分\n\n        \n10票可以分配给三个选项！三个选项投票数之和必须为10！\n\n按空格键进入决策环节你会得知与哪个小区互动\n\n\n',
+    text: '投票规则：我们采用票数兑换积分制\n\n您需要决定将这10票如何分配给三个选项：\n每投一票给选项A：自己加2分，其他成员不加分；\n\n每投一票给选项B：自己和A小区成员各加1分，互动小区成员不加分；\n\n每投一票给选项C：自己和A小区成员各加1分，互动小区成员各减1分\n\n        \n10票可以分配给三个选项！三个选项投票数之和必须为10！\n\n按空格键进入决策环节你会得知与哪个小区互动\n\n\n',
     font: 'STHeiti',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: undefined, ori: 0.0,
