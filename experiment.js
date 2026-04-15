@@ -2294,7 +2294,7 @@ function Emotion_IntroRoutineBegin(snapshot) {
     // 根据组别动态修改情绪测量介绍文字
     const emotion_group = Number.parseInt(expInfo["group"]);
     if (emotion_group === 2) {
-      intro_text_emotion.setText('接下来请针对这个全新的 C 小区，回答以下问题。\n\n选项无好坏之分，请按真实感受填写。\n请根据题目要求，选择最符合您当前状态的选项。\n点击对应的数字分值完成选择。\n\n准备好了请按空格键开始');
+      intro_text_emotion.setText('接下来请针对这个全新的 C 小区，回答以下问题。\n\n选项无好坏之分，请按真实感受填写。\n请根据题目要求，选择最符合您当前状态的选项。\n\n说明：\n1 = 非常不认同    5 = 有点认同\n2 = 比较不认同    6 = 比较认同\n3 = 有点不认同    7 = 非常认同\n4 = 不确定\n\n点击对应的数字分值完成选择。\n\n准备好了请按空格键开始');
     }
 
     intro_key_emotion.keys = undefined;
