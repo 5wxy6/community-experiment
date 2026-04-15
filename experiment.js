@@ -283,7 +283,7 @@ async function experimentInit() {
   svo_intro_text = new visual.TextStim({
     win: psychoJS.window,
     name: 'svo_intro_text',
-    text: '\n\n                     接下来您将回答一些问题\n\n       请根据您自己的观点，评价每条陈述与您实际情况的符合程度。\n       请选择最符合您真实想法的选项，没有对错之分。\n\n                      说明：\n                      1 = 非常不认同    5 = 有点认同\n                      2 = 比较不认同    6 = 比较认同\n                      3 = 有点不认同    7 = 非常认同\n                      4 = 不确定\n                      点击对应的数字分值完成选择\n\n                      按空格键继续',
+    text: '\n\n                     接下来您将回答一些问题\n\n       请根据您自己的观点，评价每条陈述与您实际情况的符合程度。\n       请选择最符合您真实想法的选项，没有对错之分。\n\n                      【说明】\n                      1 = 非常不认同\n                      2 = 比较不认同\n                      3 = 有点不认同\n                      4 = 不确定\n                      5 = 有点认同\n                      6 = 比较认同\n                      7 = 非常认同\n\n                      点击对应的数字分值完成选择\n\n                      按空格键继续',
     font: 'STHeiti',
     units: 'height', 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 1.4, ori: 0.0,
@@ -510,7 +510,7 @@ async function experimentInit() {
   intro_text_emotion = new visual.TextStim({
     win: psychoJS.window,
     name: 'intro_text_emotion',
-    text: '          接下来，我们需要了解您在刚才互动后的真实感受。\n          选项无好坏之分，请按真实感受填写\n          请根据接下来的题目要求，选择最符合您当前状态的选项。\n\n          说明：\n          1 = 非常不认同    5 = 有点认同\n          2 = 比较不认同    6 = 比较认同\n          3 = 有点不认同    7 = 非常认同\n          4 = 不确定\n\n          点击对应的数字分值完成选择\n          准备好了请按空格键开始',
+    text: '          接下来，我们需要了解您在刚才互动后的真实感受。\n          选项无好坏之分，请按真实感受填写\n          请根据接下来的题目要求，选择最符合您当前状态的选项。\n\n          【说明】\n          1 = 非常不认同\n          2 = 比较不认同\n          3 = 有点不认同\n          4 = 不确定\n          5 = 有点认同\n          6 = 比较认同\n          7 = 非常认同\n\n          点击对应的数字分值完成选择\n          准备好了请按空格键开始',
     font: 'STHeiti',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 0.8, ori: 0.0,
@@ -2294,7 +2294,7 @@ function Emotion_IntroRoutineBegin(snapshot) {
     // 根据组别动态修改情绪测量介绍文字
     const emotion_group = Number.parseInt(expInfo["group"]);
     if (emotion_group === 2) {
-      intro_text_emotion.setText('接下来请针对这个全新的 C 小区，回答以下问题。\n\n选项无好坏之分，请按真实感受填写。\n请根据题目要求，选择最符合您当前状态的选项。\n\n说明：\n1 = 非常不认同    5 = 有点认同\n2 = 比较不认同    6 = 比较认同\n3 = 有点不认同    7 = 非常认同\n4 = 不确定\n\n点击对应的数字分值完成选择。\n\n准备好了请按空格键开始');
+      intro_text_emotion.setText('接下来请针对这个全新的 C 小区，回答以下问题。\n\n选项无好坏之分，请按真实感受填写。\n请根据题目要求，选择最符合您当前状态的选项。\n\n【说明】\n1 = 非常不认同\n2 = 比较不认同\n3 = 有点不认同\n4 = 不确定\n5 = 有点认同\n6 = 比较认同\n7 = 非常认同\n\n点击对应的数字分值完成选择。\n\n准备好了请按空格键开始');
     }
 
     intro_key_emotion.keys = undefined;
