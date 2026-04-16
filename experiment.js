@@ -413,7 +413,7 @@ async function experimentInit() {
     text: '【充电桩配额决策】\n\n社区充电站共有20个充电桩\n供AB小区划分使用。\n\n请决定您希望A小区能拥有多少个充电桩。\n\n输入范围：0-20\n（0=没有，20=全部拥有）',
     font: 'STHeiti',
     units: undefined,
-    pos: [0, 0.2], draggable: false, height: 0.032, wrapWidth: 0.8, ori: 0.0,
+    pos: [0, 0.15], draggable: false, height: 0.032, wrapWidth: 0.8, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
@@ -427,7 +427,7 @@ async function experimentInit() {
     text: '',
     placeholder: 'undefined',
     font: 'STHeiti',
-    pos: [0, (- 0.05)], 
+    pos: [0, (- 0.25)], 
     draggable: false,
     letterHeight: 0.06,
     lineSpacing: 1.0,
@@ -1910,7 +1910,7 @@ function Struggle_RoutineRoutineBegin(snapshot) {
     // update component parameters for each repeat
     // Run 'Begin Routine' code from struggle_code
     current_round_display = 1;
-    round_info_text = "\u3010\u5145\u7535\u6869\u914d\u989d\u3011\u7b2c 1 / 1 \u8f6e";
+    round_info_text = "";
     input_quota.text = "";
     warning_text_struggle.text = "";
     opponent_status = "\u63d0\u793a\u540c\u5c0f\u533a\u6210\u5458\u4ee5\u53ca\u5bf9\u65b9B\u5c0f\u6210\u5458\u4e5f\u6b63\u5728\u9884\u7559\u5145\u7535\u6869\u3002";
