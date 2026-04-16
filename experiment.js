@@ -2598,12 +2598,10 @@ function Emotion_MeasurementRoutineBegin(snapshot) {
     
     // 获取当前页面类型 (anger 或 solidarity)
     const current_page = page_type;  // 'anger' 或 'solidarity'
-    const current_group = Number.parseInt(expInfo["group"]);
+    // 情绪测量始终针对刚才互动的小区（Group 1/2/3 在情绪测量时都是针对 B 小区）
+    // Group 2 在 Transition_Match 之后才切换到 C 小区进行后续决策
     let opponent_name = "B小区";
     let self_name = "A小区";
-    if (current_group === 2) {
-        opponent_name = "C小区";
-    }
     
     // 定义题目内容
     const anger_questions = [
