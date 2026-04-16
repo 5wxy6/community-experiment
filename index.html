@@ -37,10 +37,19 @@
         <input type="text" id="input-session" value="001" style="padding:5px; width:150px;">
       </div>
       <div style="margin:15px 0;">
-        <label>Group: </label>
-        <input type="text" id="input-group" value="1" style="padding:5px; width:150px;">
+        <label>性别: </label>
+        <select id="input-gender" style="padding:5px; width:150px;">
+          <option value="">请选择</option>
+          <option value="男">男</option>
+          <option value="女">女</option>
+        </select>
+      </div>
+      <div style="margin:15px 0;">
+        <label>年龄: </label>
+        <input type="number" id="input-age" min="18" max="70" placeholder="18-70" style="padding:5px; width:150px;">
       </div>
       <button id="start-btn" style="padding:10px 30px; margin-top:15px; font-size:16px; cursor:pointer;">开始实验</button>
+      <p style="font-size:12px; color:#aaa; margin-top:10px;">Group将被随机分配（1/2/3概率相等）</p>
     </div>
 
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -105,13 +114,18 @@
       document.getElementById('start-btn').addEventListener('click', function() {
         var participant = document.getElementById('input-participant').value || '001';
         var session = document.getElementById('input-session').value || '001';
-        var group = document.getElementById('input-group').value || '1';
+        var gender = document.getElementById('input-gender').value || '';
+        var age = document.getElementById('input-age').value || '';
+        // 随机分配Group（1、2、3概率相等）
+        var group = Math.floor(Math.random() * 3) + 1;
 
         // Set values in global expInfo (will be used by experiment.js)
         window.expInfoOverride = {
           participant: participant,
           session: session,
-          group: group
+          gender: gender,
+          age: age,
+          group: group.toString()
         };
 
         // Hide form and show loading
