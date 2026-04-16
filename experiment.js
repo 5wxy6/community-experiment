@@ -410,10 +410,10 @@ async function experimentInit() {
   quota_instruction = new visual.TextStim({
     win: psychoJS.window,
     name: 'quota_instruction',
-    text: '【充电桩配额决策】\n\n社区充电站共有20个充电桩供AB小区划分使用。\n\n请决定您希望A小区能拥有多少个充电桩。\n\n输入范围：0-20（0=没有，20=全部拥有）',
+    text: '【充电桩配额决策】\n\n社区充电站共有20个充电桩供AB小区划分使用。\n请决定您希望A小区能拥有多少个充电桩。\n\n输入范围：0-20（0=没有，20=全部拥有）',
     font: 'STHeiti',
     units: undefined,
-    pos: [0, 0.35], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
+    pos: [0, 0.42], draggable: false, height: 0.03, wrapWidth: 0.9, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
