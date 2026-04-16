@@ -780,7 +780,7 @@ async function experimentInit() {
   text_8 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_8',
-    text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n• 您所在小区的充电资源奖励与荣誉\n• 您个人的最终报酬\n• 与您互动的小区成员的报酬\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n作为社区代表，您拥有 10 张选票。\n请按空格键了解投票规则。',
+    text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n    • 您所在小区的充电资源奖励与荣誉\n    • 您个人的最终报酬\n    • 与您互动的小区成员的报酬\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n作为社区代表，您拥有 10 张选票。\n请按空格键了解投票规则。',
     font: 'STHeiti',
     units: undefined,
     pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
@@ -797,13 +797,13 @@ async function experimentInit() {
   text_7 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_7',
-    text: '投票规则：我们采用票数兑换积分制\n\n您需要决定将这10票如何分配给三个选项：\n每投一票给选项A：自己加2分，其他成员不加分；\n\n每投一票给选项B：自己和A小区成员各加1分，互动小区成员不加分；\n\n每投一票给选项C：自己和A小区成员各加1分，互动小区成员各减1分\n\n        \n10票可以分配给三个选项！三个选项投票数之和必须为10！\n\n按空格键进入决策环节你会得知与哪个小区互动\n\n\n',
+    text: '【投票规则】\n\n我们采用票数兑换积分制。\n\n您需要决定将这10票如何分配给三个选项：\n\n选项A：自己加2分，其他成员不加分；\n\n选项B：自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：自己和A小区成员各加1分，互动小区成员各减1分。\n\n注意：10票可以分配给三个选项，\n三个选项投票数之和必须等于10！\n\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
     font: 'STHeiti',
-    units: undefined, 
-    pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: undefined, ori: 0.0,
-    languageStyle: 'LTR',
-    color: new util.Color('black'),  opacity: undefined,
-    depth: 0.0 
+    units: undefined,
+    pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
+    anchor: 'center',
+    alignText: 'center',
+    color: new util.Color('black'), opacity: undefined, depth: 0.0
   });
   
   key_resp_8 = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
