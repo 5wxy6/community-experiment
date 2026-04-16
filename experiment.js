@@ -251,12 +251,10 @@ async function experimentInit() {
   text_5 = new visual.TextStim({
     win: psychoJS.window,
     text: '欢迎参加我们的社区互动实验\n\n你将处于一个未来社区中，社区里共有ABC三个小区。\n这是一个旨在通过数字化手段实现资源共享的现代化社区。\n在这里，所有的公共设施——包括绿地、健身房以及电力资源，\n都由社区内的居民共同管理与维护。\n\n您将作为某一小区的社区居民，在本次活动中完成几个社区任务。\n准备好后按空格键继续。\n\n如有问题请联系实验人员。',
-    text: '          欢迎参加我们的社区互动实验\n\n\n          你将处于一个未来社区中，社区里共有ABC三个小区。\n          这是一个旨在通过数字化手段实现资源共享的现代化社区。\n          在这里，所有的公共设施——包括绿地、健身房以及电力资源，\n          都由社区内的居民共同管理与维护.\n\n          您将作为某一小区社区居民，在本次活动中完成几个社区任务\n          准备好后按空格键继续\n\n          如有问题请联系实验人员',
     font: 'STHeiti',
     pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
-    pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 1.2, ori: 0.0,
     languageStyle: 'LTR',
     color: new util.Color('black'),  opacity: undefined,
     depth: -1.0 
