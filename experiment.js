@@ -122,21 +122,19 @@ const flowScheduler = new Scheduler(psychoJS);
 // Schedule all routines
 flowScheduler.add(updateInfo);
 flowScheduler.add(experimentInit);
-flowScheduler.add(firstRoutineBegin());
-flowScheduler.add(firstRoutineEachFrame());
-flowScheduler.add(firstRoutineEnd());
 flowScheduler.add(SVO_IntroRoutineBegin());
 flowScheduler.add(SVO_IntroRoutineEachFrame());
 flowScheduler.add(SVO_IntroRoutineEnd());
-flowScheduler.add(Instruction_RoutineRoutineBegin());
-flowScheduler.add(Instruction_RoutineRoutineEachFrame());
-flowScheduler.add(Instruction_RoutineRoutineEnd());
 const svo_loopLoopScheduler = new Scheduler(psychoJS);
 flowScheduler.add(svo_loopLoopBegin(svo_loopLoopScheduler));
 flowScheduler.add(svo_loopLoopScheduler);
 flowScheduler.add(svo_loopLoopEnd);
-
-
+flowScheduler.add(firstRoutineBegin());
+flowScheduler.add(firstRoutineEachFrame());
+flowScheduler.add(firstRoutineEnd());
+flowScheduler.add(Instruction_RoutineRoutineBegin());
+flowScheduler.add(Instruction_RoutineRoutineEachFrame());
+flowScheduler.add(Instruction_RoutineRoutineEnd());
 flowScheduler.add(Struggle_RoutineRoutineBegin());
 flowScheduler.add(Struggle_RoutineRoutineEachFrame());
 flowScheduler.add(Struggle_RoutineRoutineEnd());
@@ -150,8 +148,6 @@ const emotion_loopLoopScheduler = new Scheduler(psychoJS);
 flowScheduler.add(emotion_loopLoopBegin(emotion_loopLoopScheduler));
 flowScheduler.add(emotion_loopLoopScheduler);
 flowScheduler.add(emotion_loopLoopEnd);
-
-
 flowScheduler.add(Emotion_Final_SubmitRoutineBegin());
 flowScheduler.add(Emotion_Final_SubmitRoutineEachFrame());
 flowScheduler.add(Emotion_Final_SubmitRoutineEnd());
@@ -627,7 +623,7 @@ async function experimentInit() {
   
   emotion_slider_anger_3 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_anger_3', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, 0.01], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, -0.08], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -678,7 +674,7 @@ async function experimentInit() {
   
   emotion_slider_solid_3 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_solid_3', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, 0.01], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, -0.08], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
