@@ -250,10 +250,12 @@ async function experimentInit() {
   firstClock = new util.Clock();
   text_5 = new visual.TextStim({
     win: psychoJS.window,
-    name: 'text_5',
+    text: '欢迎参加我们的社区互动实验\n\n你将处于一个未来社区中，社区里共有ABC三个小区。\n这是一个旨在通过数字化手段实现资源共享的现代化社区。\n在这里，所有的公共设施——包括绿地、健身房以及电力资源，\n都由社区内的居民共同管理与维护。\n\n您将作为某一小区的社区居民，在本次活动中完成几个社区任务。\n准备好后按空格键继续。\n\n如有问题请联系实验人员。',
     text: '          欢迎参加我们的社区互动实验\n\n\n          你将处于一个未来社区中，社区里共有ABC三个小区。\n          这是一个旨在通过数字化手段实现资源共享的现代化社区。\n          在这里，所有的公共设施——包括绿地、健身房以及电力资源，\n          都由社区内的居民共同管理与维护.\n\n          您将作为某一小区社区居民，在本次活动中完成几个社区任务\n          准备好后按空格键继续\n\n          如有问题请联系实验人员',
     font: 'STHeiti',
-    units: undefined, 
+    pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
+    anchor: 'center',
+    alignText: 'center',
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 1.2, ori: 0.0,
     languageStyle: 'LTR',
     color: new util.Color('black'),  opacity: undefined,
@@ -270,7 +272,7 @@ async function experimentInit() {
     text: '【背景介绍】请仔细阅读\n\n按照社区规划，A小区与B小区共同使用社区共享充电站。\n\n随着新能源汽车普及，\n两小区新能源车数量快速增长，\n充电需求大致相当。\n\n而充电桩容量有限，\n该充电站共20个充电桩，\n不能完全满足两小区需求。\n\n物业决定征求成员意见来决定最终分配方案。\n\n注意：您被随机分配为A小区成员，您的决策将影响您个人、同小区成员及B小区成员的利益。\n\n了解后请按空格键继续',
     font: 'STHeiti',
     units: 'height',
-    pos: [0, 0], draggable: false, height: 0.032, wrapWidth: 0.6, ori: 0.0,
+    pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
@@ -285,7 +287,7 @@ async function experimentInit() {
   svo_intro_text = new visual.TextStim({
     win: psychoJS.window,
     name: 'svo_intro_text',
-    text: '\n\n                     接下来您将回答一些问题\n\n       请根据您自己的观点，评价每条陈述与您实际情况的符合程度。\n       请选择最符合您真实想法的选项，没有对错之分。\n\n                      【说明】\n                      1 = 非常不认同\n                      2 = 比较不认同\n                      3 = 有点不认同\n                      4 = 不确定\n                      5 = 有点认同\n                      6 = 比较认同\n                      7 = 非常认同\n\n                      点击对应的数字分值完成选择\n\n                      按空格键继续',
+    text: '接下来您将回答一些问题\n\n请根据您自己的观点，评价每条陈述与您实际情况的符合程度。\n请选择最符合您真实想法的选项，没有对错之分。\n\n【说明】\n1 = 非常不认同\n2 = 比较不认同\n3 = 有点不认同\n4 = 不确定\n5 = 有点认同\n6 = 比较认同\n7 = 非常认同\n\n点击对应的数字分值完成选择\n\n按空格键继续',
     font: 'STHeiti',
     units: 'height', 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 1.4, ori: 0.0,
@@ -410,12 +412,14 @@ async function experimentInit() {
   quota_instruction = new visual.TextStim({
     win: psychoJS.window,
     name: 'quota_instruction',
-    text: '社区充电站共有20个充电桩供AB小区划分使用\n\n请决定您希望A小区能拥有多少个充电桩\n\n输入范围：0-20（0=没有，20=全部拥有）',
+    text: '【充电桩配额决策】\n\n社区充电站共有20个充电桩供AB小区划分使用。\n\n请决定您希望A小区能拥有多少个充电桩。\n\n输入范围：0-20（0=没有，20=全部拥有）',
     font: 'STHeiti',
-    units: undefined, 
-    pos: [0, 0.15], draggable: false, height: 0.04,  wrapWidth: 1.5, ori: 0.0,
+    units: undefined,
+    pos: [0, 0.35], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
+    anchor: 'center',
+    alignText: 'center',
     languageStyle: 'LTR',
-    color: new util.Color('black'),  opacity: undefined,
+    color: new util.Color('black'), opacity: undefined,
     depth: -3.0 
   });
   
@@ -514,13 +518,14 @@ async function experimentInit() {
   intro_text_emotion = new visual.TextStim({
     win: psychoJS.window,
     name: 'intro_text_emotion',
-    text: '          接下来，我们需要了解您在刚才互动后的真实感受。\n          选项无好坏之分，请按真实感受填写\n          请根据接下来的题目要求，选择最符合您当前状态的选项。\n\n          【说明】\n          1 = 非常不认同\n          2 = 比较不认同\n          3 = 有点不认同\n          4 = 不确定\n          5 = 有点认同\n          6 = 比较认同\n          7 = 非常认同\n\n          点击对应的数字分值完成选择\n          准备好了请按空格键开始',
+    text: '接下来，我们需要了解您在刚才互动后的真实感受。\n选项无好坏之分，请按真实感受填写。\n请根据接下来的题目要求，选择最符合您当前状态的选项。\n\n【说明】\n1 = 非常不认同\n2 = 比较不认同\n3 = 有点不认同\n4 = 不确定\n5 = 有点认同\n6 = 比较认同\n7 = 非常认同\n\n点击对应的数字分值完成选择\n\n准备好了请按空格键开始。',
     font: 'STHeiti',
-    units: undefined, 
-    pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 0.8, ori: 0.0,
+    units: undefined,
+    pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
+    anchor: 'center',
+    alignText: 'center',
     languageStyle: 'LTR',
-    color: new util.Color('black'),  opacity: undefined,
-    depth: -1.0 
+    color: new util.Color('black'), opacity: undefined, depth: -1.0
   });
   
   intro_key_emotion = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
@@ -779,11 +784,12 @@ async function experimentInit() {
     name: 'text_8',
     text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n• 您所在小区的充电资源奖励与荣誉\n• 您个人的最终报酬\n• 与您互动的小区成员的报酬\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n作为社区代表，您拥有 10 张选票。\n请按空格键了解投票规则。',
     font: 'STHeiti',
-    units: undefined, 
-    pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: undefined, ori: 0.0,
+    units: undefined,
+    pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
+    anchor: 'center',
+    alignText: 'center',
     languageStyle: 'LTR',
-    color: new util.Color('black'),  opacity: undefined,
-    depth: 0.0 
+    color: new util.Color('black'), opacity: undefined, depth: 0.0
   });
   
   key_resp_9 = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
