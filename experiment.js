@@ -34,7 +34,11 @@ let Round_FeedbackClock, Experiment_EndClock;
 let text_5, instr_text, svo_intro_text, svo_text, self_display, other_display;
 let text_left, text_right, quota_instruction, opponent_reminder_struggle;
 let warning_text_struggle, input_quota, submit_btn_struggle;
-let round_info_struggle, intro_text_emotion, emotion_slider;
+let round_info_struggle, intro_text_emotion;
+let emotion_text_anger_1, emotion_text_anger_2, emotion_text_anger_3, emotion_text_anger_4, emotion_text_anger_5;
+let emotion_slider_anger_1, emotion_slider_anger_2, emotion_slider_anger_3, emotion_slider_anger_4, emotion_slider_anger_5;
+let emotion_text_solid_1, emotion_text_solid_2, emotion_text_solid_3, emotion_text_solid_4, emotion_text_solid_5;
+let emotion_slider_solid_1, emotion_slider_solid_2, emotion_slider_solid_3, emotion_slider_solid_4, emotion_slider_solid_5;
 let intro_key_emotion, final_confirm_btn, transition_msg;
 let text_2, text_3, text_4, text_7, text_8;
 let end_msg_text, end_key, feedback_text, round_info, feedback_display;
@@ -121,12 +125,12 @@ flowScheduler.add(experimentInit);
 flowScheduler.add(firstRoutineBegin());
 flowScheduler.add(firstRoutineEachFrame());
 flowScheduler.add(firstRoutineEnd());
-flowScheduler.add(Instruction_RoutineRoutineBegin());
-flowScheduler.add(Instruction_RoutineRoutineEachFrame());
-flowScheduler.add(Instruction_RoutineRoutineEnd());
 flowScheduler.add(SVO_IntroRoutineBegin());
 flowScheduler.add(SVO_IntroRoutineEachFrame());
 flowScheduler.add(SVO_IntroRoutineEnd());
+flowScheduler.add(Instruction_RoutineRoutineBegin());
+flowScheduler.add(Instruction_RoutineRoutineEachFrame());
+flowScheduler.add(Instruction_RoutineRoutineEnd());
 const svo_loopLoopScheduler = new Scheduler(psychoJS);
 flowScheduler.add(svo_loopLoopBegin(svo_loopLoopScheduler));
 flowScheduler.add(svo_loopLoopScheduler);
@@ -139,9 +143,6 @@ flowScheduler.add(Struggle_RoutineRoutineEnd());
 flowScheduler.add(Conflict_RoutineRoutineBegin());
 flowScheduler.add(Conflict_RoutineRoutineEachFrame());
 flowScheduler.add(Conflict_RoutineRoutineEnd());
-flowScheduler.add(Transition_Match_RoutineBegin());
-flowScheduler.add(Transition_Match_RoutineEachFrame());
-flowScheduler.add(Transition_Match_RoutineEnd());
 flowScheduler.add(Emotion_IntroRoutineBegin());
 flowScheduler.add(Emotion_IntroRoutineEachFrame());
 flowScheduler.add(Emotion_IntroRoutineEnd());
@@ -154,6 +155,9 @@ flowScheduler.add(emotion_loopLoopEnd);
 flowScheduler.add(Emotion_Final_SubmitRoutineBegin());
 flowScheduler.add(Emotion_Final_SubmitRoutineEachFrame());
 flowScheduler.add(Emotion_Final_SubmitRoutineEnd());
+flowScheduler.add(Transition_Match_RoutineBegin());
+flowScheduler.add(Transition_Match_RoutineEachFrame());
+flowScheduler.add(Transition_Match_RoutineEnd());
 flowScheduler.add(secondRoutineBegin());
 flowScheduler.add(secondRoutineEachFrame());
 flowScheduler.add(secondRoutineEnd());
@@ -267,7 +271,7 @@ async function experimentInit() {
   instr_text = new visual.TextStim({
     win: psychoJS.window,
     name: 'instr_text',
-    text: '【背景介绍】请仔细阅读\n\n按照社区规划，A小区与B小区共同使用社区共享充电站。\n\n随着新能源汽车普及，\n两小区新能源车数量快速增长，\n充电需求大致相当。\n\n而充电桩容量有限，\n该充电站共20个充电桩，\n不能完全满足两小区需求。\n\n两小区曾因充电资源使用产生口角，物业决定征求成员意见来决定最终分配方案。\n\n注意：您被随机分配为A小区成员，您的决策将影响您个人、同小区成员及B小区成员的利益。\n\n了解后请按空格键继续',
+    text: '【背景介绍】请仔细阅读\n\n按照社区规划，A小区与B小区共同使用社区共享充电站。\n\n随着新能源汽车普及，\n两小区新能源车数量快速增长，\n充电需求大致相当。\n\n而充电桩容量有限，\n该充电站共20个充电桩，\n不能完全满足两小区需求。\n\n物业决定征求成员意见来决定最终分配方案。\n\n注意：您被随机分配为A小区成员，您的决策将影响您个人、同小区成员及B小区成员的利益。\n\n了解后请按空格键继续',
     font: 'STHeiti',
     units: 'height',
     pos: [0, 0], draggable: false, height: 0.032, wrapWidth: 0.6, ori: 0.0,
@@ -527,27 +531,179 @@ async function experimentInit() {
   
   // Initialize components for Routine "Emotion_Measurement"
   Emotion_MeasurementClock = new util.Clock();
-  text_4 = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'text_4',
-    text: '',
-    font: 'STHeiti',
-    units: undefined, 
-    pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 1.2, ori: 0.0,
-    languageStyle: 'LTR',
-    color: new util.Color('black'),  opacity: undefined,
-    depth: -1.0 
+  
+  // Initialize 5 anger emotion text items (y positions: 0.35, 0.18, 0.01, -0.16, -0.33)
+  emotion_text_anger_1 = new visual.TextStim({
+    win: psychoJS.window, name: 'emotion_text_anger_1',
+    text: '', font: 'STHeiti', units: undefined,
+    pos: [0, 0.35], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -1.0
   });
   
-  emotion_slider = new visual.Slider({
-    win: psychoJS.window, name: 'emotion_slider',
-    startValue: undefined,
-    size: [1.0, 0.1], pos: [0, (- 0.2)], ori: 0.0, units: psychoJS.window.units,
-    labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"], fontSize: 0.035, ticks: [1, 2, 3, 4, 5, 6, 7],
-    granularity: 1.0, style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
-    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'), 
-    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -2, 
-    flip: false,
+  emotion_text_anger_2 = new visual.TextStim({
+    win: psychoJS.window, name: 'emotion_text_anger_2',
+    text: '', font: 'STHeiti', units: undefined,
+    pos: [0, 0.18], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -2.0
+  });
+  
+  emotion_text_anger_3 = new visual.TextStim({
+    win: psychoJS.window, name: 'emotion_text_anger_3',
+    text: '', font: 'STHeiti', units: undefined,
+    pos: [0, 0.01], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -3.0
+  });
+  
+  emotion_text_anger_4 = new visual.TextStim({
+    win: psychoJS.window, name: 'emotion_text_anger_4',
+    text: '', font: 'STHeiti', units: undefined,
+    pos: [0, (- 0.16)], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -4.0
+  });
+  
+  emotion_text_anger_5 = new visual.TextStim({
+    win: psychoJS.window, name: 'emotion_text_anger_5',
+    text: '', font: 'STHeiti', units: undefined,
+    pos: [0, (- 0.33)], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -5.0
+  });
+  
+  // Initialize 5 solidarity emotion text items
+  emotion_text_solid_1 = new visual.TextStim({
+    win: psychoJS.window, name: 'emotion_text_solid_1',
+    text: '', font: 'STHeiti', units: undefined,
+    pos: [0, 0.35], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -6.0
+  });
+  
+  emotion_text_solid_2 = new visual.TextStim({
+    win: psychoJS.window, name: 'emotion_text_solid_2',
+    text: '', font: 'STHeiti', units: undefined,
+    pos: [0, 0.18], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -7.0
+  });
+  
+  emotion_text_solid_3 = new visual.TextStim({
+    win: psychoJS.window, name: 'emotion_text_solid_3',
+    text: '', font: 'STHeiti', units: undefined,
+    pos: [0, 0.01], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -8.0
+  });
+  
+  emotion_text_solid_4 = new visual.TextStim({
+    win: psychoJS.window, name: 'emotion_text_solid_4',
+    text: '', font: 'STHeiti', units: undefined,
+    pos: [0, (- 0.16)], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -9.0
+  });
+  
+  emotion_text_solid_5 = new visual.TextStim({
+    win: psychoJS.window, name: 'emotion_text_solid_5',
+    text: '', font: 'STHeiti', units: undefined,
+    pos: [0, (- 0.33)], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -10.0
+  });
+  
+  // Initialize 5 anger sliders (below each text: y positions: 0.28, 0.11, -0.06, -0.23, -0.40)
+  emotion_slider_anger_1 = new visual.Slider({
+    win: psychoJS.window, name: 'emotion_slider_anger_1', startValue: undefined,
+    size: [1.0, 0.05], pos: [0, 0.28], ori: 0.0, units: psychoJS.window.units,
+    labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
+    fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
+    style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
+    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -11.0, flip: false,
+  });
+  
+  emotion_slider_anger_2 = new visual.Slider({
+    win: psychoJS.window, name: 'emotion_slider_anger_2', startValue: undefined,
+    size: [1.0, 0.05], pos: [0, 0.11], ori: 0.0, units: psychoJS.window.units,
+    labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
+    fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
+    style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
+    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -12.0, flip: false,
+  });
+  
+  emotion_slider_anger_3 = new visual.Slider({
+    win: psychoJS.window, name: 'emotion_slider_anger_3', startValue: undefined,
+    size: [1.0, 0.05], pos: [0, 0.01], ori: 0.0, units: psychoJS.window.units,
+    labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
+    fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
+    style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
+    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -13.0, flip: false,
+  });
+  
+  emotion_slider_anger_4 = new visual.Slider({
+    win: psychoJS.window, name: 'emotion_slider_anger_4', startValue: undefined,
+    size: [1.0, 0.05], pos: [0, (- 0.23)], ori: 0.0, units: psychoJS.window.units,
+    labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
+    fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
+    style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
+    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -14.0, flip: false,
+  });
+  
+  emotion_slider_anger_5 = new visual.Slider({
+    win: psychoJS.window, name: 'emotion_slider_anger_5', startValue: undefined,
+    size: [1.0, 0.05], pos: [0, (- 0.40)], ori: 0.0, units: psychoJS.window.units,
+    labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
+    fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
+    style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
+    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -15.0, flip: false,
+  });
+  
+  // Initialize 5 solidarity sliders
+  emotion_slider_solid_1 = new visual.Slider({
+    win: psychoJS.window, name: 'emotion_slider_solid_1', startValue: undefined,
+    size: [1.0, 0.05], pos: [0, 0.28], ori: 0.0, units: psychoJS.window.units,
+    labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
+    fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
+    style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
+    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -16.0, flip: false,
+  });
+  
+  emotion_slider_solid_2 = new visual.Slider({
+    win: psychoJS.window, name: 'emotion_slider_solid_2', startValue: undefined,
+    size: [1.0, 0.05], pos: [0, 0.11], ori: 0.0, units: psychoJS.window.units,
+    labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
+    fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
+    style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
+    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -17.0, flip: false,
+  });
+  
+  emotion_slider_solid_3 = new visual.Slider({
+    win: psychoJS.window, name: 'emotion_slider_solid_3', startValue: undefined,
+    size: [1.0, 0.05], pos: [0, 0.01], ori: 0.0, units: psychoJS.window.units,
+    labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
+    fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
+    style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
+    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -18.0, flip: false,
+  });
+  
+  emotion_slider_solid_4 = new visual.Slider({
+    win: psychoJS.window, name: 'emotion_slider_solid_4', startValue: undefined,
+    size: [1.0, 0.05], pos: [0, (- 0.23)], ori: 0.0, units: psychoJS.window.units,
+    labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
+    fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
+    style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
+    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -19.0, flip: false,
+  });
+  
+  emotion_slider_solid_5 = new visual.Slider({
+    win: psychoJS.window, name: 'emotion_slider_solid_5', startValue: undefined,
+    size: [1.0, 0.05], pos: [0, (- 0.40)], ori: 0.0, units: psychoJS.window.units,
+    labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
+    fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
+    style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
+    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -20.0, flip: false,
   });
   
   // Initialize components for Routine "Emotion_Final_Submit"
@@ -625,7 +781,7 @@ async function experimentInit() {
   text_8 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_8',
-    text: '     【文明住户评比活动】\n\n社区正在进行年度文明住户评比活动。\n您所在的小区会随机与B和C中的任一小区进行互评\n文明住户评比活动投票结果将影响：\n1.您所在小区额外充电资源奖励和荣誉\n2.您个人的荣誉和奖金\n\n作为社区的一员，您拥有10分选票。\n\n按空格键了解投票规则',
+    text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n• 您所在小区的充电资源奖励与荣誉\n• 您个人的最终报酬\n• 与您互动的小区成员的报酬\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n作为社区代表，您拥有 10 张选票。\n请按空格键了解投票规则。',
     font: 'STHeiti',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: undefined, ori: 0.0,
@@ -1426,7 +1582,7 @@ function emotion_loopLoopBegin(emotion_loopLoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.SEQUENTIAL,
       extraInfo: expInfo, originPath: undefined,
-      trialList: 'emotion_items.xlsx',
+      trialList: [{page_type: 'anger'}, {page_type: 'solidarity'}],
       seed: undefined, name: 'emotion_loop'
     });
     psychoJS.experiment.addLoop(emotion_loop); // add the loop to the experiment
@@ -1962,21 +2118,21 @@ function Struggle_RoutineRoutineEnd(snapshot) {
         conflict_feedback = ((((((("\u3010\u5145\u7535\u6869\u914d\u989d\u7ed3\u679c\u3011\n\n" + `您的预留主张：为A小区预留 ${quota}% 的充电桩
     `
     ) + "\u26a0\ufe0f \u7136\u800c\uff0c\u76d1\u6d4b\u53d1\u73b0\uff1a\u5bf9\u624b'B\u5c0f\u533a'\u91c7\u53d6\u4e86\u6fc0\u8fdb\u62a2\u5360\u7b56\u7565\uff01\n") + `他选择强行占据了 ${opponent_quota}% 的充电桩配额。
-    `) + `这导致我方A小区实际仅获得 ${actual_quota}% 的充电配额。
+    `) + `这导致A小区实际仅获得 ${actual_quota}% 的充电配额。
     `) + "\u60a8\u6240\u5728\u793e\u533a\u7684\u65b0\u80fd\u6e90\u8f66\u4e3b\u9762\u4e34\u4e25\u91cd\u7684\u5145\u7535\u56f0\u96be\u3002\n\n\ud83d\ude1e\n") + "\u8bf7\u8bb0\u4f4f\uff1a\u63a5\u4e0b\u6765\u60a8\u5c06\u7ee7\u7eed\u4e0e\u3010\u8fd9\u652fB\u5c0f\u533a\u3011\u8fdb\u884c\u51b3\u7b56\u4e92\u52a8\u3002\n\n") + "\u8bf7\u6309\u7a7a\u683c\u952e\u8fdb\u5165\u4e0b\u4e00\u9636\u6bb5\u3002");
     } else {
         if ((current_group === 2)) {
             conflict_feedback = (((((((("\u3010\u5145\u7535\u6869\u914d\u989d\u7ed3\u679c\u3011\n\n" + `您的预留主张：为A小区预留 ${quota}% 的充电桩
     `
     ) + "\u26a0\ufe0f \u7136\u800c\uff0c\u76d1\u6d4b\u53d1\u73b0\uff1a\u5bf9\u624b'B\u5c0f\u533a'\u91c7\u53d6\u4e86\u6fc0\u8fdb\u62a2\u5360\u7b56\u7565\uff01\n") + `他们选择强行占据了 ${opponent_quota}% 的充电桩配额！
-    `) + `这导致我方A小区实际仅获得 ${actual_quota}% 的充电配额。
+    `) + `这导致A小区实际仅获得 ${actual_quota}% 的充电配额。
     `) + "\u60a8\u6240\u5728\u793e\u533a\u7684\u65b0\u80fd\u6e90\u8f66\u4e3b\u9762\u4e34\u4e25\u91cd\u7684\u5145\u7535\u56f0\u96be\u3002\n\n\ud83d\ude1e\n") + "\u8bf7\u8bb0\u4f4f\uff1a\u63a5\u4e0b\u6765\u60a8\u5c06\u9762\u5bf9\u3010\u90a3\u652f\u5bfc\u81f4\u635f\u5931\u7684B\u5c0f\u533a\u3011\uff01\n") + "\u6b63\u662f\u8fd9\u652f\u961f\u4f0d\u7684\u62a2\u5360\u884c\u4e3a\u9020\u6210\u4e86\u6211\u65b9\u7684\u5145\u7535\u56f0\u5883\uff01\n\n") + "\u8bf7\u6309\u7a7a\u683c\u952e\u8fdb\u5165\u4e0b\u4e00\u9636\u6bb5\u3002");
         } else {
             conflict_feedback = ((((`【第1轮结算】
     `
      + `您的主张：${quota}%
-    `) + `对方强行占据：${opponent_quota}%
-    `) + `我方实际：${actual_quota}%
+    `) + `B小区强行占据：${opponent_quota}%
+    `) + `A小区实际：${actual_quota}%
     `
     ) + "\u8bf7\u6309\u7a7a\u683c\u952e\u7ee7\u7eed\u3002");
         }
@@ -2175,7 +2331,7 @@ function Transition_Match_RoutineBegin(snapshot) {
     transition_match_text = new visual.TextStim({
       win: psychoJS.window,
       name: 'transition_match_text',
-      text: '系统已为您重新匹配对手，\n\n您将和一个全新的 C 小区互动。',
+      text: '系统已为您重新匹配，\n\n您将和一个全新的 C 小区互动。',
       font: 'STHeiti',
       units: undefined,
       pos: [0, 0], draggable: false, height: 0.05, wrapWidth: 1.2, ori: 0.0,
@@ -2298,7 +2454,7 @@ function Emotion_IntroRoutineBegin(snapshot) {
     // 根据组别动态修改情绪测量介绍文字
     const emotion_group = Number.parseInt(expInfo["group"]);
     if (emotion_group === 2) {
-      intro_text_emotion.setText('接下来请针对这个全新的 C 小区，回答以下问题。\n\n选项无好坏之分，请按真实感受填写。\n请根据题目要求，选择最符合您当前状态的选项。\n\n【说明】\n1 = 非常不认同\n2 = 比较不认同\n3 = 有点不认同\n4 = 不确定\n5 = 有点认同\n6 = 比较认同\n7 = 非常认同\n\n点击对应的数字分值完成选择。\n\n准备好了请按空格键开始');
+      intro_text_emotion.setText('接下来，我们需要了解您在刚才互动后的真实感受。\n\n选项无好坏之分，请按真实感受填写。\n请根据接下来的题目要求，选择最符合您当前状态的选项。\n\n【说明】\n1 = 非常不认同\n2 = 比较不认同\n3 = 有点不认同\n4 = 不确定\n5 = 有点认同\n6 = 比较认同\n7 = 非常认同\n\n点击对应的数字分值完成选择。\n\n准备好了请按空格键开始');
     }
 
     intro_key_emotion.keys = undefined;
@@ -2443,25 +2599,90 @@ function Emotion_MeasurementRoutineBegin(snapshot) {
     Emotion_MeasurementMaxDurationReached = false;
     // update component parameters for each repeat
     // Run 'Begin Routine' code from code_2
-    emotion_slider.reset();
-
-    // 动态替换对手名称
-    let display_question = question;
+    
+    // 获取当前页面类型 (anger 或 solidarity)
+    const current_page = page_type;  // 'anger' 或 'solidarity'
     const current_group = Number.parseInt(expInfo["group"]);
     let opponent_name = "B小区";
+    let self_name = "A小区";
     if (current_group === 2) {
         opponent_name = "C小区";
     }
-    display_question = display_question.replace(/B小区/g, opponent_name);
-
-    text_4.setText(display_question);
-    emotion_slider.reset()
+    
+    // 定义题目内容
+    const anger_questions = [
+        "1. 当想到" + opponent_name + "的成员时，我感到愤怒或气恼。",
+        "2. 看到" + opponent_name + "成员获得比我们更多的奖励会让我感到不满。",
+        "3. 我觉得" + opponent_name + "的成员在分配资源时表现得贪婪或自私。",
+        "4. 在整个实验过程中，我对" + opponent_name + "成员产生了排斥感。",
+        "5. 看到" + opponent_name + "在之前的回合中表现出竞争性，我会产生想要反击他们的冲动。"
+    ];
+    
+    const solidarity_questions = [
+        "1. 我感到自己与" + self_name + "的其他成员之间有着紧密的联系。",
+        "2. 当我" + self_name + "获得成功时，我感觉就像我自己获得成功一样。",
+        "3. 我对自己作为" + self_name + "的成员感到自豪。",
+        "4. 即使需要付出个人代价，我也愿意为了维护" + self_name + "的整体利益而努力。",
+        "5. 在这个实验任务中，我感觉到" + self_name + "成员是一个整体。"
+    ];
+    
+    // 根据页面类型设置文本和重置滑块
+    if (current_page === 'anger') {
+        emotion_text_anger_1.setText(anger_questions[0]);
+        emotion_text_anger_2.setText(anger_questions[1]);
+        emotion_text_anger_3.setText(anger_questions[2]);
+        emotion_text_anger_4.setText(anger_questions[3]);
+        emotion_text_anger_5.setText(anger_questions[4]);
+        
+        emotion_slider_anger_1.reset();
+        emotion_slider_anger_2.reset();
+        emotion_slider_anger_3.reset();
+        emotion_slider_anger_4.reset();
+        emotion_slider_anger_5.reset();
+    } else if (current_page === 'solidarity') {
+        emotion_text_solid_1.setText(solidarity_questions[0]);
+        emotion_text_solid_2.setText(solidarity_questions[1]);
+        emotion_text_solid_3.setText(solidarity_questions[2]);
+        emotion_text_solid_4.setText(solidarity_questions[3]);
+        emotion_text_solid_5.setText(solidarity_questions[4]);
+        
+        emotion_slider_solid_1.reset();
+        emotion_slider_solid_2.reset();
+        emotion_slider_solid_3.reset();
+        emotion_slider_solid_4.reset();
+        emotion_slider_solid_5.reset();
+    }
+    
     psychoJS.experiment.addData('Emotion_Measurement.started', globalClock.getTime());
+    psychoJS.experiment.addData('emotion_page_type', current_page);
     Emotion_MeasurementMaxDuration = null
     // keep track of which components have finished
     Emotion_MeasurementComponents = [];
-    Emotion_MeasurementComponents.push(text_4);
-    Emotion_MeasurementComponents.push(emotion_slider);
+    
+    // 根据页面类型添加组件
+    if (current_page === 'anger') {
+        Emotion_MeasurementComponents.push(emotion_text_anger_1);
+        Emotion_MeasurementComponents.push(emotion_text_anger_2);
+        Emotion_MeasurementComponents.push(emotion_text_anger_3);
+        Emotion_MeasurementComponents.push(emotion_text_anger_4);
+        Emotion_MeasurementComponents.push(emotion_text_anger_5);
+        Emotion_MeasurementComponents.push(emotion_slider_anger_1);
+        Emotion_MeasurementComponents.push(emotion_slider_anger_2);
+        Emotion_MeasurementComponents.push(emotion_slider_anger_3);
+        Emotion_MeasurementComponents.push(emotion_slider_anger_4);
+        Emotion_MeasurementComponents.push(emotion_slider_anger_5);
+    } else if (current_page === 'solidarity') {
+        Emotion_MeasurementComponents.push(emotion_text_solid_1);
+        Emotion_MeasurementComponents.push(emotion_text_solid_2);
+        Emotion_MeasurementComponents.push(emotion_text_solid_3);
+        Emotion_MeasurementComponents.push(emotion_text_solid_4);
+        Emotion_MeasurementComponents.push(emotion_text_solid_5);
+        Emotion_MeasurementComponents.push(emotion_slider_solid_1);
+        Emotion_MeasurementComponents.push(emotion_slider_solid_2);
+        Emotion_MeasurementComponents.push(emotion_slider_solid_3);
+        Emotion_MeasurementComponents.push(emotion_slider_solid_4);
+        Emotion_MeasurementComponents.push(emotion_slider_solid_5);
+    }
     
     for (const thisComponent of Emotion_MeasurementComponents)
       if ('status' in thisComponent)
@@ -2478,39 +2699,46 @@ function Emotion_MeasurementRoutineEachFrame() {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     
-    // *text_4* updates
-    if (t >= 0.0 && text_4.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      text_4.tStart = t;  // (not accounting for frame time here)
-      text_4.frameNStart = frameN;  // exact frame index
-      
-      text_4.setAutoDraw(true);
+    // 获取当前页面类型
+    const current_page = page_type;
+    
+    // 更新所有活动的文本和滑块组件
+    for (const thisComponent of Emotion_MeasurementComponents) {
+        if (t >= 0.0 && thisComponent.status === PsychoJS.Status.NOT_STARTED) {
+            thisComponent.tStart = t;
+            thisComponent.frameNStart = frameN;
+            thisComponent.setAutoDraw(true);
+        }
     }
     
-    
-    // if text_4 is active this frame...
-    if (text_4.status === PsychoJS.Status.STARTED) {
+    // 检查是否所有5个滑块都有值
+    let all_sliders_filled = false;
+    if (current_page === 'anger') {
+        const rating1 = emotion_slider_anger_1.getRating();
+        const rating2 = emotion_slider_anger_2.getRating();
+        const rating3 = emotion_slider_anger_3.getRating();
+        const rating4 = emotion_slider_anger_4.getRating();
+        const rating5 = emotion_slider_anger_5.getRating();
+        if (rating1 !== undefined && rating2 !== undefined && rating3 !== undefined && 
+            rating4 !== undefined && rating5 !== undefined) {
+            all_sliders_filled = true;
+        }
+    } else if (current_page === 'solidarity') {
+        const rating1 = emotion_slider_solid_1.getRating();
+        const rating2 = emotion_slider_solid_2.getRating();
+        const rating3 = emotion_slider_solid_3.getRating();
+        const rating4 = emotion_slider_solid_4.getRating();
+        const rating5 = emotion_slider_solid_5.getRating();
+        if (rating1 !== undefined && rating2 !== undefined && rating3 !== undefined && 
+            rating4 !== undefined && rating5 !== undefined) {
+            all_sliders_filled = true;
+        }
     }
     
-    
-    // *emotion_slider* updates
-    if (t >= 0.0 && emotion_slider.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      emotion_slider.tStart = t;  // (not accounting for frame time here)
-      emotion_slider.frameNStart = frameN;  // exact frame index
-      
-      emotion_slider.setAutoDraw(true);
+    // 只有当所有滑块都有值时才结束routine
+    if (all_sliders_filled) {
+        continueRoutine = false;
     }
-    
-    
-    // if emotion_slider is active this frame...
-    if (emotion_slider.status === PsychoJS.Status.STARTED) {
-    }
-    
-    
-    // Check emotion_slider for response to end Routine
-    if (emotion_slider.getRating() !== undefined && emotion_slider.status === PsychoJS.Status.STARTED) {
-      continueRoutine = false; }
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -2548,16 +2776,61 @@ function Emotion_MeasurementRoutineEnd(snapshot) {
     }
     psychoJS.experiment.addData('Emotion_Measurement.stopped', globalClock.getTime());
     // Run 'End Routine' code from code_2
-    current_rating = emotion_slider.getRating();
-    if ((current_rating !== null)) {
-        psychoJS.experiment.addData(item_id, current_rating);
-        psychoJS.experiment.addData((item_id + "_RT"), emotion_slider.getRT());
-    } else {
-        psychoJS.experiment.addData(item_id, "None");
-    }
     
-    psychoJS.experiment.addData('emotion_slider.response', emotion_slider.getRating());
-    psychoJS.experiment.addData('emotion_slider.rt', emotion_slider.getRT());
+    // 获取当前页面类型并记录所有5道题的数据
+    const current_page = page_type;
+    
+    if (current_page === 'anger') {
+        // 记录愤怒情绪5道题的数据
+        const ratings = [
+            emotion_slider_anger_1.getRating(),
+            emotion_slider_anger_2.getRating(),
+            emotion_slider_anger_3.getRating(),
+            emotion_slider_anger_4.getRating(),
+            emotion_slider_anger_5.getRating()
+        ];
+        const rts = [
+            emotion_slider_anger_1.getRT(),
+            emotion_slider_anger_2.getRT(),
+            emotion_slider_anger_3.getRT(),
+            emotion_slider_anger_4.getRT(),
+            emotion_slider_anger_5.getRT()
+        ];
+        
+        for (let i = 0; i < 5; i++) {
+            if (ratings[i] !== null && ratings[i] !== undefined) {
+                psychoJS.experiment.addData('og_anger_' + (i+1), ratings[i]);
+                psychoJS.experiment.addData('og_anger_' + (i+1) + '_RT', rts[i]);
+            } else {
+                psychoJS.experiment.addData('og_anger_' + (i+1), 'None');
+            }
+        }
+    } else if (current_page === 'solidarity') {
+        // 记录团结感5道题的数据
+        const ratings = [
+            emotion_slider_solid_1.getRating(),
+            emotion_slider_solid_2.getRating(),
+            emotion_slider_solid_3.getRating(),
+            emotion_slider_solid_4.getRating(),
+            emotion_slider_solid_5.getRating()
+        ];
+        const rts = [
+            emotion_slider_solid_1.getRT(),
+            emotion_slider_solid_2.getRT(),
+            emotion_slider_solid_3.getRT(),
+            emotion_slider_solid_4.getRT(),
+            emotion_slider_solid_5.getRT()
+        ];
+        
+        for (let i = 0; i < 5; i++) {
+            if (ratings[i] !== null && ratings[i] !== undefined) {
+                psychoJS.experiment.addData('ig_solid_' + (i+1), ratings[i]);
+                psychoJS.experiment.addData('ig_solid_' + (i+1) + '_RT', rts[i]);
+            } else {
+                psychoJS.experiment.addData('ig_solid_' + (i+1), 'None');
+            }
+        }
+    }
     // the Routine "Emotion_Measurement" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -3401,7 +3674,7 @@ function Decision_RoutineRoutineEachFrame() {
             teammate_score = (val_b + val_c);
             opponent_score = (- val_c);
             score_preview.text = `本轮预计收益：
-    自己：+${self_score} 分 | 队友：每人 +${teammate_score} 分 | ${opponent_name}：每人 ${opponent_score} 分`
+    您自己：+${self_score} 分 | A小区其他成员：每人 +${teammate_score} 分 | ${opponent_name}成员：每人 ${opponent_score} 分`
     ;
         } catch(e) {
             score_preview.text = "\u8bf7\u8f93\u5165\u6709\u6548\u7684\u6570\u5b57\u4ee5\u9884\u89c8\u5206\u6570";
@@ -3704,7 +3977,7 @@ function Round_FeedbackRoutineBegin(snapshot) {
     routineTimer.reset();
     Round_FeedbackMaxDurationReached = false;
     // update component parameters for each repeat
-    feedback_msg = `本轮得分反馈\n\n您的选择：\n选项A: ${val_a || 0}分 | 选项B: ${val_b || 0}分 | 选项C: ${val_c || 0}分\n\n本轮收益：\n您自己：+${self_score || 0}分\n队友每人：+${teammate_score || 0}分\n对手每人：${opponent_score || 0}分\n\n按空格键继续`;
+    feedback_msg = `本轮得分反馈\n\n您的选择：\n选项A: ${val_a || 0}分 | 选项B: ${val_b || 0}分 | 选项C: ${val_c || 0}分\n\n本轮收益：\n您自己：+${self_score || 0}分\nA小区其他成员每人：+${teammate_score || 0}分\n${opponent_name}成员每人：${opponent_score || 0}分\n\n按空格键继续`;
     feedback_text.setText(feedback_msg);
     key_resp_5.keys = undefined;
     key_resp_5.rt = undefined;
