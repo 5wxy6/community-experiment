@@ -267,7 +267,7 @@ async function experimentInit() {
   instr_text = new visual.TextStim({
     win: psychoJS.window,
     name: 'instr_text',
-    text: '【背景介绍】请仔细阅读\n\n按照社区规划，A小区与B小区共同使用社区共享充电站。\n\n随着新能源汽车普及，\n两小区新能源车数量快速增长，\n充电需求大致相当。\n\n而充电桩容量有限，\n该充电站共20个充电桩，\n不能完全满足两小区需求。\n\n物业决定征求成员意见来决定最终分配方案。\n\n注意：您被随机分配为A小区成员，您的决策将影响您个人、同小区成员及B小区成员的利益。\n\n了解后请按空格键继续',
+    text: '【背景介绍】请仔细阅读\n\n按照社区规划，A小区与B小区共同使用社区共享充电站。\n\n随着新能源汽车普及，\n两小区新能源车数量快速增长，\n充电需求大致相当。\\n而充电桩容量有限，\n该充电站共20个充电桩，\n不能完全满足两小区需求。\n\n物业决定征求成员意见来决定最终分配方案。\n\n注意：您被随机分配为A小区成员，您的决策将影响您个人、同小区成员及B小区成员的利益。\n\n了解后请按空格键继续',
     font: 'STHeiti',
     units: 'height',
     pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
@@ -780,7 +780,7 @@ async function experimentInit() {
   text_8 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_8',
-    text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n    • 您所在小区的充电资源奖励与荣誉\n    • 您个人的最终报酬\n    • 与您互动的小区成员的报酬\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n作为社区代表，您拥有 10 张选票。\n请按空格键了解投票规则。',
+    text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n    • 您所在小区的额外充电资源奖励与荣誉\n    • 您个人的实验报酬与互动小区的报酬额\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n作为社区代表，您拥有 10 张选票。\n请按空格键了解投票规则。',
     font: 'STHeiti',
     units: undefined,
     pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
@@ -797,7 +797,7 @@ async function experimentInit() {
   text_7 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_7',
-    text: '【投票规则】\n\n我们采用票数兑换积分制。\n\n您需要决定将这10票如何分配给三个选项：\n\n选项A：自己加2分，其他成员不加分；\n\n选项B：自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：自己和A小区成员各加1分，互动小区成员各减1分。\n\n注意：10票可以分配给三个选项，\n三个选项投票数之和必须等于10！\n\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
+    text: '【投票规则】\n我们采用票数兑换积分制。\n您需要决定将这10票如何分配给三个选项：\n选项A：自己加2分，其他成员不加分；\n选项B：自己和A小区成员各加1分，互动小区成员不加分；\n选项C：自己和A小区成员各加1分，互动小区成员各减1分。\n注意：10票可以分配给三个选项，\n三个选项投票数之和必须等于10！\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
     font: 'STHeiti',
     units: undefined,
     pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
@@ -2117,14 +2117,14 @@ function Struggle_RoutineRoutineEnd(snapshot) {
     if ((current_group === 1)) {
         conflict_feedback = ((((((("\u3010\u5145\u7535\u6869\u914d\u989d\u7ed3\u679c\u3011\n\n" + `您的预留主张：为A小区预留 ${quota}% 的充电桩
     `
-    ) + "\u26a0\ufe0f \u7136\u800c\uff0c\u76d1\u6d4b\u53d1\u73b0\uff1a\u5bf9\u624b'B\u5c0f\u533a'\u91c7\u53d6\u4e86\u6fc0\u8fdb\u62a2\u5360\u7b56\u7565\uff01\n") + `他选择强行占据了 ${opponent_quota}% 的充电桩配额。
+    ) + "\u26a0\ufe0f \u7136\u800c\uff0c\u76d1\u6d4b\u53d1\u73b0\uff1a\u4e92\u52a8\u5bf9\u8c61'B\u5c0f\u533a'\u91c7\u53d6\u4e86\u6fc0\u8fdb\u62a2\u5360\u7b56\u7565\uff01\n") + `他选择强行占据了 ${opponent_quota}% 的充电桩配额。
     `) + `这导致A小区实际仅获得 ${actual_quota}% 的充电配额。
     `) + "\u60a8\u6240\u5728\u793e\u533a\u7684\u65b0\u80fd\u6e90\u8f66\u4e3b\u9762\u4e34\u4e25\u91cd\u7684\u5145\u7535\u56f0\u96be\u3002\n\n\ud83d\ude1e\n") + "\u8bf7\u8bb0\u4f4f\uff1a\u63a5\u4e0b\u6765\u60a8\u5c06\u7ee7\u7eed\u4e0e\u3010\u8fd9\u652fB\u5c0f\u533a\u3011\u8fdb\u884c\u51b3\u7b56\u4e92\u52a8\u3002\n\n") + "\u8bf7\u6309\u7a7a\u683c\u952e\u8fdb\u5165\u4e0b\u4e00\u9636\u6bb5\u3002");
     } else {
         if ((current_group === 2)) {
             conflict_feedback = (((((((("\u3010\u5145\u7535\u6869\u914d\u989d\u7ed3\u679c\u3011\n\n" + `您的预留主张：为A小区预留 ${quota}% 的充电桩
     `
-    ) + "\u26a0\ufe0f \u7136\u800c\uff0c\u76d1\u6d4b\u53d1\u73b0\uff1a\u5bf9\u624b'B\u5c0f\u533a'\u91c7\u53d6\u4e86\u6fc0\u8fdb\u62a2\u5360\u7b56\u7565\uff01\n") + `他们选择强行占据了 ${opponent_quota}% 的充电桩配额！
+    ) + "\u26a0\ufe0f \u7136\u800c\uff0c\u76d1\u6d4b\u53d1\u73b0\uff1a\u4e92\u52a8\u5bf9\u8c61'B\u5c0f\u533a'\u91c7\u53d6\u4e86\u6fc0\u8fdb\u62a2\u5360\u7b56\u7565\uff01\n") + `他们选择强行占据了 ${opponent_quota}% 的充电桩配额！
     `) + `这导致A小区实际仅获得 ${actual_quota}% 的充电配额。
     `) + "\u60a8\u6240\u5728\u793e\u533a\u7684\u65b0\u80fd\u6e90\u8f66\u4e3b\u9762\u4e34\u4e25\u91cd\u7684\u5145\u7535\u56f0\u96be\u3002\n\n\ud83d\ude1e\n") + "\u8bf7\u8bb0\u4f4f\uff1a\u63a5\u4e0b\u6765\u60a8\u5c06\u9762\u5bf9\u3010\u90a3\u652f\u5bfc\u81f4\u635f\u5931\u7684B\u5c0f\u533a\u3011\uff01\n") + "\u6b63\u662f\u8fd9\u652f\u961f\u4f0d\u7684\u62a2\u5360\u884c\u4e3a\u9020\u6210\u4e86\u6211\u65b9\u7684\u5145\u7535\u56f0\u5883\uff01\n\n") + "\u8bf7\u6309\u7a7a\u683c\u952e\u8fdb\u5165\u4e0b\u4e00\u9636\u6bb5\u3002");
         } else {
@@ -2170,7 +2170,7 @@ function Conflict_RoutineRoutineBegin(snapshot) {
     // update component parameters for each repeat
     // Run 'Begin Routine' code from code_4
     if (((Number.parseInt(expInfo["group"]) === 1) || (Number.parseInt(expInfo["group"]) === 2))) {
-        conflict_feedback = "\u3010\u7b2c\u4e00\u8f6e\u7ed3\u7b97\u62a5\u544a\u3011\n\n\u76d1\u6d4b\u53d1\u73b0\uff1a\u5728\u521a\u624d\u7684\u4e92\u52a8\u4e2d\uff0c\u5bf9\u624b\u201cB\u5c0f\u533a\u201d\u91c7\u53d6\u4e86\u5f3a\u529b\u6e17\u900f\u7b56\u7565\u3002\n\u4ed6\u4eec\u91c7\u7528\u96c6\u4f53\u9884\u7559\u5927\u91cf\u5145\u7535\u6869\u7684\u65b9\u5f0f\u3002\n\u5355\u65b9\u9762\u5f3a\u884c\u9501\u5b9a\u4e86\u793e\u533a 80% \u7684\u5145\u7535\u8d44\u6e90 \u3002\n\u8fd9\u5bfc\u81f4\u6211\u65b9A\u5c0f\u533a\u7684\u5927\u90e8\u5206\u65b0\u80fd\u6e90\u8f66\u8f86\u65e0\u6cd5\u6b63\u5e38\u5145\u7535\u3002\n\n\u8bf7\u6309\u7a7a\u683c\u952e\u67e5\u770b\u540e\u7eed\u4efb\u52a1\u3002";
+        conflict_feedback = "\u3010\u7b2c\u4e00\u8f6e\u7ed3\u7b97\u62a5\u544a\u3011\n\n\u76d1\u6d4b\u53d1\u73b0\uff1a\u5728\u521a\u624d\u7684\u4e92\u52a8\u4e2d\uff0c\u4e92\u52a8\u5bf9\u8c61\u201cB\u5c0f\u533a\u201d\u91c7\u53d6\u4e86\u5f3a\u529b\u6e17\u900f\u7b56\u7565\u3002\n\u4ed6\u4eec\u91c7\u7528\u96c6\u4f53\u9884\u7559\u5927\u91cf\u5145\u7535\u6869\u7684\u65b9\u5f0f\u3002\n\u5355\u65b9\u9762\u5f3a\u884c\u9501\u5b9a\u4e86\u793e\u533a 80% \u7684\u5145\u7535\u8d44\u6e90 \u3002\n\u8fd9\u5bfc\u81f4\u6211\u65b9A\u5c0f\u533a\u7684\u5927\u90e8\u5206\u65b0\u80fd\u6e90\u8f66\u8f86\u65e0\u6cd5\u6b63\u5e38\u5145\u7535\u3002\n\n\u8bf7\u6309\u7a7a\u683c\u952e\u67e5\u770b\u540e\u7eed\u4efb\u52a1\u3002";
     } else {
         // group=3 无冲突组：中性反馈
         conflict_feedback = "\u3010\u7b2c\u4e00\u8f6e\u7ed3\u679c\u3011\n\n\u7ecf\u53cc\u65b9\u534f\u5546\uff0c\u8fbe\u6210\u4e86\u8d44\u6e90\u5206\u914d\u65b9\u6848\uff1a\n\u793e\u533a\u5145\u7535\u7ad9\u768420\u4e2a\u5145\u7535\u6869\u7531\u4e24\u5c0f\u533a\u5e73\u5747\u5206\u914d\uff0c\n\u6bcf\u4e2a\u5c0f\u533a\u5404\u5360\u670950%\u7684\u4f7f\u7528\u6743\u3002\n\u6b64\u65b9\u6848\u786e\u4fdd\u4e86\u53cc\u65b9\u7684\u5145\u7535\u9700\u6c42\u90fd\u80fd\u5f97\u5230\u6ee1\u8db3\u3002\n\n\u8bf7\u6309\u7a7a\u683c\u952e\u7ee7\u7eed\u540e\u7eed\u4efb\u52a1\u3002";
@@ -3138,12 +3138,12 @@ function Transition_RoutineRoutineBegin(snapshot) {
         current_group = 3;
     }
     if ((current_group === 1)) {
-        reminder_text = "\u63d0\u793a\uff1a\u63a5\u4e0b\u6765\u7684\u4e92\u52a8\u4e2d\uff0c\u60a8\u7684\u5bf9\u624b\u4ecd\u662f\u3010\u521a\u624d\u90a3\u652f\u3011\u5bfc\u81f4\u8d44\u6e90\u635f\u5931\u7684B\u5c0f\u533a\u3002";
+        reminder_text = "\u63d0\u793a\uff1a\u63a5\u4e0b\u6765\u7684\u4e92\u52a8\u4e2d\uff0c\u60a8\u7684\u4e92\u52a8\u5bf9\u8c61\u4ecd\u662f\u3010\u521a\u624d\u90a3\u652f\u3011\u5bfc\u81f4\u8d44\u6e90\u635f\u5931\u7684B\u5c0f\u533a\u3002";
     } else {
         if ((current_group === 2)) {
-            reminder_text = "\u63d0\u793a\uff1a\u7cfb\u7edf\u5df2\u91cd\u65b0\u5339\u914d\u3002\u63a5\u4e0b\u6765\u7684\u4e92\u52a8\u4e2d\uff0c\u60a8\u7684\u5bf9\u624b\u662f\u4e00\u652f\u3010\u5168\u65b0\u3011\u7684C\u5c0f\u533a\u3002";
+            reminder_text = "\u63d0\u793a\uff1a\u7cfb\u7edf\u5df2\u91cd\u65b0\u5339\u914d\u3002\u63a5\u4e0b\u6765\u7684\u4e92\u52a8\u4e2d\uff0c\u60a8\u7684\u4e92\u52a8\u5bf9\u8c61\u662f\u4e00\u652f\u3010\u5168\u65b0\u3011\u7684C\u5c0f\u533a\u3002";
         } else {
-            reminder_text = "\u63d0\u793a\uff1a\u63a5\u4e0b\u6765\u7684\u4e92\u52a8\u4e2d\uff0c\u60a8\u7684\u5bf9\u624b\u662f\u4e00\u652f\u968f\u673a\u5339\u914d\u7684B\u5c0f\u533a\u3002";
+            reminder_text = "\u63d0\u793a\uff1a\u63a5\u4e0b\u6765\u7684\u4e92\u52a8\u4e2d\uff0c\u60a8\u7684\u4e92\u52a8\u5bf9\u8c61\u662f\u4e00\u652f\u968f\u673a\u5339\u914d\u7684B\u5c0f\u533a\u3002";
         }
     }
     total_score = 0;
@@ -3588,7 +3588,7 @@ function Decision_RoutineRoutineBegin(snapshot) {
             opponent_status = "\u63d0\u793a\uff1a\u4f60\u6b63\u9762\u5bf9C\u5c0f\u533a\u8fdb\u884c\u793e\u533a\u4efb\u52a1";
         } else {
             if ((current_group === 1)) {
-                opponent_status = "\u63d0\u793a\uff1a\u63a5\u4e0b\u6765\u7684\u4e92\u52a8\u4e2d\uff0c\u60a8\u7684\u5bf9\u624b\u4ecd\u662f\u3010\u521a\u624d\u90a3\u652f\u3011\u5bfc\u81f4\u8d44\u6e90\u635f\u5931\u7684B\u5c0f\u533a\u3002";
+                opponent_status = "\u63d0\u793a\uff1a\u63a5\u4e0b\u6765\u7684\u4e92\u52a8\u4e2d\uff0c\u60a8\u7684\u4e92\u52a8\u5bf9\u8c61\u4ecd\u662f\u3010\u521a\u624d\u90a3\u652f\u3011\u5bfc\u81f4\u8d44\u6e90\u635f\u5931\u7684B\u5c0f\u533a\u3002";
             } else {
                 opponent_status = "\u63d0\u793a\uff1a\u8bf7\u6309\u7167\u60a8\u7684\u610f\u613f\u8fdb\u884c\u8d44\u6e90\u5206\u914d\u3002";
             }
