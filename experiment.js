@@ -267,7 +267,7 @@ async function experimentInit() {
   instr_text = new visual.TextStim({
     win: psychoJS.window,
     name: 'instr_text',
-    text: '【背景介绍】请仔细阅读\n\n按照社区规划，A小区与B小区共同使用社区共享充电站。\n\n随着新能源汽车普及，\n两小区新能源车数量快速增长，\n充电需求大致相当。\n而充电桩容量有限，\n该充电站共20个充电桩，\n不能完全满足两小区需求。\n物业决定征求成员意见来决定最终分配方案。\n注意：您被随机分配为A小区成员，您的决策将影响您个人、同小区成员及B小区成员的利益。\n\n了解后请按空格键继续',
+    text: '【背景介绍】请仔细阅读\n\n按照社区规划，A小区与B小区共同使用社区共享充电站。\n\n随着新能源汽车普及，\n两小区新能源车数量快速增长，\n充电需求大致相当。\n而充电桩容量有限，\n该充电站共20个充电桩，\n不能完全满足两小区需求。\n物业决定征求成员意见来决定最终分配方案。\n\n注意：您被随机分配为A小区成员，您的决策将影响您个人、同小区成员及B小区成员的利益。\n\n了解后请按空格键继续',
     font: 'STHeiti',
     units: 'height',
     pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
@@ -275,7 +275,8 @@ async function experimentInit() {
     alignText: 'center',
     languageStyle: 'LTR',
     color: new util.Color('black'),  opacity: undefined,
-    depth: -1.0 
+    depth: -1.0,
+    lineSpacing: 1.5
   });
   
   key_resp = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
@@ -797,13 +798,15 @@ async function experimentInit() {
   text_7 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_7',
-    text: '【投票规则】\n我们采用票数兑换积分制。\n您需要决定将这10票如何分配给三个选项：\n选项A：自己加2分，其他成员不加分；\n选项B：自己和A小区成员各加1分，互动小区成员不加分；\n选项C：自己和A小区成员各加1分，互动小区成员各减1分。\n注意：10票可以分配给三个选项，\n三个选项投票数之和必须等于10！\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
+    text: '【投票规则】\n\n我们采用票数兑换积分制。\n您需要决定将这10票如何分配给三个选项：\n\n选项A：自己加2分，其他成员不加分；\n\n选项B：自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：自己和A小区成员各加1分，互动小区成员各减1分。\n\n注意：10票可以分配给三个选项，\n三个选项投票数之和必须等于10！\n\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
     font: 'STHeiti',
-    units: undefined,
+    units: 'height',
     pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
-    color: new util.Color('black'), opacity: undefined, depth: 0.0
+    languageStyle: 'LTR',
+    color: new util.Color('black'), opacity: undefined, depth: 0.0,
+    lineSpacing: 1.5
   });
   
   key_resp_8 = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
