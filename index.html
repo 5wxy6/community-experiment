@@ -46,10 +46,13 @@
       </div>
       <div style="margin:15px 0;">
         <label>年龄: </label>
-        <input type="number" id="input-age" min="18" max="70" placeholder="18-70" style="padding:5px; width:150px;">
+        <select id="input-age" style="padding:5px; width:150px;">
+          <option value="" disabled selected>请选择</option>
+          <!-- 生成 1~80 的选项 -->
+        </select>
       </div>
       <button id="start-btn" style="padding:10px 30px; margin-top:15px; font-size:16px; cursor:pointer;">开始实验</button>
-      <p style="font-size:12px; color:#aaa; margin-top:10px;">Group将被随机分配（1/2/3概率相等）</p>
+      <!-- 已删除原先的随机分组提示小字 -->
     </div>
 
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -58,6 +61,17 @@
 
     <script type="module">
       (function() {
+        // 动态生成年龄下拉选项 1~80
+        const ageSelect = document.getElementById('input-age');
+        if (ageSelect) {
+          for (let i = 1; i <= 80; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i;
+            ageSelect.appendChild(option);
+          }
+        }
+
         var errors = document.getElementById('errors');
         var loading = document.getElementById('loading');
         var progress = document.getElementById('progress');
@@ -97,7 +111,6 @@
           progress.textContent = '100%';
           setTimeout(function() {
             loading.style.display = 'none';
-            // Show participant form
             document.getElementById('participant-form').style.display = 'block';
           }, 500);
         }).catch(function(err) {
@@ -110,16 +123,19 @@
         });
       })();
 
-      // Handle participant form submission
       document.getElementById('start-btn').addEventListener('click', function() {
         var participant = document.getElementById('input-participant').value || '001';
         var session = document.getElementById('input-session').value || '001';
         var gender = document.getElementById('input-gender').value || '';
         var age = document.getElementById('input-age').value || '';
+        // 确保年龄已选择（非空）
+        if (!age) {
+          alert('请选择年龄');
+          return;
+        }
         // 随机分配Group（1、2、3概率相等）
         var group = Math.floor(Math.random() * 3) + 1;
 
-        // Set values in global expInfo (will be used by experiment.js)
         window.expInfoOverride = {
           participant: participant,
           session: session,
@@ -128,12 +144,10 @@
           group: group.toString()
         };
 
-        // Hide form and show loading
         document.getElementById('participant-form').style.display = 'none';
         document.getElementById('loading').style.display = 'block';
         document.getElementById('progress').textContent = '正在启动实验...';
 
-        // Trigger experiment start
         if (window.startExperiment) {
           window.startExperiment(window.expInfoOverride);
         }
