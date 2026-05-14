@@ -727,7 +727,7 @@ async function experimentInit() {
   final_confirm_btn = new visual.ButtonStim({
     win: psychoJS.window,
     name: 'final_confirm_btn',
-    text: 'ok',
+    text: '继续',
     font: 'STHeiti',
     pos: [0, (- 0.4)],
     size: [0.3, 0.1],
@@ -769,7 +769,7 @@ async function experimentInit() {
   transition_msg = new visual.TextStim({
     win: psychoJS.window,
     name: 'transition_msg',
-    text: '\n\n很遗憾！社区充电资源竞争激烈\n\n你所在的A小区并未争取到大部分的充电桩资源使用权限\n\n接下来你将会随机与未来社区中的某一小区（B小区或C小区）\n\n进行最后一个社区任务\n\n了解以上信息后请按空格键查看接下来的内容',
+    text: '\n\n很遗憾！社区充电桩竞争激烈\n\n你所在的A小区并未争取到大部分的充电桩使用权限\n\n接下来你将会随机与未来社区中的某一小区（B小区或C小区）\n\n进行最后一个社区任务\n\n了解以上信息后请按空格键查看接下来的内容',
     font: 'STHeiti',
     units: undefined, 
     pos: [0, 0.0], draggable: false, height: 0.04,  wrapWidth: 0.8, ori: 0.0,
@@ -785,7 +785,7 @@ async function experimentInit() {
   text_8 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_8',
-    text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n    • 您所在小区的额外充电资源奖励与荣誉\n    • 您个人的实验报酬与互动小区的报酬额\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n作为社区代表，您拥有 10 张选票。\n请按空格键了解投票规则。',
+    text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n    • 您所在小区的额外充电桩奖励与荣誉\n    • 您个人的实验报酬与互动小区的报酬额\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n作为社区代表，您拥有 10 张选票。\n请按空格键了解投票规则。',
     font: 'STHeiti',
     units: undefined,
     pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
@@ -802,15 +802,16 @@ async function experimentInit() {
   text_7 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_7',
-    text: '【投票规则】\n\n我们采用票数兑换积分制。\n您需要决定将这10票如何分配给三个选项：\n\n选项A：自己加2分，其他成员不加分；\n\n选项B：自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：自己和A小区成员各加1分，互动小区成员各减1分。\n\n注意：10票可以分配给三个选项，\n三个选项投票数之和必须等于10！\n\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
+    text: '【投票规则】\n\n我们采用票数兑换积分制。\n您需要决定将这10票如何分配给三个选项：\n\n选项A：每投一票，自己加2分，其他成员不加分；\n\n选项B：每投一票，自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：每投一票，自己和A小区成员各加1分，互动小区成员各减1分。\n\n注意：10票可以分配给三个选项并且须全部投出，\n三个选项投票数之和必须等于10！\n\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
     font: 'STHeiti',
     units: 'height',
     pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
-    color: new util.Color('black'), opacity: undefined, depth: 0.0,
-    lineSpacing: 1.5
+    color: new util.Color('black'), opacity: undefined, 
+    lineSpacing: 1.5, 
+    depth: 0.0,
   });
   
   key_resp_8 = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
