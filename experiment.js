@@ -435,21 +435,18 @@ async function experimentInit() {
     lineSpacing: 1.0,
     size: [0.4, 0.1],  units: undefined, 
     ori: 0.0,
-    color: 'black',          
-    fillColor: 'white',       
-    borderColor: 'blue',      
-    borderWidth: 2.0,        
-    languageStyle: 'LTR',
-    bold: false,
-    italic: false,
-    opacity: undefined,
-    padding: 0.0,
-    alignment: 'center',
-    overflow: 'visible',
-    editable: true,
-    multiline: true,
-    anchor: 'center',
-    depth: -4.0 
+    color: 'white', colorSpace: 'rgb',
+   fillColor: 'white', borderColor: 'gray',
+   languageStyle: 'LTR',
+   bold: false, italic: false,
+   opacity: undefined,
+   padding: 0.0,
+   alignment: 'center',
+   overflow: 'visible',
+   editable: true,
+   multiline: true,
+   anchor: 'center',
+   depth: -4.0 
 });
   
   opponent_reminder_struggle = new visual.TextStim({
