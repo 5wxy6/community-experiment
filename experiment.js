@@ -435,7 +435,7 @@ async function experimentInit() {
     lineSpacing: 1.0,
     size: [0.4, 0.1],  units: undefined, 
     ori: 0.0,
-    color: 'white', colorSpace: 'rgb',
+    color: 'black', colorSpace: 'rgb',
    fillColor: 'white', borderColor: 'gray',
    languageStyle: 'LTR',
    bold: false, italic: false,
