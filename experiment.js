@@ -412,7 +412,7 @@ async function experimentInit() {
   quota_instruction = new visual.TextStim({
     win: psychoJS.window,
     name: 'quota_instruction',
-    text: '【充电桩配额决策】\n\n社区充电站共有20个充电桩\n供AB小区划分使用。\n\n请决定您希望A小区能拥有多少个充电桩。\n\n输入范围：0-20\n（0=没有，20=全部拥有）',
+    text: '【充电桩配额决策】\n\n社区充电站共有20个充电桩\n供A、B小区划分使用。\n\n请决定您希望A小区能拥有多少个充电桩。\n\n输入范围：0-20\n（0=没有，20=全部拥有）',
     font: 'STHeiti',
     units: undefined,
     pos: [0, 0.15], draggable: false, height: 0.032, wrapWidth: 0.8, ori: 0.0,
@@ -435,10 +435,13 @@ async function experimentInit() {
     lineSpacing: 1.0,
     size: [0.4, 0.1],  units: undefined, 
     ori: 0.0,
-    color: 'white', colorSpace: 'rgb',
-    fillColor: undefined, borderColor: undefined,
+    color: 'black',          
+    fillColor: 'white',       
+    borderColor: 'blue',      
+    borderWidth: 2.0,        
     languageStyle: 'LTR',
-    bold: false, italic: false,
+    bold: false,
+    italic: false,
     opacity: undefined,
     padding: 0.0,
     alignment: 'center',
@@ -447,7 +450,7 @@ async function experimentInit() {
     multiline: true,
     anchor: 'center',
     depth: -4.0 
-  });
+});
   
   opponent_reminder_struggle = new visual.TextStim({
     win: psychoJS.window,
