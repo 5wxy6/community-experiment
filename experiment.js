@@ -607,7 +607,7 @@ async function experimentInit() {
   // Initialize 5 anger sliders (below each text: y positions: 0.28, 0.11, -0.06, -0.23, -0.40)
   emotion_slider_anger_1 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_anger_1', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, 0.41], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, 0.38], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -617,7 +617,7 @@ async function experimentInit() {
   
   emotion_slider_anger_2 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_anger_2', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, 0.24], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, 0.21], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -627,7 +627,7 @@ async function experimentInit() {
   
   emotion_slider_anger_3 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_anger_3', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, -0.05], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, 0.04], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -637,7 +637,7 @@ async function experimentInit() {
   
   emotion_slider_anger_4 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_anger_4', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, - 0.10], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, - 0.13], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -647,7 +647,7 @@ async function experimentInit() {
   
   emotion_slider_anger_5 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_anger_5', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, - 0.27], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, - 0.30], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -658,7 +658,7 @@ async function experimentInit() {
   // Initialize 5 solidarity sliders
   emotion_slider_solid_1 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_solid_1', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, 0.41], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, 0.38], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -668,7 +668,7 @@ async function experimentInit() {
   
   emotion_slider_solid_2 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_solid_2', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, 0.24], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, 0.21], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -678,7 +678,7 @@ async function experimentInit() {
   
   emotion_slider_solid_3 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_solid_3', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, 0.05], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, 0.04], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -688,7 +688,7 @@ async function experimentInit() {
   
   emotion_slider_solid_4 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_solid_4', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, - 0.10], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, - 0.13], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -698,7 +698,7 @@ async function experimentInit() {
   
   emotion_slider_solid_5 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_solid_5', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, - 0.27], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, - 0.30], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
