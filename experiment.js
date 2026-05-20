@@ -536,35 +536,35 @@ async function experimentInit() {
   emotion_text_anger_1 = new visual.TextStim({
     win: psychoJS.window, name: 'emotion_text_anger_1',
     text: '', font: 'STHeiti', units: undefined,
-    pos: [0, 0.35], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    pos: [0, 0.30], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
     languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -1.0
   });
   
   emotion_text_anger_2 = new visual.TextStim({
     win: psychoJS.window, name: 'emotion_text_anger_2',
     text: '', font: 'STHeiti', units: undefined,
-    pos: [0, 0.18], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    pos: [0, 0.13], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
     languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -2.0
   });
   
   emotion_text_anger_3 = new visual.TextStim({
     win: psychoJS.window, name: 'emotion_text_anger_3',
     text: '', font: 'STHeiti', units: undefined,
-    pos: [0, 0.01], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    pos: [0, -0.04], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
     languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -3.0
   });
   
   emotion_text_anger_4 = new visual.TextStim({
     win: psychoJS.window, name: 'emotion_text_anger_4',
     text: '', font: 'STHeiti', units: undefined,
-    pos: [0, (- 0.16)], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    pos: [0, (- 0.21)], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
     languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -4.0
   });
   
   emotion_text_anger_5 = new visual.TextStim({
     win: psychoJS.window, name: 'emotion_text_anger_5',
     text: '', font: 'STHeiti', units: undefined,
-    pos: [0, (- 0.33)], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    pos: [0, (- 0.38)], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
     languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -5.0
   });
   
@@ -572,42 +572,42 @@ async function experimentInit() {
   emotion_text_solid_1 = new visual.TextStim({
     win: psychoJS.window, name: 'emotion_text_solid_1',
     text: '', font: 'STHeiti', units: undefined,
-    pos: [0, 0.35], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    pos: [0, 0.30], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
     languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -6.0
   });
   
   emotion_text_solid_2 = new visual.TextStim({
     win: psychoJS.window, name: 'emotion_text_solid_2',
     text: '', font: 'STHeiti', units: undefined,
-    pos: [0, 0.18], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    pos: [0, 0.13], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
     languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -7.0
   });
   
   emotion_text_solid_3 = new visual.TextStim({
     win: psychoJS.window, name: 'emotion_text_solid_3',
     text: '', font: 'STHeiti', units: undefined,
-    pos: [0, 0.01], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    pos: [0, -0.04], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
     languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -8.0
   });
   
   emotion_text_solid_4 = new visual.TextStim({
     win: psychoJS.window, name: 'emotion_text_solid_4',
     text: '', font: 'STHeiti', units: undefined,
-    pos: [0, (- 0.16)], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    pos: [0, (- 0.21)], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
     languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -9.0
   });
   
   emotion_text_solid_5 = new visual.TextStim({
     win: psychoJS.window, name: 'emotion_text_solid_5',
     text: '', font: 'STHeiti', units: undefined,
-    pos: [0, (- 0.33)], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    pos: [0, (- 0.38)], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
     languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -10.0
   });
   
   // Initialize 5 anger sliders (below each text: y positions: 0.28, 0.11, -0.06, -0.23, -0.40)
   emotion_slider_anger_1 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_anger_1', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, 0.28], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, 0.23], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -617,7 +617,7 @@ async function experimentInit() {
   
   emotion_slider_anger_2 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_anger_2', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, 0.11], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, 0.06], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -627,7 +627,7 @@ async function experimentInit() {
   
   emotion_slider_anger_3 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_anger_3', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, -0.08], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, -0.13], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -637,7 +637,7 @@ async function experimentInit() {
   
   emotion_slider_anger_4 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_anger_4', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, (- 0.23)], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, (- 0.28)], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -647,7 +647,7 @@ async function experimentInit() {
   
   emotion_slider_anger_5 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_anger_5', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, (- 0.40)], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, (- 0.45)], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -658,7 +658,7 @@ async function experimentInit() {
   // Initialize 5 solidarity sliders
   emotion_slider_solid_1 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_solid_1', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, 0.28], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, 0.23], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -668,7 +668,7 @@ async function experimentInit() {
   
   emotion_slider_solid_2 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_solid_2', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, 0.11], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, 0.06], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -678,7 +678,7 @@ async function experimentInit() {
   
   emotion_slider_solid_3 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_solid_3', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, -0.08], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, -0.13], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -688,7 +688,7 @@ async function experimentInit() {
   
   emotion_slider_solid_4 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_solid_4', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, (- 0.23)], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, (- 0.28)], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
@@ -698,7 +698,7 @@ async function experimentInit() {
   
   emotion_slider_solid_5 = new visual.Slider({
     win: psychoJS.window, name: 'emotion_slider_solid_5', startValue: undefined,
-    size: [1.0, 0.05], pos: [0, (- 0.40)], ori: 0.0, units: psychoJS.window.units,
+    size: [1.0, 0.05], pos: [0, (- 0.45)], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
