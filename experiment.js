@@ -374,8 +374,7 @@ async function experimentInit() {
     size: [1.0, 0.08], pos: [0, (- 0.1)], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"], fontSize: 0.035, ticks: [1, 2, 3, 4, 5, 6, 7],
     granularity: 1.0, style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
-    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'), 
-    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -6, 
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'), opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -6, 
     flip: false,
   });
   
@@ -612,7 +611,7 @@ async function experimentInit() {
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
-    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
     opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -11.0, flip: false,
   });
   
@@ -622,7 +621,7 @@ async function experimentInit() {
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
-    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
     opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -12.0, flip: false,
   });
   
@@ -632,7 +631,7 @@ async function experimentInit() {
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
-    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
     opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -13.0, flip: false,
   });
   
@@ -642,7 +641,7 @@ async function experimentInit() {
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
-    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
     opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -14.0, flip: false,
   });
   
@@ -652,7 +651,7 @@ async function experimentInit() {
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
-    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
     opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -15.0, flip: false,
   });
   
@@ -663,7 +662,7 @@ async function experimentInit() {
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
-    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
     opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -16.0, flip: false,
   });
   
@@ -673,7 +672,7 @@ async function experimentInit() {
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
-    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
     opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -17.0, flip: false,
   });
   
@@ -683,7 +682,7 @@ async function experimentInit() {
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
-    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
     opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -18.0, flip: false,
   });
   
@@ -693,7 +692,7 @@ async function experimentInit() {
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
-    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
     opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -19.0, flip: false,
   });
   
@@ -703,7 +702,7 @@ async function experimentInit() {
     labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
     fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
     style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
-    color: new util.Color('LightGray'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
     opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -20.0, flip: false,
   });
   
