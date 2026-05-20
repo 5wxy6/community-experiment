@@ -111,7 +111,7 @@ const psychoJS = new PsychoJS({
 // open window:
 psychoJS.openWindow({
   fullscr: false,
-  color: new util.Color([0.85,0.85,0.85]),
+  color: new util.Color([0.70,0.70,0.70]),
   units: 'height',
   waitBlanking: true,
   backgroundImage: '',
@@ -799,7 +799,7 @@ async function experimentInit() {
   text_7 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_7',
-    text: '【投票规则】\n\n我们采用票数兑换积分制。\n您需要决定将这10票如何分配给三个选项：\n\n选项A：每投一票，自己加2分，其他成员不加分；\n\n选项B：每投一票，自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：每投一票，自己和A小区成员各加1分，互动小区成员各减1分。\n\n注意：10票可以分配给三个选项并且须全部投出，\n三个选项投票数之和必须等于10！\n\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
+    text: '【投票规则】\n\n我们采用票数兑换积分制。\n您需要决定将这10票如何分配给三个选项：\n\n选项A：每投1票，自己加2分，其他成员不加分；\n\n选项B：每投1票，自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：每投1票，自己和A小区成员各加1分，互动小区成员各减1分。\n\n注意：10票可以分配给三个选项并且须全部投出，\n三个选项投票数之和必须等于10！\n\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
     font: 'STHeiti',
     units: 'height',
     pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
