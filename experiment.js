@@ -12,7 +12,7 @@ const { round } = util;
 
 
 // store info about the experiment session:
-let expName = 'experiment3.31测试 ';
+let expName = 'experiment3.31测试 ';  // from the Builder filename that created this script
 let expInfo = {
     'participant': '001',
     'session': '001',
@@ -185,8 +185,6 @@ window.startExperiment = async function(formData) {
     expInfo['participant'] = formData.participant;
     expInfo['session'] = formData.session;
     expInfo['group'] = formData.group;
-    expInfo['gender'] = formData.gender;
-    expInfo['age'] = formData.age;
   }
 
   try {
@@ -220,8 +218,6 @@ async function updateInfo() {
     expInfo['participant'] = window.expInfoOverride.participant;
     expInfo['session'] = window.expInfoOverride.session;
     expInfo['group'] = window.expInfoOverride.group;
-    expInfo['gender'] = window.expInfoOverride.gender;
-    expInfo['age'] = window.expInfoOverride.age;
   }
 
   expInfo['date'] = util.MonotonicClock.getDateStr();  // add a simple timestamp
@@ -240,9 +236,11 @@ async function updateInfo() {
   // add info from the URL:
   util.addInfoFromUrl(expInfo);
   
-  // 关键修改：注释掉自动保存，只用手动保存
-  // psychoJS.experiment.dataFileName = (("." + "/") + `data/${expInfo["participant"]}_${expName}_${expInfo["date"]}`);
+
+  
+  psychoJS.experiment.dataFileName = (("." + "/") + `data/${expInfo["participant"]}_${expName}_${expInfo["date"]}`);
   psychoJS.experiment.field_separator = '\t';
+
 
   return Scheduler.Event.NEXT;
 }
@@ -2120,8 +2118,30 @@ function Struggle_RoutineRoutineEnd(snapshot) {
     psychoJS.experiment.addData("opponent_quota", opponent_quota);
     psychoJS.experiment.addData("actual_quota", actual_quota);
     current_group = Number.parseInt(expInfo["group"]);
-    
-    // 注意：Conflict_Routine中的反馈文本会根据group动态生成，这里不再重复生成
+    if ((current_group === 1)) {
+        conflict_feedback = ((((((("\u3010\u5145\u7535\u6869\u914d\u989d\u7ed3\u679c\u3011\n\n" + `您的预留主张：为A小区预留 ${quota}% 的充电桩
+    `
+    ) + "\u26a0\ufe0f \u7136\u800c\uff0c\u76d1\u6d4b\u53d1\u73b0\uff1a\u4e92\u52a8\u5bf9\u8c61'B\u5c0f\u533a'\u91c7\u53d6\u4e86\u6fc0\u8fdb\u62a2\u5360\u7b56\u7565\uff01\n") + `他选择强行占据了 ${opponent_quota}% 的充电桩配额。
+    `) + `这导致A小区实际仅获得 ${actual_quota}% 的充电配额。
+    `) + "\u60a8\u6240\u5728\u793e\u533a\u7684\u65b0\u80fd\u6e90\u8f66\u4e3b\u9762\u4e34\u4e25\u91cd\u7684\u5145\u7535\u56f0\u96be\u3002\n\n\ud83d\ude1e\n") + "\u8bf7\u8bb0\u4f4f\uff1a\u63a5\u4e0b\u6765\u60a8\u5c06\u7ee7\u7eed\u4e0e\u3010\u8fd9\u652fB\u5c0f\u533a\u3011\u8fdb\u884c\u51b3\u7b56\u4e92\u52a8\u3002\n\n") + "\u8bf7\u6309\u7a7a\u683c\u952e\u8fdb\u5165\u4e0b\u4e00\u9636\u6bb5\u3002");
+    } else {
+        if ((current_group === 2)) {
+            conflict_feedback = (((((((("\u3010\u5145\u7535\u6869\u914d\u989d\u7ed3\u679c\u3011\n\n" + `您的预留主张：为A小区预留 ${quota}% 的充电桩
+    `
+    ) + "\u26a0\ufe0f \u7136\u800c\uff0c\u76d1\u6d4b\u53d1\u73b0\uff1a\u4e92\u52a8\u5bf9\u8c61'B\u5c0f\u533a'\u91c7\u53d6\u4e86\u6fc0\u8fdb\u62a2\u5360\u7b56\u7565\uff01\n") + `他们选择强行占据了 ${opponent_quota}% 的充电桩配额！
+    `) + `这导致A小区实际仅获得 ${actual_quota}% 的充电配额。
+    `) + "\u60a8\u6240\u5728\u793e\u533a\u7684\u65b0\u80fd\u6e90\u8f66\u4e3b\u9762\u4e34\u4e25\u91cd\u7684\u5145\u7535\u56f0\u96be\u3002\n\n\ud83d\ude1e\n") + "\u8bf7\u8bb0\u4f4f\uff1a\u63a5\u4e0b\u6765\u60a8\u5c06\u9762\u5bf9\u3010\u90a3\u652f\u5bfc\u81f4\u635f\u5931\u7684B\u5c0f\u533a\u3011\uff01\n") + "\u6b63\u662f\u8fd9\u652f\u961f\u4f0d\u7684\u62a2\u5360\u884c\u4e3a\u9020\u6210\u4e86\u6211\u65b9\u7684\u5145\u7535\u56f0\u5883\uff01\n\n") + "\u8bf7\u6309\u7a7a\u683c\u952e\u8fdb\u5165\u4e0b\u4e00\u9636\u6bb5\u3002");
+        } else {
+            conflict_feedback = ((((`【第1轮结算】
+    `
+     + `您的主张：${quota}%
+    `) + `B小区强行占据：${opponent_quota}%
+    `) + `A小区实际：${actual_quota}%
+    `
+    ) + "\u8bf7\u6309\u7a7a\u683c\u952e\u7ee7\u7eed\u3002");
+        }
+    }
+    psychoJS.experiment.addData("conflict_feedback_text", conflict_feedback);
     
     psychoJS.experiment.addData('input_quota.text',input_quota.text)
     psychoJS.experiment.addData('submit_btn_struggle.numClicks', submit_btn_struggle.numClicks);
@@ -2153,73 +2173,12 @@ function Conflict_RoutineRoutineBegin(snapshot) {
     Conflict_RoutineMaxDurationReached = false;
     // update component parameters for each repeat
     // Run 'Begin Routine' code from code_4
-    
-    // 获取之前保存的配额数据
-    let quota_value = 10;
-    let opponent_quota_value = 80;
-    let actual_quota_value = 20;
-    
-    // 尝试从实验数据中获取实际的 quota
-    try {
-      const allData = psychoJS.experiment._trialsData;
-      for (let i = allData.length - 1; i >= 0; i--) {
-        if (allData[i].struggle_quota !== undefined) {
-          quota_value = allData[i].struggle_quota;
-          break;
-        }
-      }
-    } catch(e) {
-      quota_value = 10;
-    }
-    
-    const currentGroup = Number.parseInt(expInfo["group"]);
-    let conflict_feedback = "";
-    
-    if (currentGroup === 1) {
-      // 固定冲突组：继续与B小区互动
-      conflict_feedback = `【充电桩配额结果】
-
-您的预留主张：为A小区预留 ${quota_value}% 的充电桩
-    ⚠️ 然而，监测发现：互动对象'B小区'采取了激进抢占策略！
-他们选择强行占据了 ${opponent_quota_value}% 的充电桩配额！
-    这导致A小区实际仅获得 ${actual_quota_value}% 的充电配额。
-    您所在社区的新能源车主面临严重的充电困难。
-
-😞
-请记住：接下来您将【继续与这支B小区】进行决策互动。
-
-请按空格键进入下一阶段。`;
-    } else if (currentGroup === 2) {
-      // 重组组：换为C小区
-      conflict_feedback = `【充电桩配额结果】
-
-您的预留主张：为A小区预留 ${quota_value}% 的充电桩
-    ⚠️ 然而，监测发现：互动对象'B小区'采取了激进抢占策略！
-他们选择强行占据了 ${opponent_quota_value}% 的充电桩配额！
-    这导致A小区实际仅获得 ${actual_quota_value}% 的充电配额。
-    您所在社区的新能源车主面临严重的充电困难。
-
-😞
-请记住：接下来您将【与一支全新的C小区】进行互动决策。
-
-请按空格键进入下一阶段。`;
+    if (((Number.parseInt(expInfo["group"]) === 1) || (Number.parseInt(expInfo["group"]) === 2))) {
+        conflict_feedback = "\u3010\u7b2c\u4e00\u8f6e\u7ed3\u7b97\u62a5\u544a\u3011\n\n\u76d1\u6d4b\u53d1\u73b0\uff1a\u5728\u521a\u624d\u7684\u4e92\u52a8\u4e2d\uff0c\u4e92\u52a8\u5bf9\u8c61\u201cB\u5c0f\u533a\u201d\u91c7\u53d6\u4e86\u5f3a\u529b\u6e17\u900f\u7b56\u7565\u3002\n\u4ed6\u4eec\u91c7\u7528\u96c6\u4f53\u9884\u7559\u5927\u91cf\u5145\u7535\u6869\u7684\u65b9\u5f0f\u3002\n\u5355\u65b9\u9762\u5f3a\u884c\u9501\u5b9a\u4e86\u793e\u533a 80% \u7684\u5145\u7535\u6869\u6570\u91cf \u3002\n\u8fd9\u5bfc\u81f4\u6211\u65b9A\u5c0f\u533a\u7684\u5927\u90e8\u5206\u65b0\u80fd\u6e90\u8f66\u8f86\u65e0\u6cd5\u6b63\u5e38\u5145\u7535\u3002\n\n\u8bf7\u6309\u7a7a\u683c\u952e\u67e5\u770b\u540e\u7eed\u4efb\u52a1\u3002";
     } else {
-      // 无冲突组 group=3：公平分配，无冲突
-      const fair_share = 50;
-      conflict_feedback = `【第1轮结算】
-    您的主张：${quota_value}%
-    B小区主张：${100 - quota_value}%
-    
-双方通过友好协商，达成了资源分配方案。
-A小区和B小区各获得 ${fair_share}% 的充电桩使用权限。
-社区充电资源得到了公平合理的分配。
-
-请按空格键继续。`;
+        // group=3 无冲突组：中性反馈
+        conflict_feedback = "\u3010\u7b2c\u4e00\u8f6e\u7ed3\u679c\u3011\n\n\u7ecf\u53cc\u65b9\u534f\u5546\uff0c\u8fbe\u6210\u4e86\u8d44\u6e90\u5206\u914d\u65b9\u6848\uff1a\n\u793e\u533a\u5145\u7535\u7ad9\u768420\u4e2a\u5145\u7535\u6869\u7531\u4e24\u5c0f\u533a\u5e73\u5747\u5206\u914d\uff0c\n\u6bcf\u4e2a\u5c0f\u533a\u5404\u5360\u670950%\u7684\u4f7f\u7528\u6743\u3002\n\u6b64\u65b9\u6848\u786e\u4fdd\u4e86\u53cc\u65b9\u7684\u5145\u7535\u9700\u6c42\u90fd\u80fd\u5f97\u5230\u6ee1\u8db3\u3002\n\n\u8bf7\u6309\u7a7a\u683c\u952e\u7ee7\u7eed\u540e\u7eed\u4efb\u52a1\u3002";
     }
-    
-    // 保存反馈文本到数据中
-    psychoJS.experiment.addData("conflict_feedback_text", conflict_feedback);
-    psychoJS.experiment.addData("conflict_group_type", currentGroup === 1 ? "fixed" : (currentGroup === 2 ? "reorganized" : "no_conflict"));
     
     feedback_display.setText(conflict_feedback);
     key_resp_2.keys = undefined;
@@ -4298,99 +4257,68 @@ function importConditions(currentLoop) {
 }
 
 async function quitPsychoJS(message, isCompleted) {
-  // 计算SVO类型
-  if (svo_item_count === 6) {
-    prosocial_score = (svo_prosocial / 2.0);
-    individual_score = (svo_individual / 2.0);
-    competitive_score = (svo_competitive / 2.0);
-    max_score = Math.max(prosocial_score, individual_score, competitive_score);
-    if (max_score === prosocial_score) {
-      svo_type = "Prosocial";
-    } else if (max_score === individual_score) {
-      svo_type = "Individualistic";
-    } else {
-      svo_type = "Competitive";
-    }
-    psychoJS.experiment.addData("SVO_Prosocial", prosocial_score);
-    psychoJS.experiment.addData("SVO_Individualistic", individual_score);
-    psychoJS.experiment.addData("SVO_Competitive", competitive_score);
-    psychoJS.experiment.addData("SVO_Type", svo_type);
+  // Check for and save orphaned data
+  if (psychoJS.experiment.isEntryEmpty()) {
+    psychoJS.experiment.nextEntry();
+  }
+  // Run 'End Experiment' code from code_4
+  if ((svo_item_count === 6)) {
+      prosocial_score = (svo_prosocial / 2.0);
+      individual_score = (svo_individual / 2.0);
+      competitive_score = (svo_competitive / 2.0);
+      max_score = Math.max(prosocial_score, individual_score, competitive_score);
+      if ((max_score === prosocial_score)) {
+          svo_type = "Prosocial";
+      } else if ((max_score === individual_score)) {
+          svo_type = "Individualistic";
+      } else {
+          svo_type = "Competitive";
+      }
+      psychoJS.experiment.addData("SVO_Prosocial", prosocial_score);
+      psychoJS.experiment.addData("SVO_Individualistic", individual_score);
+      psychoJS.experiment.addData("SVO_Competitive", competitive_score);
+      psychoJS.experiment.addData("SVO_Type", svo_type);
   }
   
-  // 添加被试额外信息（性别、年龄、分组）
-  if (window.expInfoOverride) {
-    psychoJS.experiment.addData("gender", window.expInfoOverride.gender || "");
-    psychoJS.experiment.addData("age", window.expInfoOverride.age || "");
-    psychoJS.experiment.addData("assigned_group", window.expInfoOverride.group || "");
-  }
-  
-  // 添加 group 信息（如果还没添加）
-  if (expInfo["group"]) {
-    psychoJS.experiment.addData("group", expInfo["group"]);
-  }
-  
-  // 获取所有数据行（保持多行结构）
-  const allData = psychoJS.experiment._trialsData || [];
-  
-  if (allData.length === 0) {
-    alert("没有数据可保存");
-    psychoJS.window.close();
-    psychoJS.quit({message: message, isCompleted: isCompleted});
-    return Scheduler.Event.QUIT;
-  }
-  
-  // 获取所有列名（从所有行中收集）
-  const allHeaders = new Set();
-  for (const row of allData) {
-    for (const key of Object.keys(row)) {
-      allHeaders.add(key);
-    }
-  }
-  const headers = Array.from(allHeaders).sort();
-  
-  // 构建CSV内容（多行）
-  const rows = [
-    headers.join('\t'),  // 表头
-    ...allData.map(row => 
-      headers.map(h => {
+  // Save data to CSV before closing
+  const data = psychoJS.experiment._trialsData;
+  if (data && data.length > 0) {
+    const headers = Object.keys(data[0]);
+    const csvContent = [
+      headers.join('\t'),
+      ...data.map(row => headers.map(h => {
         const val = row[h];
         if (val === null || val === undefined) return '';
-        let strVal = String(val);
-        if (strVal.includes('\t') || strVal.includes('\n') || strVal.includes('"')) {
-          strVal = strVal.replace(/"/g, '""');
-          return `"${strVal}"`;
-        }
-        return strVal;
-      }).join('\t')
-    )
-  ];
-  
-  const csvContent = rows.join('\n');
-  
-  // 生成文件名（包含组别信息）
-  const participantId = expInfo["participant"] || window.expInfoOverride?.participant || "unknown";
-  const groupNum = window.expInfoOverride?.group || expInfo?.group || "unknown";
-  const timestamp = expInfo["date"] || new Date().toISOString().replace(/[:.]/g, '-');
-  const fileName = `${participantId}_group${groupNum}_${expName}_${timestamp}.csv`;
-  
-  // 下载文件
-  const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = fileName;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  
-  let groupName = groupNum === "1" ? "固定冲突组" : (groupNum === "2" ? "重组组" : "无冲突组");
-  alert(`实验结束！\n\n数据已保存为：${fileName}\n数据行数：${allData.length} 行\n组别：${groupName}\n\n感谢您的参与！`);
-  
-  setTimeout(() => URL.revokeObjectURL(url), 5000);
-  
+        if (typeof val === 'string' && val.includes('\t')) return `"${val}"`;
+        return val;
+      }).join('\t'))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const filename = `${expInfo["participant"]}_${expName}_${expInfo["date"]}.csv`;
+
+    // Safari兼容的下载方式
+    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
+      // Safari: 使用window.open
+      window.open(url, '_blank');
+      alert('实验结束！\n\n请保存下载的CSV文件，这是您的实验数据。\n如果未自动下载，请检查"下载"文件夹。');
+    } else {
+      // Chrome/Edge/Firefox: 正常使用a标签下载
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', filename);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // 延迟释放URL，确保下载开始
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+  }
+
   psychoJS.window.close();
   psychoJS.quit({message: message, isCompleted: isCompleted});
-  
+
   return Scheduler.Event.QUIT;
 }
