@@ -17,6 +17,7 @@ let expInfo = {
     'participant': '001',
     'session': '001',
     'group': '1',
+    'framing': '1',  // 认知框架操纵：'1'=群体框架，'2'=个体框架
 };
 let PILOTING = util.getUrlParameters().has('__pilotToken');
 let currentLoop;
@@ -28,11 +29,13 @@ let firstClock, Instruction_RoutineClock, SVO_IntroClock, SVO_RoutineClock;
 let Struggle_RoutineClock, Conflict_RoutineClock, Emotion_IntroClock;
 let Emotion_MeasurementClock, Emotion_Final_SubmitClock, secondClock;
 let Transition_RoutineClock, voteClock, ruleClock, Decision_RoutineClock;
+let Framing_RoutineClock, Framing_Check_RoutineClock;
 let Round_FeedbackClock, Experiment_EndClock;
 
 // Text components
 let text_5, instr_text, svo_intro_text, svo_text, self_display, other_display;
 let text_left, text_right, quota_instruction, opponent_reminder_struggle;
+let framing_text, key_resp_framing, framing_mc_text, framing_mc_slider;
 let warning_text_struggle, input_quota, submit_btn_struggle;
 let round_info_struggle, intro_text_emotion;
 let emotion_text_anger_1, emotion_text_anger_2, emotion_text_anger_3, emotion_text_anger_4, emotion_text_anger_5;
@@ -67,6 +70,7 @@ let _key_resp_7_allKeys, _key_resp_allKeys, _key_resp_svo_intro_allKeys;
 let _key_resp_2_allKeys, _intro_key_emotion_allKeys, _key_resp_6_allKeys;
 let _key_resp_3_allKeys, _key_resp_9_allKeys, _key_resp_8_allKeys;
 let _key_resp_5_allKeys, _end_key_allKeys;
+let _key_resp_framing_allKeys;
 
 // Loop variables
 let svo_loop, emotion_loop, rounds;
@@ -160,6 +164,12 @@ flowScheduler.add(secondRoutineEnd());
 flowScheduler.add(Transition_RoutineRoutineBegin());
 flowScheduler.add(Transition_RoutineRoutineEachFrame());
 flowScheduler.add(Transition_RoutineRoutineEnd());
+flowScheduler.add(Framing_RoutineRoutineBegin());
+flowScheduler.add(Framing_RoutineRoutineEachFrame());
+flowScheduler.add(Framing_RoutineRoutineEnd());
+flowScheduler.add(Framing_Check_RoutineRoutineBegin());
+flowScheduler.add(Framing_Check_RoutineRoutineEachFrame());
+flowScheduler.add(Framing_Check_RoutineRoutineEnd());
 flowScheduler.add(voteRoutineBegin());
 flowScheduler.add(voteRoutineEachFrame());
 flowScheduler.add(voteRoutineEnd());
@@ -235,6 +245,10 @@ async function updateInfo() {
 
   // add info from the URL:
   util.addInfoFromUrl(expInfo);
+  // 认知框架操纵随机分配（被试间）：若 URL 未指定 framing 则随机 50/50
+  if (typeof expInfo['framing'] === 'undefined' || expInfo['framing'] === '' || expInfo['framing'] === null) {
+    expInfo['framing'] = (Math.random() < 0.5) ? '1' : '2';
+  }
   
 
   
@@ -281,6 +295,54 @@ async function experimentInit() {
   });
   
   key_resp = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
+  
+  // Initialize components for Routine "Framing_Routine"（认知框架操纵材料）
+  Framing_RoutineClock = new util.Clock();
+  // 群体框架全文（framing='1'）
+  const FRAMING_TEXT_GROUP = '【第二阶段 · 任务说明】\n\n未来社区中有（A、B、C）三个小区，从现在起，你将以（A小区）一员的身份参与社区资源分配。你与 A 小区的其他成员同属一个休戚与共的集体——你们的得失被绑在一起，A小区所有成员的表现将汇总为A小区团队总收益。\n请记住:你不是孤身一人。你的每一次选择，都直接关系到整个A小区的集体荣誉与共同命运。我们能否在与B或C小区的资源较量中守住属于我们的份额，取决于团队每一个人的共同努力。\n\n（读完后请按空格键继续）';
+  // 个体框架全文（framing='2'）
+  const FRAMING_TEXT_INDIV = '【第二阶段 · 任务说明】\n\n未来社区中有（A、B、C）三个小区，从现在起，你将以（A小区）一员的身份参与社区资源分配。\n从现在起，你将作为独立个体参与资源分配。本次任务采取个人绩评估算——你的报酬完全取决于你个人的得分，与团队中其他任何成员无关。你不需要为别人考虑，也不用替同小区成员承担得失。\n请记住:你的目标很单纯，就是为自己的账户争取最多的个人报酬。你能否在与B或C小区的资源较量中守住属于自己的份额，取决于你的个人努力。\n\n（读完后请按空格键继续）';
+  framing_text = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'framing_text',
+    text: '',
+    font: 'STHeiti',
+    units: 'height',
+    pos: [0, 0.12], draggable: false, height: 0.032, wrapWidth: 0.92, ori: 0.0,
+    anchor: 'center',
+    alignText: 'center',
+    languageStyle: 'LTR',
+    color: new util.Color('black'),  opacity: undefined,
+    depth: -1.0,
+    lineSpacing: 1.5
+  });
+  key_resp_framing = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
+  
+  // Initialize components for Routine "Framing_Check_Routine"（框架操纵检验）
+  Framing_Check_RoutineClock = new util.Clock();
+  framing_mc_text = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'framing_mc_text',
+    text: '操纵检验：读上面的文字后，它引导你更关注？\n（1 = 个人得分/个人利益，7 = 团队总收益/集体荣誉）\n请拖动下方滑块，松手即记录',
+    font: 'STHeiti',
+    units: 'height',
+    pos: [0, -0.28], draggable: false, height: 0.03, wrapWidth: 1.2, ori: 0.0,
+    anchor: 'center',
+    alignText: 'center',
+    languageStyle: 'LTR',
+    color: new util.Color('black'),  opacity: undefined,
+    depth: -1.0,
+    lineSpacing: 1.4
+  });
+  framing_mc_slider = new visual.Slider({
+    win: psychoJS.window, name: 'framing_mc_slider',
+    startValue: undefined,
+    size: [0.9, 0.08], pos: [0, (- 0.5)], ori: 0.0, units: psychoJS.window.units,
+    labels: ["1\n个人", "7\n团队"], fontSize: 0.03, ticks: [1, 2, 3, 4, 5, 6, 7],
+    granularity: 1.0, style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'), opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -6,
+    flip: false,
+  });
   
   // Initialize components for Routine "SVO_Intro"
   SVO_IntroClock = new util.Clock();
@@ -1377,6 +1439,213 @@ function Instruction_RoutineRoutineEnd(snapshot) {
     routineTimer.reset();
     
     // Routines running outside a loop should always advance the datafile row
+    if (currentLoop === psychoJS.experiment) {
+      psychoJS.experiment.nextEntry(snapshot);
+    }
+    return Scheduler.Event.NEXT;
+  }
+}
+
+function Framing_RoutineRoutineBegin(snapshot) {
+  return async function () {
+    TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
+    
+    //--- Prepare to start Routine 'Framing_Routine' ---
+    t = 0;
+    frameN = -1;
+    continueRoutine = true; // until we're told otherwise
+    routineForceEnded = false;
+    Framing_RoutineClock.reset();
+    routineTimer.reset();
+    Framing_RoutineMaxDurationReached = false;
+    // update component parameters for each repeat
+    // 根据 framing 条件呈现对应框架材料（1=群体框架，2=个体框架）
+    if ((expInfo["framing"] === "2")) {
+      framing_text.text = FRAMING_TEXT_INDIV;
+    } else {
+      framing_text.text = FRAMING_TEXT_GROUP;
+    }
+    framing_text.anchor = "center";
+    framing_text.alignText = "center";
+    key_resp_framing.keys = undefined;
+    key_resp_framing.rt = undefined;
+    _key_resp_framing_allKeys = [];
+    psychoJS.experiment.addData('Framing_Routine.started', globalClock.getTime());
+    Framing_RoutineMaxDuration = null
+    // keep track of which components have finished
+    Framing_RoutineComponents = [];
+    Framing_RoutineComponents.push(framing_text);
+    Framing_RoutineComponents.push(key_resp_framing);
+    
+    for (const thisComponent of Framing_RoutineComponents)
+      if ('status' in thisComponent)
+        thisComponent.status = PsychoJS.Status.NOT_STARTED;
+    return Scheduler.Event.NEXT;
+  }
+}
+
+function Framing_RoutineRoutineEachFrame() {
+  return async function () {
+    //--- Loop for each frame of Routine 'Framing_Routine' ---
+    t = Framing_RoutineClock.getTime();
+    frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
+    
+    // *framing_text* updates
+    if (t >= 0.0 && framing_text.status === PsychoJS.Status.NOT_STARTED) {
+      framing_text.tStart = t;
+      framing_text.frameNStart = frameN;
+      framing_text.setAutoDraw(true);
+    }
+    if (framing_text.status === PsychoJS.Status.STARTED) {
+    }
+    
+    // *key_resp_framing* updates
+    if (t >= 0.0 && key_resp_framing.status === PsychoJS.Status.NOT_STARTED) {
+      psychoJS.window.callOnFlip(function() { key_resp_framing.clock.reset(); });
+      psychoJS.window.callOnFlip(function() { key_resp_framing.start(); });
+      psychoJS.window.callOnFlip(function() { key_resp_framing.clearEvents(); });
+    }
+    if (key_resp_framing.status === PsychoJS.Status.STARTED) {
+      let theseKeys = key_resp_framing.getKeys({
+        keyList: typeof 'space' === 'string' ? ['space'] : 'space',
+        waitRelease: false
+      });
+      _key_resp_framing_allKeys = _key_resp_framing_allKeys.concat(theseKeys);
+      if (_key_resp_framing_allKeys.length > 0) {
+        key_resp_framing.keys = _key_resp_framing_allKeys[_key_resp_framing_allKeys.length - 1].name;
+        key_resp_framing.rt = _key_resp_framing_allKeys[_key_resp_framing_allKeys.length - 1].rt;
+        key_resp_framing.duration = _key_resp_framing_allKeys[_key_resp_framing_allKeys.length - 1].duration;
+        continueRoutine = false;
+      }
+    }
+    
+    if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
+      return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
+    }
+    if (!continueRoutine) {
+      routineForceEnded = true;
+      return Scheduler.Event.NEXT;
+    }
+    continueRoutine = false;
+    for (const thisComponent of Framing_RoutineComponents)
+      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
+        continueRoutine = true;
+        break;
+      }
+    if (continueRoutine) {
+      return Scheduler.Event.FLIP_REPEAT;
+    } else {
+      return Scheduler.Event.NEXT;
+    }
+  };
+}
+
+function Framing_RoutineRoutineEnd(snapshot) {
+  return async function () {
+    //--- Ending Routine 'Framing_Routine' ---
+    for (const thisComponent of Framing_RoutineComponents) {
+      if (typeof thisComponent.setAutoDraw === 'function') {
+        thisComponent.setAutoDraw(false);
+      }
+    }
+    psychoJS.experiment.addData('Framing_Routine.stopped', globalClock.getTime());
+    key_resp_framing.stop();
+    routineTimer.reset();
+    if (currentLoop === psychoJS.experiment) {
+      psychoJS.experiment.nextEntry(snapshot);
+    }
+    return Scheduler.Event.NEXT;
+  }
+}
+
+function Framing_Check_RoutineRoutineBegin(snapshot) {
+  return async function () {
+    TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
+    
+    //--- Prepare to start Routine 'Framing_Check_Routine' ---
+    t = 0;
+    frameN = -1;
+    continueRoutine = true;
+    routineForceEnded = false;
+    Framing_Check_RoutineClock.reset();
+    routineTimer.reset();
+    Framing_Check_RoutineMaxDurationReached = false;
+    // update component parameters for each repeat
+    framing_mc_slider.reset()
+    psychoJS.experiment.addData('Framing_Check_Routine.started', globalClock.getTime());
+    Framing_Check_RoutineMaxDuration = null
+    // keep track of which components have finished
+    Framing_Check_RoutineComponents = [];
+    Framing_Check_RoutineComponents.push(framing_mc_text);
+    Framing_Check_RoutineComponents.push(framing_mc_slider);
+    
+    for (const thisComponent of Framing_Check_RoutineComponents)
+      if ('status' in thisComponent)
+        thisComponent.status = PsychoJS.Status.NOT_STARTED;
+    return Scheduler.Event.NEXT;
+  }
+}
+
+function Framing_Check_RoutineRoutineEachFrame() {
+  return async function () {
+    //--- Loop for each frame of Routine 'Framing_Check_Routine' ---
+    t = Framing_Check_RoutineClock.getTime();
+    frameN = frameN + 1;
+    // *framing_mc_text* updates
+    if (t >= 0.0 && framing_mc_text.status === PsychoJS.Status.NOT_STARTED) {
+      framing_mc_text.tStart = t;
+      framing_mc_text.frameNStart = frameN;
+      framing_mc_text.setAutoDraw(true);
+    }
+    if (framing_mc_text.status === PsychoJS.Status.STARTED) {
+    }
+    // *framing_mc_slider* updates
+    if (t >= 0.0 && framing_mc_slider.status === PsychoJS.Status.NOT_STARTED) {
+      framing_mc_slider.tStart = t;
+      framing_mc_slider.frameNStart = frameN;
+      framing_mc_slider.setAutoDraw(true);
+    }
+    if (framing_mc_slider.status === PsychoJS.Status.STARTED) {
+    }
+    // Check slider for response to end Routine
+    if (framing_mc_slider.getRating() !== undefined && framing_mc_slider.status === PsychoJS.Status.STARTED) {
+      continueRoutine = false;
+    }
+    if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
+      return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
+    }
+    if (!continueRoutine) {
+      routineForceEnded = true;
+      return Scheduler.Event.NEXT;
+    }
+    continueRoutine = false;
+    for (const thisComponent of Framing_Check_RoutineComponents)
+      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
+        continueRoutine = true;
+        break;
+      }
+    if (continueRoutine) {
+      return Scheduler.Event.FLIP_REPEAT;
+    } else {
+      return Scheduler.Event.NEXT;
+    }
+  };
+}
+
+function Framing_Check_RoutineRoutineEnd(snapshot) {
+  return async function () {
+    //--- Ending Routine 'Framing_Check_Routine' ---
+    for (const thisComponent of Framing_Check_RoutineComponents) {
+      if (typeof thisComponent.setAutoDraw === 'function') {
+        thisComponent.setAutoDraw(false);
+      }
+    }
+    psychoJS.experiment.addData('Framing_Check_Routine.stopped', globalClock.getTime());
+    // 记录框架操纵检验评分与条件
+    psychoJS.experiment.addData('framing_condition', expInfo['framing']);
+    psychoJS.experiment.addData('framing_mc', framing_mc_slider.getRating());
+    psychoJS.experiment.addData('framing_mc.rt', framing_mc_slider.getRT());
+    routineTimer.reset();
     if (currentLoop === psychoJS.experiment) {
       psychoJS.experiment.nextEntry(snapshot);
     }
