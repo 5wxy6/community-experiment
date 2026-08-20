@@ -4623,9 +4623,10 @@ window.startExperiment = async function(formData) {
     try {
         // 将 flowScheduler 添加到 psychoJS（仅添加一次，避免重复）
         // 检查是否已经添加，防止重复添加导致问题
-        if (!psychoJS.scheduler._queue.length) {
-            psychoJS.scheduler.add(flowScheduler);
-        }
+      if (!psychoJS.scheduler._flowSchedulerAdded) {
+    psychoJS.scheduler.add(flowScheduler);
+    psychoJS.scheduler._flowSchedulerAdded = true;
+}
 
         // 启动 PsychoJS
         await psychoJS.start({
