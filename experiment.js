@@ -1,23 +1,33 @@
 /************************** 
  * Experiment3.31测试  *
  **************************/
+/******************************/
+* Experiment3.31测试 *
+********************************/
 
-import { core, data, sound, util, visual, hardware } from './psychojs-2025.2.3.js';
-const { PsychoJS } = core;
+// ===== 导入PsychoJS核心库 =====
+// 如果 psychojs-2025.2.js 在根目录，用这个：
+import * as PsychoJS from './psychojs-2025.2.js';
+// ===== 解构导入的模块 =====
+const { core, data, sound, util, visual, hardware } = PsychoJS;
+
+const { PsychoJS: PsychoJSCore } = core;
 const { TrialHandler, MultiStairHandler } = data;
 const { Scheduler } = util;
-//some handy aliases as in the psychopy scripts;
+
+// ===== 常用数学函数 =====
 const { abs, sin, cos, PI: pi, sqrt } = Math;
 const { round } = util;
 
+// ===== 实验信息 =====
+let expName = 'experiment3.31测试';
 
-// store info about the experiment session:
-let expName = 'experiment3.31测试 ';  // from the Builder filename that created this script
 let expInfo = {
     'participant': '001',
     'session': '001',
-    'group': '1',
-    'framing': '1',  // 认知框架操纵：'1'=群体框架，'2'=个体框架
+    'gender': '',
+    'age': '',
+    'group': '1'
 };
 let PILOTING = util.getUrlParameters().has('__pilotToken');
 let currentLoop;
@@ -4591,3 +4601,45 @@ async function quitPsychoJS(message, isCompleted) {
 
   return Scheduler.Event.QUIT;
 }
+// ===== 暴露启动函数给 index.html =====
+// 注意：此函数会被 index.html 中的 start-btn 点击事件调用
+window.startExperiment = async function(formData) {
+    // 合并传入的参与者信息
+    if (formData) {
+        if (formData.participant) expInfo['participant'] = formData.participant;
+        if (formData.session) expInfo['session'] = formData.session;
+        if (formData.group) expInfo['group'] = formData.group;
+        if (formData.gender) expInfo['gender'] = formData.gender;
+        if (formData.age) expInfo['age'] = formData.age;
+    }
+
+    // 确保 framing 被正确设置（随机分配 1=群体框架，2=个体框架）
+    if (typeof expInfo['framing'] === 'undefined' || expInfo['framing'] === '' || expInfo['framing'] === null) {
+        expInfo['framing'] = (Math.random() < 0.5) ? '1' : '2';
+    }
+
+    console.log('启动实验，expInfo:', expInfo);
+
+    try {
+        // 将 flowScheduler 添加到 psychoJS（仅添加一次，避免重复）
+        // 检查是否已经添加，防止重复添加导致问题
+        if (!psychoJS.scheduler._queue.length) {
+            psychoJS.scheduler.add(flowScheduler);
+        }
+
+        // 启动 PsychoJS
+        await psychoJS.start({
+            expName: expName,
+            expInfo: expInfo,
+            resources: [
+                {'name': 'svo_conditions.xlsx', 'path': 'svo_conditions.xlsx'},
+                {'name': 'emotion_items.xlsx', 'path': 'emotion_items.xlsx'},
+            ]
+        });
+
+        console.log('实验启动成功！');
+    } catch (err) {
+        console.error('实验启动失败:', err);
+        alert('实验启动失败，请刷新页面重试。错误信息：' + err.message);
+    }
+};
