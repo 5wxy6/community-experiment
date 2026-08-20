@@ -48,73 +48,12 @@
         <label>年龄: </label>
         <select id="input-age" style="padding:5px; width:150px;">
           <option value="" disabled selected>请选择</option>
-          <!-- 生成 1~80 的选项 -->
-        </select>
-      </div>
-      <button id="start-btn" style="padding:10px 30px; margin-top:15px; font-size:16px; cursor:pointer;">开始实验</button>
-      <!-- 已删除原先的随机分组提示小字 -->
-    </div>
-
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/PreloadJS/1.0.1/preloadjs.min.js"></script>
-
-   <!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>社区互动实验</title>
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-    <style>
-      body { margin: 0; padding: 0; background: #d9d9d9; overflow: hidden; }
-      #root { width: 100vw; height: 100vh; }
-      #loading { 
-        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-        color: white; font-family: Arial; text-align: center;
-      }
-      #loading .progress { color: #0f0; margin-top: 10px; }
-      #errors { position: fixed; top: 10px; left: 10px; color: #f66; font-family: monospace; font-size: 12px; white-space: pre-wrap; max-width: 90vw; }
-    </style>
-  </head>
-  <body>
-    <div id="loading">
-      <div>正在加载实验资源...</div>
-      <div class="progress" id="progress">0%</div>
-      <div style="font-size: 14px; margin-top: 20px; color: #aaa;">首次加载可能需要 10-30 秒</div>
-    </div>
-    <div id="errors"></div>
-    <div id="root"></div>
-
-    <!-- Participant Info Form -->
-    <div id="participant-form" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#333; padding:30px; border-radius:10px; color:white; font-family:Arial; z-index:1000;">
-      <h3 style="margin-top:0;">参与者信息</h3>
-      <div style="margin:15px 0;">
-        <label>学号: </label>
-        <input type="text" id="input-participant" value="001" style="padding:5px; width:150px;">
-      </div>
-      <div style="margin:15px 0;">
-        <label>Session: </label>
-        <input type="text" id="input-session" value="001（无需填写）" style="padding:5px; width:150px;">
-      </div>
-      <div style="margin:15px 0;">
-        <label>性别: </label>
-        <select id="input-gender" style="padding:5px; width:150px;">
-          <option value="">请选择</option>
-          <option value="男">男</option>
-          <option value="女">女</option>
-        </select>
-      </div>
-      <div style="margin:15px 0;">
-        <label>年龄: </label>
-        <select id="input-age" style="padding:5px; width:150px;">
-          <option value="" disabled selected>请选择</option>
-          <!-- 生成 1~80 的选项 -->
         </select>
       </div>
       <button id="start-btn" style="padding:10px 30px; margin-top:15px; font-size:16px; cursor:pointer;">开始实验</button>
     </div>
 
+    <!-- ====== 第三方库 ====== -->
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/PreloadJS/1.0.1/preloadjs.min.js"></script>
@@ -122,10 +61,10 @@
     <!-- ====== 加载 psychoJS ====== -->
     <script src="psychojs-2025.2.js"></script>
 
-    <!-- ====== 加载 experiment.js ====== -->
+    <!-- ====== 动态加载 experiment.js ====== -->
     <script>
-      // 动态生成年龄下拉选项 1~80
       (function() {
+        // 动态生成年龄下拉选项 1~80
         const ageSelect = document.getElementById('input-age');
         if (ageSelect) {
           for (let i = 1; i <= 80; i++) {
@@ -135,93 +74,93 @@
             ageSelect.appendChild(option);
           }
         }
-      })();
 
-      var errors = document.getElementById('errors');
-      var loading = document.getElementById('loading');
-      var progress = document.getElementById('progress');
+        var errors = document.getElementById('errors');
+        var loading = document.getElementById('loading');
+        var progress = document.getElementById('progress');
 
-      function log(msg) {
-        errors.textContent += msg + '\n';
-        console.log(msg);
-      }
-
-      window.onerror = function(msg, url, line, col, error) {
-        var details = 'ERROR: ' + msg + ' at line ' + line;
-        if (col) details += ':' + col;
-        if (url) details += ' in ' + url;
-        if (error && error.stack) details += '\nStack: ' + error.stack;
-        log(details);
-        console.error('Global error:', error);
-        loading.innerHTML = '<div style="color:#f66">加载出错，请刷新重试<br>' + details.replace(/\n/g, '<br>') + '</div>';
-      };
-
-      window.onunhandledrejection = function(event) {
-        var reason = event.reason;
-        var msg = 'Unhandled Promise Rejection: ' + (reason && reason.message ? reason.message : reason);
-        if (reason && reason.stack) msg += '\n' + reason.stack;
-        log(msg);
-        console.error('Unhandled rejection:', reason);
-      };
-
-      var percent = 0;
-      var interval = setInterval(function() {
-        percent += 5;
-        if (percent > 90) percent = 90;
-        progress.textContent = percent + '%';
-      }, 500);
-
-      // 用普通 script 加载 experiment.js，而不是 ES Module
-      var script = document.createElement('script');
-      script.src = 'experiment.js';
-      script.onload = function() {
-        clearInterval(interval);
-        progress.textContent = '100%';
-        setTimeout(function() {
-          loading.style.display = 'none';
-          document.getElementById('participant-form').style.display = 'block';
-        }, 500);
-        console.log('experiment.js 加载完成，window.startExperiment:', typeof window.startExperiment);
-      };
-      script.onerror = function() {
-        clearInterval(interval);
-        log('加载 experiment.js 失败');
-        loading.innerHTML = '<div style="color:#f66">加载 experiment.js 失败，请刷新重试</div>';
-      };
-      document.head.appendChild(script);
-
-      // 开始按钮
-      document.getElementById('start-btn').addEventListener('click', function() {
-        var participant = document.getElementById('input-participant').value || '001';
-        var session = document.getElementById('input-session').value || '001';
-        var gender = document.getElementById('input-gender').value || '';
-        var age = document.getElementById('input-age').value || '';
-        if (!age) {
-          alert('请选择年龄');
-          return;
+        function log(msg) {
+          errors.textContent += msg + '\n';
+          console.log(msg);
         }
-        var group = Math.floor(Math.random() * 3) + 1;
 
-        var expInfoOverride = {
-          participant: participant,
-          session: session,
-          gender: gender,
-          age: age,
-          group: group.toString()
+        window.onerror = function(msg, url, line, col, error) {
+          var details = 'ERROR: ' + msg + ' at line ' + line;
+          if (col) details += ':' + col;
+          if (url) details += ' in ' + url;
+          if (error && error.stack) details += '\nStack: ' + error.stack;
+          log(details);
+          console.error('Global error:', error);
+          loading.innerHTML = '<div style="color:#f66">加载出错，请刷新重试<br>' + details.replace(/\n/g, '<br>') + '</div>';
         };
 
-        document.getElementById('participant-form').style.display = 'none';
-        document.getElementById('loading').style.display = 'block';
-        document.getElementById('progress').textContent = '正在启动实验...';
+        window.onunhandledrejection = function(event) {
+          var reason = event.reason;
+          var msg = 'Unhandled Promise Rejection: ' + (reason && reason.message ? reason.message : reason);
+          if (reason && reason.stack) msg += '\n' + reason.stack;
+          log(msg);
+          console.error('Unhandled rejection:', reason);
+        };
 
-        if (window.startExperiment) {
-          window.startExperiment(expInfoOverride);
-        } else {
-          alert('实验尚未加载完成，请稍后点击。');
-          document.getElementById('participant-form').style.display = 'block';
-          document.getElementById('loading').style.display = 'none';
-        }
-      });
+        var percent = 0;
+        var interval = setInterval(function() {
+          percent += 5;
+          if (percent > 90) percent = 90;
+          progress.textContent = percent + '%';
+        }, 500);
+
+        // 用普通 script 加载 experiment.js
+        var script = document.createElement('script');
+        script.src = 'experiment.js';
+        script.onload = function() {
+          clearInterval(interval);
+          progress.textContent = '100%';
+          setTimeout(function() {
+            loading.style.display = 'none';
+            document.getElementById('participant-form').style.display = 'block';
+          }, 500);
+          console.log('experiment.js 加载完成，window.startExperiment:', typeof window.startExperiment);
+        };
+        script.onerror = function() {
+          clearInterval(interval);
+          log('加载 experiment.js 失败');
+          loading.innerHTML = '<div style="color:#f66">加载 experiment.js 失败，请刷新重试</div>';
+        };
+        document.head.appendChild(script);
+
+        // 开始按钮
+        document.getElementById('start-btn').addEventListener('click', function() {
+          var participant = document.getElementById('input-participant').value || '001';
+          var session = document.getElementById('input-session').value || '001';
+          var gender = document.getElementById('input-gender').value || '';
+          var age = document.getElementById('input-age').value || '';
+          if (!age) {
+            alert('请选择年龄');
+            return;
+          }
+          var group = Math.floor(Math.random() * 3) + 1;
+
+          var expInfoOverride = {
+            participant: participant,
+            session: session,
+            gender: gender,
+            age: age,
+            group: group.toString()
+          };
+
+          document.getElementById('participant-form').style.display = 'none';
+          document.getElementById('loading').style.display = 'block';
+          document.getElementById('progress').textContent = '正在启动实验...';
+
+          if (window.startExperiment) {
+            window.startExperiment(expInfoOverride);
+          } else {
+            alert('实验尚未加载完成，请稍后点击。');
+            document.getElementById('participant-form').style.display = 'block';
+            document.getElementById('loading').style.display = 'none';
+          }
+        });
+      })();
     </script>
   </body>
 </html>
