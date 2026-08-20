@@ -58,13 +58,24 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/PreloadJS/1.0.1/preloadjs.min.js"></script>
 
-    <!-- ====== 加载 psychoJS ====== -->
-    <script src="psychojs-2025.2.js"></script>
+    <!-- ====== 加载 psychoJS（ESM 版：import 后挂到 window.PsychoJS） ====== -->
+    <script type="module">
+      try {
+        const PsychoJSNamespace = await import('./psychojs-2025.2.js');
+        window.PsychoJS = PsychoJSNamespace;
+        console.log('PsychoJS 已加载，window.PsychoJS:', typeof window.PsychoJS);
+      } catch (e) {
+        console.error('加载 psychojs-2025.2.js 失败:', e);
+        const errors = document.getElementById('errors');
+        if (errors) errors.textContent += '加载 psychojs-2025.2.js 失败：' + e.message + '\n';
+      } finally {
+        window.dispatchEvent(new Event('psychojs-ready'));
+      }
+    </script>
 
     <!-- ====== 动态加载 experiment.js ====== -->
     <script>
       (function() {
-        // 动态生成年龄下拉选项 1~80
         const ageSelect = document.getElementById('input-age');
         if (ageSelect) {
           for (let i = 1; i <= 80; i++) {
@@ -109,26 +120,32 @@
           progress.textContent = percent + '%';
         }, 500);
 
-        // 用普通 script 加载 experiment.js
-        var script = document.createElement('script');
-        script.src = 'experiment.js';
-        script.onload = function() {
-          clearInterval(interval);
-          progress.textContent = '100%';
-          setTimeout(function() {
-            loading.style.display = 'none';
-            document.getElementById('participant-form').style.display = 'block';
-          }, 500);
-          console.log('experiment.js 加载完成，window.startExperiment:', typeof window.startExperiment);
-        };
-        script.onerror = function() {
-          clearInterval(interval);
-          log('加载 experiment.js 失败');
-          loading.innerHTML = '<div style="color:#f66">加载 experiment.js 失败，请刷新重试</div>';
-        };
-        document.head.appendChild(script);
+        function loadExperiment() {
+          var script = document.createElement('script');
+          script.src = 'experiment.js';
+          script.onload = function() {
+            clearInterval(interval);
+            progress.textContent = '100%';
+            setTimeout(function() {
+              loading.style.display = 'none';
+              document.getElementById('participant-form').style.display = 'block';
+            }, 500);
+            console.log('experiment.js 加载完成，window.startExperiment:', typeof window.startExperiment);
+          };
+          script.onerror = function() {
+            clearInterval(interval);
+            log('加载 experiment.js 失败');
+            loading.innerHTML = '<div style="color:#f66">加载 experiment.js 失败，请刷新重试</div>';
+          };
+          document.head.appendChild(script);
+        }
 
-        // 开始按钮
+        if (window.PsychoJS) {
+          loadExperiment();
+        } else {
+          window.addEventListener('psychojs-ready', loadExperiment, { once: true });
+        }
+
         document.getElementById('start-btn').addEventListener('click', function() {
           var participant = document.getElementById('input-participant').value || '001';
           var session = document.getElementById('input-session').value || '001';
@@ -164,3 +181,4 @@
     </script>
   </body>
 </html>
+
