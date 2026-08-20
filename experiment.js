@@ -3,7 +3,6 @@
  */
 // ===== 使用全局 PsychoJS（由 psychojs-2025.2.js 提供） =====
 // 注意：psychojs-2025.2.js 必须在 experiment.js 之前加载
-
 // 从全局 window 对象中获取 PsychoJS
 const PsychoJS = window.PsychoJS;
 if (!PsychoJS) {
