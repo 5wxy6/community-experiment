@@ -58,12 +58,24 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/PreloadJS/1.0.1/preloadjs.min.js"></script>
 
-    <!-- ====== 加载 psychoJS（ESM 版：import 后挂到 window.PsychoJS） ====== -->
+    <!-- ====== 加载 psychoJS（ESM 版：取 core.PsychoJS 主类，重建 UMD 形态挂到 window.PsychoJS） ====== -->
     <script type="module">
       try {
-        const PsychoJSNamespace = await import('./psychojs-2025.2.js');
-        window.PsychoJS = PsychoJSNamespace;
-        console.log('PsychoJS 已加载，window.PsychoJS:', typeof window.PsychoJS);
+        const ns = await import('./psychojs-2025.2.js');
+        // PsychoPy 的 ESM 运行时只导出子模块 {core,data,...}，主类 PsychoJS 在 core 模块内（core.PsychoJS）
+        let Main = (ns.core && ns.core.PsychoJS) || ns.PsychoJS || ns.default;
+        if (typeof Main !== 'function') {
+          throw new Error('无法从 psychojs 模块定位 PsychoJS 主类（core.PsychoJS=' + typeof (ns.core && ns.core.PsychoJS) + '）');
+        }
+        // 重建为标准 UMD 形态：主类本体 + 子模块作为属性，供 experiment.js 解构与 new 实例化
+        Main.core = ns.core;
+        Main.data = ns.data;
+        Main.sound = ns.sound;
+        Main.util = ns.util;
+        Main.visual = ns.visual;
+        Main.hardware = ns.hardware;
+        window.PsychoJS = Main;
+        console.log('PsychoJS 已加载，主类:', typeof window.PsychoJS, 'core:', typeof window.PsychoJS.core);
       } catch (e) {
         console.error('加载 psychojs-2025.2.js 失败:', e);
         const errors = document.getElementById('errors');
@@ -181,4 +193,3 @@
     </script>
   </body>
 </html>
-
