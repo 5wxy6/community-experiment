@@ -7,8 +7,7 @@
 
 // ===== 导入PsychoJS核心库 =====
 // 如果 psychojs-2025.2.js 在根目录，用这个：
-import * as PsychoJS from './psychojs-2025.2.js';
-// ===== 解构导入的模块 =====
+// ===== 使用全局 PsychoJS（由 psychojs-2025.2.js 提供） =====
 const { core, data, sound, util, visual, hardware } = PsychoJS;
 
 const { PsychoJS: PsychoJSCore } = core;
