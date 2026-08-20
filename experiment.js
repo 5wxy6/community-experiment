@@ -4,8 +4,13 @@
 // ===== 使用全局 PsychoJS（由 psychojs-2025.2.js 提供） =====
 // 注意：psychojs-2025.2.js 必须在 experiment.js 之前加载
 
-// 从全局 PsychoJS 对象中解构
-const { core, data, sound, util, visual, hardware } = window.PsychoJS || PsychoJS;
+// 从全局 window 对象中获取 PsychoJS
+const PsychoJS = window.PsychoJS;
+if (!PsychoJS) {
+    throw new Error('PsychoJS 库未加载！请检查 psychojs-2025.2.js 文件。');
+}
+
+const { core, data, sound, util, visual, hardware } = PsychoJS;
 
 const { PsychoJS: PsychoJSCore } = core;
 const { TrialHandler, MultiStairHandler } = data;
