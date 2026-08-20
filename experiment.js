@@ -5,10 +5,11 @@
 * Experiment3.31测试 *
 ********************************/
 
-// ===== 导入PsychoJS核心库 =====
-// 如果 psychojs-2025.2.js 在根目录，用这个：
 // ===== 使用全局 PsychoJS（由 psychojs-2025.2.js 提供） =====
-const { core, data, sound, util, visual, hardware } = PsychoJS;
+// 注意：psychojs-2025.2.js 必须在 experiment.js 之前加载
+
+// 从全局 PsychoJS 对象中解构
+const { core, data, sound, util, visual, hardware } = window.PsychoJS || PsychoJS;
 
 const { PsychoJS: PsychoJSCore } = core;
 const { TrialHandler, MultiStairHandler } = data;
