@@ -32,7 +32,7 @@ let expInfo = {
 };
 
 // 认知框架操纵文本（模块级常量，供 Framing_Routine 使用）
-const FRAMING_TEXT_GROUP = '你与A小区的其他成员同属一个休戚与共的集体\n\n你们的得失被绑在一起，A小区所有成员的表现将汇总为A小区团队总收益。\n\n请记住：你不是孤身一人。\n\n你的每一次选择，都直接关系到整个A小区的集体荣誉与共同命运。\n\n你们能否在与B或C小区的资源较量中守住属于你们的份额，取决于团队每一个人的共同努力。';
+const FRAMING_TEXT_GROUP = '你与 A 小区的其他成员同属一个休戚与共的集体——你们的得失被绑在一起，A小区所有成员的表现将汇总为A小区团队总收益。\n\n请记住：你不是孤身一人。\n\n你的每一次选择，都直接关系到整个A小区的集体荣誉与共同命运。\n\n我们能否在与B或C小区的资源较量中守住属于我们的份额，取决于团队每一个人的共同努力。';
 const FRAMING_TEXT_INDIV = '从现在起，你将作为独立个体参与资源分配。\n\n本次任务采取个人绩评估算——你的报酬完全取决于你个人的得分，与团队中其他任何成员无关。\n\n你不需要为别人考虑，也不用替同小区成员承担得失。\n\n请记住：你的目标很单纯，就是为自己的账户争取最多的个人报酬。\n\n你能否在与B或C小区的资源较量中守住属于自己的份额，取决于你的个人努力。';
 
 let PILOTING = util.getUrlParameters().has('__pilotToken');
@@ -924,10 +924,10 @@ async function experimentInit() {
   text_8 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_8',
-    text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n    • 您所在小区的额外充电桩奖励与荣誉\n    • 您个人的实验报酬与互动小区的报酬额\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n请按空格键了解投票规则。',
+    text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n    • 您所在小区的额外充电桩奖励与荣誉\n    • 您个人的实验报酬与互动小区的报酬额\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n作为社区代表，您拥有 10 张选票。\n请按空格键了解投票规则。',
     font: 'STHeiti',
     units: undefined,
-    pos: [0, 0.16], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
+    pos: [0, 0], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
@@ -955,10 +955,10 @@ async function experimentInit() {
   text_7 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_7',
-    text: '【投票规则】\n\n我们采用票数兑换积分制。\n您需要决定将选票如何分配给三个选项：\n\n选项A：每投1票，自己加2分，其他成员不加分；\n\n选项B：每投1票，自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：每投1票，自己和A小区成员各加1分，互动小区成员各减1分。\n\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
+    text: '【投票规则】\n\n我们采用票数兑换积分制。\n您需要决定将这10票如何分配给三个选项：\n\n选项A：每投1票，自己加2分，其他成员不加分；\n\n选项B：每投1票，自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：每投1票，自己和A小区成员各加1分，互动小区成员各减1分。\n\n注意：10票可以分配给三个选项并且须全部投出，\n三个选项投票数之和必须等于10！\n\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
     font: 'STHeiti',
     units: 'height',
-    pos: [0, 0.18], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
+    pos: [0, 0], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
@@ -3763,7 +3763,6 @@ function voteRoutineBegin(snapshot) {
     voteComponents = [];
     voteComponents.push(info_frame);
     voteComponents.push(text_8);
-    voteComponents.push(vote_red_text);
     voteComponents.push(key_resp_9);
     
     for (const thisComponent of voteComponents)
@@ -3802,15 +3801,6 @@ function voteRoutineEachFrame() {
     
     // if text_8 is active this frame...
     if (text_8.status === PsychoJS.Status.STARTED) {
-    }
-    
-    // *vote_red_text* updates (红色突出10张选票)
-    if (t >= 0.0 && vote_red_text.status === PsychoJS.Status.NOT_STARTED) {
-      vote_red_text.tStart = t;
-      vote_red_text.frameNStart = frameN;
-      vote_red_text.setAutoDraw(true);
-    }
-    if (vote_red_text.status === PsychoJS.Status.STARTED) {
     }
     
     // *key_resp_9* updates
@@ -3923,7 +3913,6 @@ function ruleRoutineBegin(snapshot) {
     ruleComponents = [];
     ruleComponents.push(info_frame);
     ruleComponents.push(text_7);
-    ruleComponents.push(rule_red_text);
     ruleComponents.push(key_resp_8);
     
     for (const thisComponent of ruleComponents)
@@ -3962,15 +3951,6 @@ function ruleRoutineEachFrame() {
     
     // if text_7 is active this frame...
     if (text_7.status === PsychoJS.Status.STARTED) {
-    }
-    
-    // *rule_red_text* updates (红色突出10票注意事项)
-    if (t >= 0.0 && rule_red_text.status === PsychoJS.Status.NOT_STARTED) {
-      rule_red_text.tStart = t;
-      rule_red_text.frameNStart = frameN;
-      rule_red_text.setAutoDraw(true);
-    }
-    if (rule_red_text.status === PsychoJS.Status.STARTED) {
     }
     
     // *key_resp_8* updates
