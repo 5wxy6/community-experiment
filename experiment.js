@@ -1260,7 +1260,7 @@ async function experimentInit() {
   end_msg_text = new visual.TextStim({
     win: psychoJS.window,
     name: 'end_msg_text',
-    text: '所有实验任务已完成！\n感谢您的参与。\n您的表现对我们的研究非常重要。\n请告知实验员，或按空格键退出程序',
+    text: '所有实验任务已完成！\n感谢您的参与。\n您的表现对我们的研究非常重要。\n按空格键自动下载两份数据并发送给实验员。\n发送成功后您会得到实验报酬。',
     font: 'STHeiti',
     units: undefined, 
     pos: [0, 0], draggable: false, height: 0.04,  wrapWidth: 1.3, ori: 0.0,
