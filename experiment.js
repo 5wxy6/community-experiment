@@ -2712,12 +2712,6 @@ let Transition_Match_Clock, transition_match_text, transition_match_key;
 
 function Transition_Match_RoutineBegin(snapshot) {
   return async function () {
-    // 仅对group 2显示，其他组直接跳过
-    const current_group = Number.parseInt(expInfo["group"]);
-    if (current_group !== 2) {
-      return Scheduler.Event.NEXT;
-    }
-
     TrialHandler.fromSnapshot(snapshot);
     // 确保前序页面的画框不残留
     if (typeof info_frame !== 'undefined' && info_frame) info_frame.setAutoDraw(false);
@@ -2740,7 +2734,7 @@ function Transition_Match_RoutineBegin(snapshot) {
       text: '系统已为您重新匹配，\n\n您将和一个全新的 C 小区互动。',
       font: 'STHeiti',
       units: undefined,
-      pos: [0, 0], draggable: false, height: 0.05, wrapWidth: 1.2, ori: 0.0,
+      pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 1.4, ori: 0.0,
       languageStyle: 'LTR',
       color: new util.Color('black'), opacity: undefined,
       depth: 0.0
@@ -2749,6 +2743,7 @@ function Transition_Match_RoutineBegin(snapshot) {
     transition_match_key = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
 
     Transition_Match_Components = [];
+    Transition_Match_Components.push(info_frame);
     Transition_Match_Components.push(transition_match_text);
     Transition_Match_Components.push(transition_match_key);
 
@@ -2762,13 +2757,15 @@ function Transition_Match_RoutineBegin(snapshot) {
 
 function Transition_Match_RoutineEachFrame() {
   return async function () {
-    const current_group = Number.parseInt(expInfo["group"]);
-    if (current_group !== 2) {
-      return Scheduler.Event.NEXT;
-    }
-
     t = Transition_Match_Clock.getTime();
     frameN = frameN + 1;
+
+    // 画框
+    if (t >= 0.0 && info_frame.status === PsychoJS.Status.NOT_STARTED) {
+      info_frame.tStart = t;
+      info_frame.frameNStart = frameN;
+      info_frame.setAutoDraw(true);
+    }
 
     // 更新文本
     if (t >= 0.0 && transition_match_text.status === PsychoJS.Status.NOT_STARTED) {
@@ -2818,16 +2815,14 @@ function Transition_Match_RoutineEachFrame() {
 
 function Transition_Match_RoutineEnd(snapshot) {
   return async function () {
-    const current_group = Number.parseInt(expInfo["group"]);
-    if (current_group !== 2) {
-      return Scheduler.Event.NEXT;
-    }
-
     if (transition_match_text) {
       transition_match_text.setAutoDraw(false);
     }
     if (transition_match_key) {
       transition_match_key.stop();
+    }
+    if (typeof info_frame !== 'undefined' && info_frame) {
+      info_frame.setAutoDraw(false);
     }
 
     routineTimer.reset();
@@ -3413,6 +3408,7 @@ function secondRoutineBegin(snapshot) {
     secondMaxDuration = null
     // keep track of which components have finished
     secondComponents = [];
+    secondComponents.push(info_frame);
     secondComponents.push(text_3);
     secondComponents.push(key_resp_6);
     
@@ -3431,6 +3427,15 @@ function secondRoutineEachFrame() {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     
+    // *info_frame* updates
+    if (t >= 0.0 && info_frame.status === PsychoJS.Status.NOT_STARTED) {
+      info_frame.tStart = t;
+      info_frame.frameNStart = frameN;
+      info_frame.setAutoDraw(true);
+    }
+    if (info_frame.status === PsychoJS.Status.STARTED) {
+    }
+
     // *text_3* updates
     if (t >= 0.0 && text_3.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
