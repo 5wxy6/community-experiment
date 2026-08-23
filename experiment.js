@@ -32,8 +32,8 @@ let expInfo = {
 };
 
 // 认知框架操纵文本（模块级常量，供 Framing_Routine 使用）
-const FRAMING_TEXT_GROUP = '未来社区中有（A、B、C）三个小区，从现在起，你将以（A小区）一员的身份参与社区资源分配。你与 A 小区的其他成员同属一个休戚与共的集体——你们的得失被绑在一起，A小区所有成员的表现将汇总为A小区团队总收益。\n请记住:你不是孤身一人。你的每一次选择，都直接关系到整个A小区的集体荣誉与共同命运。我们能否在与B或C小区的资源较量中守住属于我们的份额，取决于团队每一个人的共同努力。';
-const FRAMING_TEXT_INDIV = '未来社区中有（A、B、C）三个小区，从现在起，你将以（A小区）一员的身份参与社区资源分配。\n从现在起，你将作为独立个体参与资源分配。本次任务采取个人绩评估算——你的报酬完全取决于你个人的得分，与团队中其他任何成员无关。你不需要为别人考虑，也不用替同小区成员承担得失。\n请记住:你的目标很单纯，就是为自己的账户争取最多的个人报酬。你能否在与B或C小区的资源较量中守住属于自己的份额，取决于你的个人努力。';
+const FRAMING_TEXT_GROUP = '你与 A 小区的其他成员同属一个休戚与共的集体——你们的得失被绑在一起，A小区所有成员的表现将汇总为A小区团队总收益。\n\n请记住：你不是孤身一人。\n\n你的每一次选择，都直接关系到整个A小区的集体荣誉与共同命运。\n\n我们能否在与B或C小区的资源较量中守住属于我们的份额，取决于团队每一个人的共同努力。';
+const FRAMING_TEXT_INDIV = '从现在起，你将作为独立个体参与资源分配。\n\n本次任务采取个人绩评估算——你的报酬完全取决于你个人的得分，与团队中其他任何成员无关。\n\n你不需要为别人考虑，也不用替同小区成员承担得失。\n\n请记住：你的目标很单纯，就是为自己的账户争取最多的个人报酬。\n\n你能否在与B或C小区的资源较量中守住属于自己的份额，取决于你的个人努力。';
 
 let PILOTING = util.getUrlParameters().has('__pilotToken');
 let currentLoop;
@@ -53,6 +53,7 @@ let text_5, instr_text, svo_intro_text, svo_text, self_display, other_display;
 let text_left, text_right, quota_instruction, opponent_reminder_struggle;
 let framing_text, key_resp_framing, framing_mc_text, framing_mc_slider;
 let framing_frame, framing_icon, framing_hint;
+let info_frame;
 let warning_text_struggle, input_quota, submit_btn_struggle;
 let round_info_struggle, intro_text_emotion;
 let emotion_text_anger_1, emotion_text_anger_2, emotion_text_anger_3, emotion_text_anger_4, emotion_text_anger_5;
@@ -296,6 +297,24 @@ async function experimentInit() {
   
   key_resp_7 = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
+  // 通用说明页画框（供欢迎页、背景介绍、情绪介绍、过渡页、投票介绍/规则等页面复用）
+  info_frame = new visual.Rect({
+    win: psychoJS.window,
+    name: 'info_frame',
+    width: 1.65, height: 0.72,
+    ori: 0.0,
+    pos: [0, 0],
+    draggable: false,
+    anchor: 'center',
+    lineWidth: 2.0,
+    lineColor: new util.Color('#888888'),
+    fillColor: new util.Color('#f8f8f8'),
+    colorSpace: 'rgb',
+    opacity: undefined,
+    depth: -1.0,
+    interpolate: true,
+  });
+  
   // Initialize components for Routine "Instruction_Routine"
   Instruction_RoutineClock = new util.Clock();
   instr_text = new visual.TextStim({
@@ -324,7 +343,7 @@ async function experimentInit() {
     text: '',
     font: 'STHeiti',
     units: 'height',
-    pos: [0, 0.02], draggable: false, height: 0.027, wrapWidth: 1.35, ori: 0.0,
+    pos: [0, 0], draggable: false, height: 0.026, wrapWidth: 1.25, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
@@ -336,7 +355,7 @@ async function experimentInit() {
   framing_frame = new visual.Rect({
     win: psychoJS.window,
     name: 'framing_frame',
-    width: 1.55, height: 0.68,
+    width: 1.65, height: 0.72,
     ori: 0.0,
     pos: [0, 0],
     draggable: false,
@@ -1253,6 +1272,7 @@ function firstRoutineBegin(snapshot) {
     firstMaxDuration = null
     // keep track of which components have finished
     firstComponents = [];
+    firstComponents.push(info_frame);
     firstComponents.push(text_5);
     firstComponents.push(key_resp_7);
     
@@ -1271,6 +1291,15 @@ function firstRoutineEachFrame() {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     
+    // *info_frame* updates (说明页画框)
+    if (t >= 0.0 && info_frame.status === PsychoJS.Status.NOT_STARTED) {
+      info_frame.tStart = t;
+      info_frame.frameNStart = frameN;
+      info_frame.setAutoDraw(true);
+    }
+    if (info_frame.status === PsychoJS.Status.STARTED) {
+    }
+
     // *text_5* updates
     if (t >= 0.0 && text_5.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -1398,6 +1427,7 @@ function Instruction_RoutineRoutineBegin(snapshot) {
     Instruction_RoutineMaxDuration = null
     // keep track of which components have finished
     Instruction_RoutineComponents = [];
+    Instruction_RoutineComponents.push(info_frame);
     Instruction_RoutineComponents.push(instr_text);
     Instruction_RoutineComponents.push(key_resp);
     
@@ -1416,6 +1446,15 @@ function Instruction_RoutineRoutineEachFrame() {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     
+    // *info_frame* updates
+    if (t >= 0.0 && info_frame.status === PsychoJS.Status.NOT_STARTED) {
+      info_frame.tStart = t;
+      info_frame.frameNStart = frameN;
+      info_frame.setAutoDraw(true);
+    }
+    if (info_frame.status === PsychoJS.Status.STARTED) {
+    }
+
     // *instr_text* updates
     if (t >= 0.0 && instr_text.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -2828,6 +2867,7 @@ function Emotion_IntroRoutineBegin(snapshot) {
     Emotion_IntroMaxDuration = null
     // keep track of which components have finished
     Emotion_IntroComponents = [];
+    Emotion_IntroComponents.push(info_frame);
     Emotion_IntroComponents.push(intro_text_emotion);
     Emotion_IntroComponents.push(intro_key_emotion);
     
@@ -2846,6 +2886,15 @@ function Emotion_IntroRoutineEachFrame() {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     
+    // *info_frame* updates
+    if (t >= 0.0 && info_frame.status === PsychoJS.Status.NOT_STARTED) {
+      info_frame.tStart = t;
+      info_frame.frameNStart = frameN;
+      info_frame.setAutoDraw(true);
+    }
+    if (info_frame.status === PsychoJS.Status.STARTED) {
+    }
+
     // *intro_text_emotion* updates
     if (t >= 0.0 && intro_text_emotion.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -3519,6 +3568,7 @@ function Transition_RoutineRoutineBegin(snapshot) {
     Transition_RoutineMaxDuration = null
     // keep track of which components have finished
     Transition_RoutineComponents = [];
+    Transition_RoutineComponents.push(info_frame);
     Transition_RoutineComponents.push(transition_msg);
     Transition_RoutineComponents.push(key_resp_3);
     
@@ -3537,6 +3587,15 @@ function Transition_RoutineRoutineEachFrame() {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     
+    // *info_frame* updates
+    if (t >= 0.0 && info_frame.status === PsychoJS.Status.NOT_STARTED) {
+      info_frame.tStart = t;
+      info_frame.frameNStart = frameN;
+      info_frame.setAutoDraw(true);
+    }
+    if (info_frame.status === PsychoJS.Status.STARTED) {
+    }
+
     // *transition_msg* updates
     if (t >= 0.0 && transition_msg.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -3660,6 +3719,7 @@ function voteRoutineBegin(snapshot) {
     voteMaxDuration = null
     // keep track of which components have finished
     voteComponents = [];
+    voteComponents.push(info_frame);
     voteComponents.push(text_8);
     voteComponents.push(key_resp_9);
     
@@ -3678,6 +3738,15 @@ function voteRoutineEachFrame() {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     
+    // *info_frame* updates
+    if (t >= 0.0 && info_frame.status === PsychoJS.Status.NOT_STARTED) {
+      info_frame.tStart = t;
+      info_frame.frameNStart = frameN;
+      info_frame.setAutoDraw(true);
+    }
+    if (info_frame.status === PsychoJS.Status.STARTED) {
+    }
+
     // *text_8* updates
     if (t >= 0.0 && text_8.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -3801,6 +3870,7 @@ function ruleRoutineBegin(snapshot) {
     ruleMaxDuration = null
     // keep track of which components have finished
     ruleComponents = [];
+    ruleComponents.push(info_frame);
     ruleComponents.push(text_7);
     ruleComponents.push(key_resp_8);
     
@@ -3819,6 +3889,15 @@ function ruleRoutineEachFrame() {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     
+    // *info_frame* updates
+    if (t >= 0.0 && info_frame.status === PsychoJS.Status.NOT_STARTED) {
+      info_frame.tStart = t;
+      info_frame.frameNStart = frameN;
+      info_frame.setAutoDraw(true);
+    }
+    if (info_frame.status === PsychoJS.Status.STARTED) {
+    }
+
     // *text_7* updates
     if (t >= 0.0 && text_7.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
