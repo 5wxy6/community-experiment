@@ -2719,6 +2719,9 @@ function Transition_Match_RoutineBegin(snapshot) {
     }
 
     TrialHandler.fromSnapshot(snapshot);
+    // 确保前序页面的画框不残留
+    if (typeof info_frame !== 'undefined' && info_frame) info_frame.setAutoDraw(false);
+    if (typeof framing_frame !== 'undefined' && framing_frame) framing_frame.setAutoDraw(false);
     t = 0;
     frameN = -1;
     continueRoutine = true;
@@ -3391,6 +3394,9 @@ function secondRoutineBegin(snapshot) {
     TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
     
     //--- Prepare to start Routine 'second' ---
+    // 确保前序页面的画框不残留
+    if (typeof info_frame !== 'undefined' && info_frame) info_frame.setAutoDraw(false);
+    if (typeof framing_frame !== 'undefined' && framing_frame) framing_frame.setAutoDraw(false);
     t = 0;
     frameN = -1;
     continueRoutine = true; // until we're told otherwise
@@ -4005,6 +4011,9 @@ function Decision_RoutineRoutineBegin(snapshot) {
     TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
     
     //--- Prepare to start Routine 'Decision_Routine' ---
+    // 确保前序页面的画框不残留
+    if (typeof info_frame !== 'undefined' && info_frame) info_frame.setAutoDraw(false);
+    if (typeof framing_frame !== 'undefined' && framing_frame) framing_frame.setAutoDraw(false);
     t = 0;
     frameN = -1;
     continueRoutine = true; // until we're told otherwise
@@ -4409,6 +4418,9 @@ function Round_FeedbackRoutineBegin(snapshot) {
     TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
     
     //--- Prepare to start Routine 'Round_Feedback' ---
+    // 确保前序页面的画框不残留
+    if (typeof info_frame !== 'undefined' && info_frame) info_frame.setAutoDraw(false);
+    if (typeof framing_frame !== 'undefined' && framing_frame) framing_frame.setAutoDraw(false);
     t = 0;
     frameN = -1;
     continueRoutine = true; // until we're told otherwise
