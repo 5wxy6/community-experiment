@@ -62,6 +62,7 @@ let emotion_text_solid_1, emotion_text_solid_2, emotion_text_solid_3, emotion_te
 let emotion_slider_solid_1, emotion_slider_solid_2, emotion_slider_solid_3, emotion_slider_solid_4, emotion_slider_solid_5;
 let intro_key_emotion, final_confirm_btn, transition_msg;
 let text_2, text_3, text_4, text_7, text_8;
+let vote_red_text, rule_red_text;
 let end_msg_text, end_key, feedback_text, round_info, feedback_display;
 let pool_A_shape, pool_B_shape, pool_C_shape, input_A, input_B, input_C;
 let label_A, label_B, label_C, opponent_reminder, submit_btn;
@@ -923,7 +924,7 @@ async function experimentInit() {
   text_8 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_8',
-    text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n    • 您所在小区的额外充电桩奖励与荣誉\n    • 您个人的实验报酬与互动小区的报酬额\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n作为社区代表，您拥有 10 张选票。\n请按空格键了解投票规则。',
+    text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n    • 您所在小区的额外充电桩奖励与荣誉\n    • 您个人的实验报酬与互动小区的报酬额\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n请按空格键了解投票规则。',
     font: 'STHeiti',
     units: undefined,
     pos: [0, 0], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
@@ -933,6 +934,20 @@ async function experimentInit() {
     color: new util.Color('black'), opacity: undefined, depth: 0.0
   });
   
+  // 投票活动介绍页 - 红色突出"10张选票"
+  vote_red_text = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'vote_red_text',
+    text: '作为社区代表，您拥有 10 张选票。',
+    font: 'STHeiti',
+    units: undefined,
+    pos: [0, 0.08], draggable: false, height: 0.032, wrapWidth: 1.4, ori: 0.0,
+    anchor: 'center',
+    alignText: 'center',
+    languageStyle: 'LTR',
+    color: new util.Color('red'), opacity: undefined, depth: -1.0
+  });
+  
   key_resp_9 = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
   // Initialize components for Routine "rule"
@@ -940,7 +955,7 @@ async function experimentInit() {
   text_7 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_7',
-    text: '【投票规则】\n\n我们采用票数兑换积分制。\n您需要决定将这10票如何分配给三个选项：\n\n选项A：每投1票，自己加2分，其他成员不加分；\n\n选项B：每投1票，自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：每投1票，自己和A小区成员各加1分，互动小区成员各减1分。\n\n注意：10票可以分配给三个选项并且须全部投出，\n三个选项投票数之和必须等于10！\n\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
+    text: '【投票规则】\n\n我们采用票数兑换积分制。\n您需要决定将选票如何分配给三个选项：\n\n选项A：每投1票，自己加2分，其他成员不加分；\n\n选项B：每投1票，自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：每投1票，自己和A小区成员各加1分，互动小区成员各减1分。\n\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
     font: 'STHeiti',
     units: 'height',
     pos: [0, 0], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
@@ -950,6 +965,22 @@ async function experimentInit() {
     color: new util.Color('black'), opacity: undefined, 
     lineSpacing: 1.6, 
     depth: 0.0,
+  });
+  
+  // 投票规则页 - 红色突出"10票"注意事项
+  rule_red_text = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'rule_red_text',
+    text: '注意：共10票，可分配给三个选项且须全部投出，\n三个选项投票数之和必须等于10！',
+    font: 'STHeiti',
+    units: 'height',
+    pos: [0, 0.06], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
+    anchor: 'center',
+    alignText: 'center',
+    languageStyle: 'LTR',
+    color: new util.Color('red'), opacity: undefined,
+    lineSpacing: 1.5,
+    depth: -1.0,
   });
   
   key_resp_8 = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
@@ -1141,8 +1172,8 @@ async function experimentInit() {
     name: 'submit_btn',
     text: '提交',
     font: 'STHeiti',
-    pos: [0, (- 0.42)],
-    size: [0.3, 0.08],
+    pos: [0, (- 0.46)],
+    size: [0.2, 0.06],
     padding: null,
     anchor: 'center',
     ori: 0.0,
@@ -1154,7 +1185,7 @@ async function experimentInit() {
     borderWidth: 0.0,
     opacity: null,
     depth: -10,
-    letterHeight: 0.05,
+    letterHeight: 0.035,
     bold: true,
     italic: false,
   });
@@ -2731,7 +2762,7 @@ function Transition_Match_RoutineBegin(snapshot) {
     transition_match_text = new visual.TextStim({
       win: psychoJS.window,
       name: 'transition_match_text',
-      text: '系统已为您重新匹配，\n\n您将和一个全新的 C 小区互动。',
+      text: '系统已为您重新匹配，\n\n您将和一个全新的 C 小区互动。\n\n（按空格键继续）',
       font: 'STHeiti',
       units: undefined,
       pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 1.4, ori: 0.0,
@@ -3732,6 +3763,7 @@ function voteRoutineBegin(snapshot) {
     voteComponents = [];
     voteComponents.push(info_frame);
     voteComponents.push(text_8);
+    voteComponents.push(vote_red_text);
     voteComponents.push(key_resp_9);
     
     for (const thisComponent of voteComponents)
@@ -3772,6 +3804,14 @@ function voteRoutineEachFrame() {
     if (text_8.status === PsychoJS.Status.STARTED) {
     }
     
+    // *vote_red_text* updates (红色突出10张选票)
+    if (t >= 0.0 && vote_red_text.status === PsychoJS.Status.NOT_STARTED) {
+      vote_red_text.tStart = t;
+      vote_red_text.frameNStart = frameN;
+      vote_red_text.setAutoDraw(true);
+    }
+    if (vote_red_text.status === PsychoJS.Status.STARTED) {
+    }
     
     // *key_resp_9* updates
     if (t >= 0.0 && key_resp_9.status === PsychoJS.Status.NOT_STARTED) {
@@ -3883,6 +3923,7 @@ function ruleRoutineBegin(snapshot) {
     ruleComponents = [];
     ruleComponents.push(info_frame);
     ruleComponents.push(text_7);
+    ruleComponents.push(rule_red_text);
     ruleComponents.push(key_resp_8);
     
     for (const thisComponent of ruleComponents)
@@ -3923,6 +3964,14 @@ function ruleRoutineEachFrame() {
     if (text_7.status === PsychoJS.Status.STARTED) {
     }
     
+    // *rule_red_text* updates (红色突出10票注意事项)
+    if (t >= 0.0 && rule_red_text.status === PsychoJS.Status.NOT_STARTED) {
+      rule_red_text.tStart = t;
+      rule_red_text.frameNStart = frameN;
+      rule_red_text.setAutoDraw(true);
+    }
+    if (rule_red_text.status === PsychoJS.Status.STARTED) {
+    }
     
     // *key_resp_8* updates
     if (t >= 0.0 && key_resp_8.status === PsychoJS.Status.NOT_STARTED) {
