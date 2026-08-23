@@ -207,6 +207,8 @@ window.startExperiment = async function(formData) {
   if (formData) {
     expInfo['participant'] = formData.participant;
     expInfo['session'] = formData.session;
+    expInfo['gender'] = formData.gender;
+    expInfo['age'] = formData.age;
     expInfo['group'] = formData.group;
   }
 
@@ -241,6 +243,8 @@ async function updateInfo() {
   if (window.expInfoOverride) {
     expInfo['participant'] = window.expInfoOverride.participant;
     expInfo['session'] = window.expInfoOverride.session;
+    expInfo['gender'] = window.expInfoOverride.gender;
+    expInfo['age'] = window.expInfoOverride.age;
     expInfo['group'] = window.expInfoOverride.group;
   }
 
