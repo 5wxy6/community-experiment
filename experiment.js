@@ -164,9 +164,6 @@ flowScheduler.add(Conflict_RoutineRoutineEnd());
 flowScheduler.add(Framing_RoutineRoutineBegin());
 flowScheduler.add(Framing_RoutineRoutineEachFrame());
 flowScheduler.add(Framing_RoutineRoutineEnd());
-flowScheduler.add(Framing_Check_RoutineRoutineBegin());
-flowScheduler.add(Framing_Check_RoutineRoutineEachFrame());
-flowScheduler.add(Framing_Check_RoutineRoutineEnd());
 flowScheduler.add(Emotion_IntroRoutineBegin());
 flowScheduler.add(Emotion_IntroRoutineEachFrame());
 flowScheduler.add(Emotion_IntroRoutineEnd());
@@ -322,13 +319,13 @@ async function experimentInit() {
     text: '',
     font: 'STHeiti',
     units: 'height',
-    pos: [0, 0.12], draggable: false, height: 0.032, wrapWidth: 0.92, ori: 0.0,
+    pos: [0, 0.05], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
     color: new util.Color('black'),  opacity: undefined,
     depth: -1.0,
-    lineSpacing: 1.5
+    lineSpacing: 1.6
   });
   key_resp_framing = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
@@ -337,21 +334,21 @@ async function experimentInit() {
   framing_mc_text = new visual.TextStim({
     win: psychoJS.window,
     name: 'framing_mc_text',
-    text: '操纵检验：读上面的文字后，它引导你更关注？\n（1 = 个人得分/个人利益，7 = 团队总收益/集体荣誉）\n请拖动下方滑块，松手即记录',
+    text: '读了上面的文字后，它引导你更关注？\n（1 = 个人得分/个人利益，7 = 团队总收益/集体荣誉）\n请拖动下方滑块，松手即记录',
     font: 'STHeiti',
     units: 'height',
-    pos: [0, -0.28], draggable: false, height: 0.03, wrapWidth: 1.2, ori: 0.0,
+    pos: [0, 0.15], draggable: false, height: 0.032, wrapWidth: 1.4, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
     color: new util.Color('black'),  opacity: undefined,
     depth: -1.0,
-    lineSpacing: 1.4
+    lineSpacing: 1.5
   });
   framing_mc_slider = new visual.Slider({
     win: psychoJS.window, name: 'framing_mc_slider',
     startValue: undefined,
-    size: [0.9, 0.08], pos: [0, (- 0.5)], ori: 0.0, units: psychoJS.window.units,
+    size: [0.9, 0.08], pos: [0, (- 0.15)], ori: 0.0, units: psychoJS.window.units,
     labels: ["1\n个人", "7\n团队"], fontSize: 0.03, ticks: [1, 2, 3, 4, 5, 6, 7],
     granularity: 1.0, style: ["RATING", "LABELS_45", "TRIANGLE_MARKER"],
     color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'), opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -6,
