@@ -32,8 +32,8 @@ let expInfo = {
 };
 
 // 认知框架操纵文本（模块级常量，供 Framing_Routine 使用）
-const FRAMING_TEXT_GROUP = '你与A小区的其他成员同属一个休戚与共的集体。\n\n你们的得失被绑在一起，A小区所有成员的表现将汇总为A小区团队总收益。\n\n你的每一次选择，都关系到整个A小区的集体荣誉与共同命运。\n\n你的目标是为整个A小区争取更多的报酬。\n\你们能否在与B或C小区的资源较量中守住属于你们的份额，取决于团队每一个人的共同努力。';
-const FRAMING_TEXT_INDIV = '从现在起，你将作为独立个体参与资源分配。\n\n本次任务采取个人绩评估算——你的报酬完全取决于你个人的得分，与团队中其他任何成员无关。\n\n你不需要为别人考虑，也不用替同小区成员承担得失。\n\n你的目标是为自己的账户争取更多的个人报酬。\n\n你能否在与B或C小区的资源较量中守住属于自己的份额，取决于你的个人努力。';
+const FRAMING_TEXT_GROUP = '你与 A 小区的其他成员同属一个休戚与共的集体——你们的得失被绑在一起，A小区所有成员的表现将汇总为A小区团队总收益。\n\n请记住：你不是孤身一人。\n\n你的每一次选择，都直接关系到整个A小区的集体荣誉与共同命运。\n\n我们能否在与B或C小区的资源较量中守住属于我们的份额，取决于团队每一个人的共同努力。';
+const FRAMING_TEXT_INDIV = '从现在起，你将作为独立个体参与资源分配。\n\n本次任务采取个人绩评估算——你的报酬完全取决于你个人的得分，与团队中其他任何成员无关。\n\n你不需要为别人考虑，也不用替同小区成员承担得失。\n\n请记住：你的目标很单纯，就是为自己的账户争取最多的个人报酬。\n\n你能否在与B或C小区的资源较量中守住属于自己的份额，取决于你的个人努力。';
 
 let PILOTING = util.getUrlParameters().has('__pilotToken');
 let currentLoop;
@@ -302,7 +302,7 @@ async function experimentInit() {
   info_frame = new visual.Rect({
     win: psychoJS.window,
     name: 'info_frame',
-    width: 1.65, height: 0.72,
+    width: 1.5, height: 0.65,
     ori: 0.0,
     pos: [0, 0],
     draggable: false,
@@ -927,7 +927,7 @@ async function experimentInit() {
     text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n    • 您所在小区的额外充电桩奖励与荣誉\n    • 您个人的实验报酬与互动小区的报酬额\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n请按空格键了解投票规则。',
     font: 'STHeiti',
     units: undefined,
-    pos: [0, 0], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
+    pos: [0, 0.16], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
@@ -941,7 +941,7 @@ async function experimentInit() {
     text: '作为社区代表，您拥有 10 张选票。',
     font: 'STHeiti',
     units: undefined,
-    pos: [0, 0.08], draggable: false, height: 0.032, wrapWidth: 1.4, ori: 0.0,
+    pos: [0, -0.16], draggable: false, height: 0.032, wrapWidth: 1.4, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
@@ -958,7 +958,7 @@ async function experimentInit() {
     text: '【投票规则】\n\n我们采用票数兑换积分制。\n您需要决定将选票如何分配给三个选项：\n\n选项A：每投1票，自己加2分，其他成员不加分；\n\n选项B：每投1票，自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：每投1票，自己和A小区成员各加1分，互动小区成员各减1分。\n\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
     font: 'STHeiti',
     units: 'height',
-    pos: [0, 0], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
+    pos: [0, 0.18], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
@@ -974,7 +974,7 @@ async function experimentInit() {
     text: '注意：共10票，可分配给三个选项且须全部投出，\n三个选项投票数之和必须等于10！',
     font: 'STHeiti',
     units: 'height',
-    pos: [0, 0.06], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
+    pos: [0, -0.08], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
