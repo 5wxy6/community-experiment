@@ -32,8 +32,8 @@ let expInfo = {
 };
 
 // 认知框架操纵文本（模块级常量，供 Framing_Routine 使用）
-const FRAMING_TEXT_GROUP = '【第二阶段 · 任务说明】\n\n未来社区中有（A、B、C）三个小区，从现在起，你将以（A小区）一员的身份参与社区资源分配。你与 A 小区的其他成员同属一个休戚与共的集体——你们的得失被绑在一起，A小区所有成员的表现将汇总为A小区团队总收益。\n请记住:你不是孤身一人。你的每一次选择，都直接关系到整个A小区的集体荣誉与共同命运。我们能否在与B或C小区的资源较量中守住属于我们的份额，取决于团队每一个人的共同努力。\n\n（读完后请按空格键继续）';
-const FRAMING_TEXT_INDIV = '【第二阶段 · 任务说明】\n\n未来社区中有（A、B、C）三个小区，从现在起，你将以（A小区）一员的身份参与社区资源分配。\n从现在起，你将作为独立个体参与资源分配。本次任务采取个人绩评估算——你的报酬完全取决于你个人的得分，与团队中其他任何成员无关。你不需要为别人考虑，也不用替同小区成员承担得失。\n请记住:你的目标很单纯，就是为自己的账户争取最多的个人报酬。你能否在与B或C小区的资源较量中守住属于自己的份额，取决于你的个人努力。\n\n（读完后请按空格键继续）';
+const FRAMING_TEXT_GROUP = '未来社区中有（A、B、C）三个小区，从现在起，你将以（A小区）一员的身份参与社区资源分配。你与 A 小区的其他成员同属一个休戚与共的集体——你们的得失被绑在一起，A小区所有成员的表现将汇总为A小区团队总收益。\n请记住:你不是孤身一人。你的每一次选择，都直接关系到整个A小区的集体荣誉与共同命运。我们能否在与B或C小区的资源较量中守住属于我们的份额，取决于团队每一个人的共同努力。';
+const FRAMING_TEXT_INDIV = '未来社区中有（A、B、C）三个小区，从现在起，你将以（A小区）一员的身份参与社区资源分配。\n从现在起，你将作为独立个体参与资源分配。本次任务采取个人绩评估算——你的报酬完全取决于你个人的得分，与团队中其他任何成员无关。你不需要为别人考虑，也不用替同小区成员承担得失。\n请记住:你的目标很单纯，就是为自己的账户争取最多的个人报酬。你能否在与B或C小区的资源较量中守住属于自己的份额，取决于你的个人努力。';
 
 let PILOTING = util.getUrlParameters().has('__pilotToken');
 let currentLoop;
@@ -52,6 +52,7 @@ let Round_FeedbackClock, Experiment_EndClock;
 let text_5, instr_text, svo_intro_text, svo_text, self_display, other_display;
 let text_left, text_right, quota_instruction, opponent_reminder_struggle;
 let framing_text, key_resp_framing, framing_mc_text, framing_mc_slider;
+let framing_frame, framing_icon, framing_hint;
 let warning_text_struggle, input_quota, submit_btn_struggle;
 let round_info_struggle, intro_text_emotion;
 let emotion_text_anger_1, emotion_text_anger_2, emotion_text_anger_3, emotion_text_anger_4, emotion_text_anger_5;
@@ -284,12 +285,12 @@ async function experimentInit() {
     win: psychoJS.window,
     text: '欢迎参加我们的社区互动实验\n\n你将处于一个未来社区中，社区里共有A、B、C三个小区。\n这是一个旨在通过数字化手段实现资源共享的现代化社区。\n在这里，所有的公共设施——包括绿地、健身房以及电力资源，\n都由社区内的居民共同管理与维护。\n您将作为某一小区的居民，在本次活动中完成几个社区任务。\n准备好后按空格键继续。\n如有问题请联系实验人员。',
     font: 'STHeiti',
-    pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
+    pos: [0, 0], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
     color: new util.Color('black'),  opacity: undefined,
-    lineSpacing: 1.5, 
+    lineSpacing: 1.6, 
     depth: -1.0 
   });
   
@@ -303,7 +304,7 @@ async function experimentInit() {
     text: '【背景介绍】请仔细阅读\n\n按照社区规划，A小区与B小区共同使用社区共享充电站。\n\n随着新能源汽车普及，\n两小区新能源车数量快速增长，\n充电需求大致相当。\n而充电桩容量有限，\n该充电站共20个充电桩，\n不能完全满足两小区需求。\n物业决定征求成员意见来决定最终分配方案。\n\n注意：您被随机分配为A小区成员，您的决策将影响您个人、同小区成员及B小区成员的利益。\n\n了解后请按空格键继续',
     font: 'STHeiti',
     units: 'height',
-    pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
+    pos: [0, 0], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
@@ -323,13 +324,58 @@ async function experimentInit() {
     text: '',
     font: 'STHeiti',
     units: 'height',
-    pos: [0, 0.05], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
+    pos: [0, 0.02], draggable: false, height: 0.027, wrapWidth: 1.35, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
     color: new util.Color('black'),  opacity: undefined,
-    depth: -1.0,
+    depth: -2.0,
     lineSpacing: 1.6
+  });
+  // 画框（大矩形边框）
+  framing_frame = new visual.Rect({
+    win: psychoJS.window,
+    name: 'framing_frame',
+    width: 1.55, height: 0.68,
+    ori: 0.0,
+    pos: [0, 0],
+    draggable: false,
+    anchor: 'center',
+    lineWidth: 2.5,
+    lineColor: new util.Color('#555555'),
+    fillColor: new util.Color('#f5f5f5'),
+    colorSpace: 'rgb',
+    opacity: undefined,
+    depth: -1.0,
+    interpolate: true,
+  });
+  // 消息通知图标
+  framing_icon = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'framing_icon',
+    text: '📢',
+    font: 'STHeiti',
+    units: 'height',
+    pos: [0, 0.42], draggable: false, height: 0.055, wrapWidth: undefined, ori: 0.0,
+    anchor: 'center',
+    alignText: 'center',
+    languageStyle: 'LTR',
+    color: new util.Color('black'), opacity: undefined,
+    depth: -3.0,
+  });
+  // 底部提示文字
+  framing_hint = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'framing_hint',
+    text: '（读完后请按空格键继续）',
+    font: 'STHeiti',
+    units: 'height',
+    pos: [0, -0.42], draggable: false, height: 0.028, wrapWidth: undefined, ori: 0.0,
+    anchor: 'center',
+    alignText: 'center',
+    languageStyle: 'LTR',
+    color: new util.Color('#666666'), opacity: undefined,
+    depth: -4.0,
   });
   key_resp_framing = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
@@ -491,7 +537,7 @@ async function experimentInit() {
     text: '【充电桩配额决策】\n\n社区充电站共有20个充电桩\n供A、B小区划分使用。\n\n请决定您希望A小区能拥有多少个充电桩。\n\n输入范围：0-20\n（0=没有，20=全部拥有）',
     font: 'STHeiti',
     units: undefined,
-    pos: [0, 0.15], draggable: false, height: 0.032, wrapWidth: 0.8, ori: 0.0,
+    pos: [0, 0.18], draggable: false, height: 0.03, wrapWidth: 1.2, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
@@ -597,7 +643,7 @@ async function experimentInit() {
     text: '接下来，我们需要了解您在刚才互动后的真实感受。\n选项无好坏之分，请按真实感受填写。\n请根据接下来的题目要求，选择最符合您当前状态的选项。\n\n【说明】\n1 = 非常不认同\n2 = 比较不认同\n3 = 有点不认同\n4 = 不确定\n5 = 有点认同\n6 = 比较认同\n7 = 非常认同\n\n点击对应的数字分值完成选择\n\n准备好了请按空格键开始。',
     font: 'STHeiti',
     units: undefined,
-    pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
+    pos: [0, 0], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
@@ -845,7 +891,7 @@ async function experimentInit() {
     text: '\n\n很遗憾！社区充电桩竞争激烈\n\n你所在的A小区并未争取到大部分的充电桩使用权限\n\n接下来你将会随机与未来社区中的某一小区（B小区或C小区）\n\n进行最后一个社区任务\n\n了解以上信息后请按空格键查看接下来的内容',
     font: 'STHeiti',
     units: undefined, 
-    pos: [0, 0.0], draggable: false, height: 0.04,  wrapWidth: 0.8, ori: 0.0,
+    pos: [0, 0.0], draggable: false, height: 0.032,  wrapWidth: 1.4, ori: 0.0,
     languageStyle: 'LTR',
     color: new util.Color('black'),  opacity: undefined,
     depth: -1.0 
@@ -861,7 +907,7 @@ async function experimentInit() {
     text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n    • 您所在小区的额外充电桩奖励与荣誉\n    • 您个人的实验报酬与互动小区的报酬额\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n作为社区代表，您拥有 10 张选票。\n请按空格键了解投票规则。',
     font: 'STHeiti',
     units: undefined,
-    pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
+    pos: [0, 0], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
@@ -878,12 +924,12 @@ async function experimentInit() {
     text: '【投票规则】\n\n我们采用票数兑换积分制。\n您需要决定将这10票如何分配给三个选项：\n\n选项A：每投1票，自己加2分，其他成员不加分；\n\n选项B：每投1票，自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：每投1票，自己和A小区成员各加1分，互动小区成员各减1分。\n\n注意：10票可以分配给三个选项并且须全部投出，\n三个选项投票数之和必须等于10！\n\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
     font: 'STHeiti',
     units: 'height',
-    pos: [0, 0], draggable: false, height: 0.035, wrapWidth: 0.9, ori: 0.0,
+    pos: [0, 0], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
     anchor: 'center',
     alignText: 'center',
     languageStyle: 'LTR',
     color: new util.Color('black'), opacity: undefined, 
-    lineSpacing: 1.5, 
+    lineSpacing: 1.6, 
     depth: 0.0,
   });
   
@@ -1489,7 +1535,10 @@ function Framing_RoutineRoutineBegin(snapshot) {
     Framing_RoutineMaxDuration = null
     // keep track of which components have finished
     Framing_RoutineComponents = [];
+    Framing_RoutineComponents.push(framing_frame);
+    Framing_RoutineComponents.push(framing_icon);
     Framing_RoutineComponents.push(framing_text);
+    Framing_RoutineComponents.push(framing_hint);
     Framing_RoutineComponents.push(key_resp_framing);
     
     for (const thisComponent of Framing_RoutineComponents)
@@ -1505,6 +1554,24 @@ function Framing_RoutineRoutineEachFrame() {
     t = Framing_RoutineClock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     
+    // *framing_frame* updates (画框)
+    if (t >= 0.0 && framing_frame.status === PsychoJS.Status.NOT_STARTED) {
+      framing_frame.tStart = t;
+      framing_frame.frameNStart = frameN;
+      framing_frame.setAutoDraw(true);
+    }
+    if (framing_frame.status === PsychoJS.Status.STARTED) {
+    }
+
+    // *framing_icon* updates (消息通知图标)
+    if (t >= 0.0 && framing_icon.status === PsychoJS.Status.NOT_STARTED) {
+      framing_icon.tStart = t;
+      framing_icon.frameNStart = frameN;
+      framing_icon.setAutoDraw(true);
+    }
+    if (framing_icon.status === PsychoJS.Status.STARTED) {
+    }
+
     // *framing_text* updates
     if (t >= 0.0 && framing_text.status === PsychoJS.Status.NOT_STARTED) {
       framing_text.tStart = t;
@@ -1512,6 +1579,15 @@ function Framing_RoutineRoutineEachFrame() {
       framing_text.setAutoDraw(true);
     }
     if (framing_text.status === PsychoJS.Status.STARTED) {
+    }
+
+    // *framing_hint* updates (底部提示)
+    if (t >= 0.0 && framing_hint.status === PsychoJS.Status.NOT_STARTED) {
+      framing_hint.tStart = t;
+      framing_hint.frameNStart = frameN;
+      framing_hint.setAutoDraw(true);
+    }
+    if (framing_hint.status === PsychoJS.Status.STARTED) {
     }
     
     // *key_resp_framing* updates
