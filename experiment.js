@@ -32,8 +32,8 @@ let expInfo = {
 };
 
 // 认知框架操纵文本（模块级常量，供 Framing_Routine 使用）
-const FRAMING_TEXT_GROUP = '你与A小区的其他成员同属一个休戚与共的集体。\n\n你们的得失被绑在一起，A小区所有成员的表现将汇总为A小区团队总收益。\n\n请记住：你不是孤身一人。\n\n你的每一次选择，都直接关系到整个A小区的集体荣誉与共同命运。\n\n你们能否在与B或C小区的资源较量中守住属于你们的份额，取决于团队每一个人的共同努力。';
-const FRAMING_TEXT_INDIV = '从现在起，你将作为独立个体参与资源分配。\n\n本次任务采取个人绩评估算——你的报酬完全取决于你个人的得分，与团队中其他任何成员无关。\n\n你不需要为别人考虑，也不用替同小区成员承担得失。\n\n请记住：你的目标很单纯，就是为自己的账户争取最多的个人报酬。\n\n你能否在与B或C小区的资源较量中守住属于自己的份额，取决于你的个人努力。';
+const FRAMING_TEXT_GROUP = '你与A小区的其他成员同属一个休戚与共的集体。\n\n你们的得失被绑在一起，A小区所有成员的表现将汇总为A小区团队总收益。\n\n请记住：你不是孤身一人。\n\n你的每一次选择，都直接关系到整个A小区的集体荣誉与共同命运。\n\n你们能否在与B小区的资源较量中守住属于你们的份额，取决于团队每一个人的共同努力。';
+const FRAMING_TEXT_INDIV = '从现在起，你将作为独立个体参与资源分配。\n\n本次任务采取个人绩评估算——你的报酬完全取决于你个人的得分，与团队中其他任何成员无关。\n\n你不需要为别人考虑，也不用替同小区成员承担得失。\n\n请记住：你的目标很单纯，就是为自己的账户争取最多的个人报酬。\n\n你能否在与B小区的资源较量中守住属于自己的份额，取决于你的个人努力。';
 
 let PILOTING = util.getUrlParameters().has('__pilotToken');
 let currentLoop;
@@ -992,7 +992,7 @@ async function experimentInit() {
   transition_msg = new visual.TextStim({
     win: psychoJS.window,
     name: 'transition_msg',
-    text: '\n\n很遗憾！社区充电桩竞争激烈\n\n你所在的A小区并未争取到大部分的充电桩使用权限\n\n接下来你将会随机与未来社区中的某一小区（B小区或C小区）\n\n进行最后一个社区任务\n\n了解以上信息后请按空格键查看接下来的内容',
+    text: '\n\n很遗憾！社区充电桩竞争激烈\n\n你所在的A小区并未争取到大部分的充电桩使用权限\n\n接下来你将会与B小区\n\n进行最后一个社区任务\n\n了解以上信息后请按空格键查看接下来的内容',
     font: 'STHeiti',
     units: undefined, 
     pos: [0, 0.0], draggable: false, height: 0.032,  wrapWidth: 1.4, ori: 0.0,
@@ -1008,7 +1008,7 @@ async function experimentInit() {
   text_8 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_8',
-    text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n   • 您所在小区的额外充电桩奖励与荣誉\n    • 您个人的实验报酬与互动小区的报酬额\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n作为社区代表，您拥有 20 张选票。\n请按空格键了解投票规则。',
+    text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区进行互评。\n\n投票结果将影响：\n   • 您所在小区的额外充电桩奖励与荣誉\n    • 您个人的实验报酬与互动小区的报酬额\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n作为社区代表，您拥有 20 张选票。\n请按空格键了解投票规则。',
     font: 'STHeiti',
     units: undefined,
     pos: [0, 0], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
@@ -1039,7 +1039,7 @@ async function experimentInit() {
   text_7 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_7',
-    text: '【投票规则】\n\n我们采用票数兑换积分制。\n您需要决定将这20票如何分配给三个选项：\n\n选项A：每投1票，自己加2分，其他成员不加分；\n\n选项B：每投1票，自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：每投1票，自己和A小区成员各加1分，互动小区成员各减1分。\n\n注意：20票可以分配给三个选项并且须全部投出，\n三个选项投票数之和必须等于20！\n\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
+    text: '【投票规则】\n\n我们采用票数兑换积分制。\n您需要决定将这20票如何分配给三个选项：\n\n选项A：每投1票，自己加2分，其他成员不加分；\n\n选项B：每投1票，自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：每投1票，自己和A小区成员各加1分，互动小区成员各减1分。\n\n注意：20票可以分配给三个选项并且须全部投出，\n三个选项投票数之和必须等于20！\n\n按空格键进入决策环节，\n您的互动对象是 B 小区。',
     font: 'STHeiti',
     units: 'height',
     pos: [0, 0], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
@@ -2823,6 +2823,7 @@ function Conflict_RoutineRoutineEnd(snapshot) {
 }
 
 // Transition_Match_Routine for group 2 - 重新匹配对手提示
+// 实验二已停用：自变量改为二水平（有冲突/无冲突），所有条件统一与 B 小区互动，不再存在重新匹配到 C 小区的流程
 let Transition_Match_Clock, transition_match_text, transition_match_key;
 
 function Transition_Match_RoutineBegin(snapshot) {
@@ -3128,8 +3129,7 @@ function Emotion_MeasurementRoutineBegin(snapshot) {
     
     // 获取当前页面类型 (anger 或 solidarity)
     const current_page = page_type;  // 'anger' 或 'solidarity'
-    // 情绪测量始终针对刚才互动的小区（Group 1/2/3 在情绪测量时都是针对 B 小区）
-    // Group 2 在 Transition_Match 之后才切换到 C 小区进行后续决策
+    // 实验二：自变量二水平，互动对象统一为 B 小区，情绪测量始终针对 B 小区
     let opponent_name = "B小区";
     let self_name = "A小区";
     
@@ -3745,14 +3745,11 @@ function Transition_RoutineRoutineBegin(snapshot) {
     } catch(e) {
         current_group = 3;
     }
+    // 实验二：二水平设计，互动对象统一为 B 小区（不再有重新匹配到 C 小区的条件）
     if ((current_group === 1)) {
         reminder_text = "\u63d0\u793a\uff1a\u63a5\u4e0b\u6765\u7684\u4e92\u52a8\u4e2d\uff0c\u60a8\u7684\u4e92\u52a8\u5bf9\u8c61\u4ecd\u662f\u3010\u521a\u624d\u90a3\u652f\u3011\u5bfc\u81f4\u8d44\u6e90\u635f\u5931\u7684B\u5c0f\u533a\u3002";
     } else {
-        if ((current_group === 2)) {
-            reminder_text = "\u63d0\u793a\uff1a\u7cfb\u7edf\u5df2\u91cd\u65b0\u5339\u914d\u3002\u63a5\u4e0b\u6765\u7684\u4e92\u52a8\u4e2d\uff0c\u60a8\u7684\u4e92\u52a8\u5bf9\u8c61\u662f\u4e00\u652f\u3010\u5168\u65b0\u3011\u7684C\u5c0f\u533a\u3002";
-        } else {
-            reminder_text = "\u63d0\u793a\uff1a\u63a5\u4e0b\u6765\u7684\u4e92\u52a8\u4e2d\uff0c\u60a8\u7684\u4e92\u52a8\u5bf9\u8c61\u662f\u4e00\u652f\u968f\u673a\u5339\u914d\u7684B\u5c0f\u533a\u3002";
-        }
+        reminder_text = "\u63d0\u793a\uff1a\u63a5\u4e0b\u6765\u7684\u4e92\u52a8\u4e2d\uff0c\u60a8\u7684\u4e92\u52a8\u5bf9\u8c61\u662f\u4e00\u652f\u968f\u673a\u5339\u914d\u7684B\u5c0f\u533a\u3002";
     }
     total_score = 0;
     
@@ -4220,28 +4217,20 @@ function Decision_RoutineRoutineBegin(snapshot) {
         round_info_text = "\u3010\u6b63\u5f0f\u51b3\u7b56\u3011\u8bf7\u8ba4\u771f\u51b3\u7b56\uff08\u672c\u8f6e\u7ed3\u679c\u5c06\u8ba1\u5165\u6700\u7ec8\u6536\u76ca\uff09";
         is_practice = false;
     }
+    // 实验二：冲突历史为二水平（1=有冲突 / 3=无冲突），练习轮与正式决策轮统一与 B 小区互动
     if (is_practice) {
         opponent_status = "\u63d0\u793a\uff1a\u8fd9\u662f\u7ec3\u4e60\u8f6e\uff0c\u8bf7\u719f\u6089\u64cd\u4f5c\u754c\u9762\u3002";
     } else {
-        if ((current_group === 2)) {
-            opponent_status = "\u63d0\u793a\uff1a\u4f60\u6b63\u9762\u5bf9C\u5c0f\u533a\u8fdb\u884c\u793e\u533a\u4efb\u52a1";
+        if ((current_group === 1)) {
+            opponent_status = "\u63d0\u793a\uff1a\u63a5\u4e0b\u6765\u7684\u4e92\u52a8\u4e2d\uff0c\u60a8\u7684\u4e92\u52a8\u5bf9\u8c61\u4ecd\u662f\u3010\u521a\u624d\u90a3\u652f\u3011\u5bfc\u81f4\u8d44\u6e90\u635f\u5931\u7684B\u5c0f\u533a\u3002";
         } else {
-            if ((current_group === 1)) {
-                opponent_status = "\u63d0\u793a\uff1a\u63a5\u4e0b\u6765\u7684\u4e92\u52a8\u4e2d\uff0c\u60a8\u7684\u4e92\u52a8\u5bf9\u8c61\u4ecd\u662f\u3010\u521a\u624d\u90a3\u652f\u3011\u5bfc\u81f4\u8d44\u6e90\u635f\u5931\u7684B\u5c0f\u533a\u3002";
-            } else {
-                opponent_status = "\u63d0\u793a\uff1a\u8bf7\u6309\u7167\u60a8\u7684\u610f\u613f\u8fdb\u884c\u8d44\u6e90\u5206\u914d\u3002";
-            }
+            opponent_status = "\u63d0\u793a\uff1a\u63a5\u4e0b\u6765\u7684\u4e92\u52a8\u4e2d\uff0c\u60a8\u7684\u4e92\u52a8\u5bf9\u8c61\u662f\u968f\u673a\u5339\u914d\u7684B\u5c0f\u533a\u3002";
         }
     }
-    if ((current_group === 2)) {
-        label_B_text = (((((("\u9009\u9879B" + "\n") + "\u81ea\u5df1+1\u5206") + "\n") + "A\u5c0f\u533a\u5176\u4ed6\u6210\u5458+1\u5206") + "\n") + "C\u5c0f\u533a\u6210\u5458\u4e0d\u53d8");
-        label_C_text = (((((("\u9009\u9879C" + "\n") + "\u81ea\u5df1+1\u5206") + "\n") + "A\u5c0f\u533a\u5176\u4ed6\u6210\u5458+1\u5206") + "\n") + "C\u5c0f\u533a\u6210\u5458\u5404-1\u5206");
-        opponent_name = "C\u5c0f\u533a";
-    } else {
-        label_B_text = (((((("\u9009\u9879B" + "\n") + "\u81ea\u5df1+1\u5206") + "\n") + "A\u5c0f\u533a\u5176\u4ed6\u6210\u5458+1\u5206") + "\n") + "B\u5c0f\u533a\u6210\u5458\u4e0d\u53d8");
-        label_C_text = (((((("\u9009\u9879C" + "\n") + "\u81ea\u5df1+1\u5206") + "\n") + "A\u5c0f\u533a\u5176\u4ed6\u6210\u5458+1\u5206") + "\n") + "B\u5c0f\u533a\u6210\u5458\u5404-1\u5206");
-        opponent_name = "B\u5c0f\u533a";
-    }
+    // 所有条件的互动对象统一为 B 小区：选项说明、收益反馈口径保持一致
+    label_B_text = (((((("\u9009\u9879B" + "\n") + "\u81ea\u5df1+1\u5206") + "\n") + "A\u5c0f\u533a\u5176\u4ed6\u6210\u5458+1\u5206") + "\n") + "B\u5c0f\u533a\u6210\u5458\u4e0d\u53d8");
+    label_C_text = (((((("\u9009\u9879C" + "\n") + "\u81ea\u5df1+1\u5206") + "\n") + "A\u5c0f\u533a\u5176\u4ed6\u6210\u5458+1\u5206") + "\n") + "B\u5c0f\u533a\u6210\u5458\u5404-1\u5206");
+    opponent_name = "B\u5c0f\u533a";
     input_A.text = "";
     input_B.text = "";
     input_C.text = "";
