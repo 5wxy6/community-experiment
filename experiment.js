@@ -60,8 +60,8 @@ let emotion_text_anger_1, emotion_text_anger_2, emotion_text_anger_3, emotion_te
 let emotion_slider_anger_1, emotion_slider_anger_2, emotion_slider_anger_3, emotion_slider_anger_4, emotion_slider_anger_5;
 let emotion_text_solid_1, emotion_text_solid_2, emotion_text_solid_3, emotion_text_solid_4, emotion_text_solid_5;
 let emotion_slider_solid_1, emotion_slider_solid_2, emotion_slider_solid_3, emotion_slider_solid_4, emotion_slider_solid_5;
-let emotion_text_threat_1, emotion_text_threat_2, emotion_text_threat_3;
-let emotion_slider_threat_1, emotion_slider_threat_2, emotion_slider_threat_3;
+let emotion_text_threat_1, emotion_text_threat_2, emotion_text_threat_3, emotion_text_threat_4, emotion_text_threat_5;
+let emotion_slider_threat_1, emotion_slider_threat_2, emotion_slider_threat_3, emotion_slider_threat_4, emotion_slider_threat_5;
 let intro_key_emotion, final_confirm_btn, transition_msg;
 let text_2, text_3, text_4, text_7, text_8;
 let vote_red_text, rule_red_text;
@@ -901,6 +901,36 @@ async function experimentInit() {
     style: ["RATING", "LABELS_20", "TRIANGLE_MARKER"],
     color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
     opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -26.0, flip: false,
+  });
+  emotion_text_threat_4 = new visual.TextStim({
+    win: psychoJS.window, name: 'emotion_text_threat_4',
+    text: '', font: 'STHeiti', units: undefined,
+    pos: [0, -0.08], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -27.0
+  });
+  emotion_text_threat_5 = new visual.TextStim({
+    win: psychoJS.window, name: 'emotion_text_threat_5',
+    text: '', font: 'STHeiti', units: undefined,
+    pos: [0, -0.25], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -28.0
+  });
+  emotion_slider_threat_4 = new visual.Slider({
+    win: psychoJS.window, name: 'emotion_slider_threat_4', startValue: undefined,
+    size: [1.0, 0.05], pos: [0, -0.12], ori: 0.0, units: psychoJS.window.units,
+    labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
+    fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
+    style: ["RATING", "LABELS_20", "TRIANGLE_MARKER"],
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -29.0, flip: false,
+  });
+  emotion_slider_threat_5 = new visual.Slider({
+    win: psychoJS.window, name: 'emotion_slider_threat_5', startValue: undefined,
+    size: [1.0, 0.05], pos: [0, -0.29], ori: 0.0, units: psychoJS.window.units,
+    labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
+    fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
+    style: ["RATING", "LABELS_20", "TRIANGLE_MARKER"],
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -30.0, flip: false,
   });
   
   // Initialize components for Routine "Emotion_Final_Submit"
@@ -3123,7 +3153,9 @@ function Emotion_MeasurementRoutineBegin(snapshot) {
     const threat_questions = [
         "1. 我担心" + opponent_name + "在后续互动中还会抢占我们的资源。",
         "2. 我感觉" + self_name + "未来的资源安全正受到来自" + opponent_name + "的威胁。",
-        "3. 我认为需要提防" + opponent_name + "进一步的竞争性行为。"
+        "3. 我认为需要提防" + opponent_name + "进一步的竞争性行为。",
+        "4. 与" + opponent_name + "互动时，我需要保持警惕，防止本群体的利益受损。",
+        "5. " + opponent_name + "的行为让我感到本群体可能再次遭受损失。"
     ];
     
     // 根据页面类型设置文本和重置滑块
@@ -3156,10 +3188,14 @@ function Emotion_MeasurementRoutineBegin(snapshot) {
         emotion_text_threat_1.setText(threat_questions[0]);
         emotion_text_threat_2.setText(threat_questions[1]);
         emotion_text_threat_3.setText(threat_questions[2]);
+        emotion_text_threat_4.setText(threat_questions[3]);
+        emotion_text_threat_5.setText(threat_questions[4]);
 
         emotion_slider_threat_1.reset();
         emotion_slider_threat_2.reset();
         emotion_slider_threat_3.reset();
+        emotion_slider_threat_4.reset();
+        emotion_slider_threat_5.reset();
     }
     
     psychoJS.experiment.addData('Emotion_Measurement.started', globalClock.getTime());
@@ -3196,9 +3232,13 @@ function Emotion_MeasurementRoutineBegin(snapshot) {
         Emotion_MeasurementComponents.push(emotion_text_threat_1);
         Emotion_MeasurementComponents.push(emotion_text_threat_2);
         Emotion_MeasurementComponents.push(emotion_text_threat_3);
+        Emotion_MeasurementComponents.push(emotion_text_threat_4);
+        Emotion_MeasurementComponents.push(emotion_text_threat_5);
         Emotion_MeasurementComponents.push(emotion_slider_threat_1);
         Emotion_MeasurementComponents.push(emotion_slider_threat_2);
         Emotion_MeasurementComponents.push(emotion_slider_threat_3);
+        Emotion_MeasurementComponents.push(emotion_slider_threat_4);
+        Emotion_MeasurementComponents.push(emotion_slider_threat_5);
     }
     
     for (const thisComponent of Emotion_MeasurementComponents)
@@ -3255,7 +3295,10 @@ function Emotion_MeasurementRoutineEachFrame() {
         const rating1 = emotion_slider_threat_1.getRating();
         const rating2 = emotion_slider_threat_2.getRating();
         const rating3 = emotion_slider_threat_3.getRating();
-        if (rating1 !== undefined && rating2 !== undefined && rating3 !== undefined) {
+        const rating4 = emotion_slider_threat_4.getRating();
+        const rating5 = emotion_slider_threat_5.getRating();
+        if (rating1 !== undefined && rating2 !== undefined && rating3 !== undefined &&
+            rating4 !== undefined && rating5 !== undefined) {
             all_sliders_filled = true;
         }
     }
@@ -3357,18 +3400,22 @@ function Emotion_MeasurementRoutineEnd(snapshot) {
         }
     }
  else if (current_page === 'threat') {
-        // 记录威胁感知 3 题的数据
+        // 记录威胁感知 5 题的数据
         const ratings = [
             emotion_slider_threat_1.getRating(),
             emotion_slider_threat_2.getRating(),
-            emotion_slider_threat_3.getRating()
+            emotion_slider_threat_3.getRating(),
+            emotion_slider_threat_4.getRating(),
+            emotion_slider_threat_5.getRating()
         ];
         const rts = [
             emotion_slider_threat_1.getRT(),
             emotion_slider_threat_2.getRT(),
-            emotion_slider_threat_3.getRT()
+            emotion_slider_threat_3.getRT(),
+            emotion_slider_threat_4.getRT(),
+            emotion_slider_threat_5.getRT()
         ];
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 5; i++) {
             if (ratings[i] !== null && ratings[i] !== undefined) {
                 psychoJS.experiment.addData('threat_percept_' + (i+1), ratings[i]);
                 psychoJS.experiment.addData('threat_percept_' + (i+1) + '_RT', rts[i]);
