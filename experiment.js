@@ -60,6 +60,8 @@ let emotion_text_anger_1, emotion_text_anger_2, emotion_text_anger_3, emotion_te
 let emotion_slider_anger_1, emotion_slider_anger_2, emotion_slider_anger_3, emotion_slider_anger_4, emotion_slider_anger_5;
 let emotion_text_solid_1, emotion_text_solid_2, emotion_text_solid_3, emotion_text_solid_4, emotion_text_solid_5;
 let emotion_slider_solid_1, emotion_slider_solid_2, emotion_slider_solid_3, emotion_slider_solid_4, emotion_slider_solid_5;
+let emotion_text_threat_1, emotion_text_threat_2, emotion_text_threat_3;
+let emotion_slider_threat_1, emotion_slider_threat_2, emotion_slider_threat_3;
 let intro_key_emotion, final_confirm_btn, transition_msg;
 let text_2, text_3, text_4, text_7, text_8;
 let vote_red_text, rule_red_text;
@@ -180,9 +182,10 @@ flowScheduler.add(Emotion_Final_SubmitRoutineEnd());
 flowScheduler.add(secondRoutineBegin());
 flowScheduler.add(secondRoutineEachFrame());
 flowScheduler.add(secondRoutineEnd());
-flowScheduler.add(Transition_Match_RoutineBegin());
-flowScheduler.add(Transition_Match_RoutineEachFrame());
-flowScheduler.add(Transition_Match_RoutineEnd());
+// 实验二：二水平设计，无重组冲突组，跳过重新匹配提示
+// flowScheduler.add(Transition_Match_RoutineBegin());
+// flowScheduler.add(Transition_Match_RoutineEachFrame());
+// flowScheduler.add(Transition_Match_RoutineEnd());
 flowScheduler.add(Transition_RoutineRoutineBegin());
 flowScheduler.add(Transition_RoutineRoutineEachFrame());
 flowScheduler.add(Transition_RoutineRoutineEnd());
@@ -213,6 +216,8 @@ window.startExperiment = async function(formData) {
     expInfo['gender'] = formData.gender;
     expInfo['age'] = formData.age;
     expInfo['group'] = formData.group;
+    // 实验二：冲突历史二水平（有冲突/无冲突），旧版组2（重组冲突）并入组1（有冲突）
+    if (String(expInfo['group']) === '2') { expInfo['group'] = '1'; }
   }
 
   try {
@@ -249,6 +254,8 @@ async function updateInfo() {
     expInfo['gender'] = window.expInfoOverride.gender;
     expInfo['age'] = window.expInfoOverride.age;
     expInfo['group'] = window.expInfoOverride.group;
+    // 实验二：冲突历史二水平（有冲突/无冲突），旧版组2（重组冲突）并入组1（有冲突）
+    if (String(expInfo['group']) === '2') { expInfo['group'] = '1'; }
   }
 
   expInfo['date'] = util.MonotonicClock.getDateStr();  // add a simple timestamp
@@ -848,6 +855,53 @@ async function experimentInit() {
     color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
     opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -20.0, flip: false,
   });
+
+  // Initialize 3 threat-perception items（威胁感知：防御性通路）
+  emotion_text_threat_1 = new visual.TextStim({
+    win: psychoJS.window, name: 'emotion_text_threat_1',
+    text: '', font: 'STHeiti', units: undefined,
+    pos: [0, 0.43], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -21.0
+  });
+  emotion_text_threat_2 = new visual.TextStim({
+    win: psychoJS.window, name: 'emotion_text_threat_2',
+    text: '', font: 'STHeiti', units: undefined,
+    pos: [0, 0.26], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -22.0
+  });
+  emotion_text_threat_3 = new visual.TextStim({
+    win: psychoJS.window, name: 'emotion_text_threat_3',
+    text: '', font: 'STHeiti', units: undefined,
+    pos: [0, 0.09], draggable: false, height: 0.035, wrapWidth: 1.3, ori: 0.0,
+    languageStyle: 'LTR', color: new util.Color('black'), opacity: undefined, depth: -23.0
+  });
+  emotion_slider_threat_1 = new visual.Slider({
+    win: psychoJS.window, name: 'emotion_slider_threat_1', startValue: undefined,
+    size: [1.0, 0.05], pos: [0, 0.39], ori: 0.0, units: psychoJS.window.units,
+    labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
+    fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
+    style: ["RATING", "LABELS_20", "TRIANGLE_MARKER"],
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -24.0, flip: false,
+  });
+  emotion_slider_threat_2 = new visual.Slider({
+    win: psychoJS.window, name: 'emotion_slider_threat_2', startValue: undefined,
+    size: [1.0, 0.05], pos: [0, 0.22], ori: 0.0, units: psychoJS.window.units,
+    labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
+    fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
+    style: ["RATING", "LABELS_20", "TRIANGLE_MARKER"],
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -25.0, flip: false,
+  });
+  emotion_slider_threat_3 = new visual.Slider({
+    win: psychoJS.window, name: 'emotion_slider_threat_3', startValue: undefined,
+    size: [1.0, 0.05], pos: [0, 0.05], ori: 0.0, units: psychoJS.window.units,
+    labels: ["1\n非常不认同", "2\n比较不认同", "3\n有点不认同", "4\n不确定", "5\n有点认同", "6\n比较认同", "7\n非常认同"],
+    fontSize: 0.025, ticks: [1, 2, 3, 4, 5, 6, 7], granularity: 1.0,
+    style: ["RATING", "LABELS_20", "TRIANGLE_MARKER"],
+    color: new util.Color('black'), markerColor: new util.Color('Red'), lineColor: new util.Color('White'),
+    opacity: undefined, fontFamily: 'STHeiti', bold: true, italic: false, depth: -26.0, flip: false,
+  });
   
   // Initialize components for Routine "Emotion_Final_Submit"
   Emotion_Final_SubmitClock = new util.Clock();
@@ -924,7 +978,7 @@ async function experimentInit() {
   text_8 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_8',
-    text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n   • 您所在小区的额外充电桩奖励与荣誉\n    • 您个人的实验报酬与互动小区的报酬额\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n作为社区代表，您拥有 10 张选票。\n请按空格键了解投票规则。',
+    text: '【文明住户评比活动】\n\n社区正在进行年度文明住户评比。\n您所在的 A 小区将与 B 小区或 C 小区进行互评。\n\n投票结果将影响：\n   • 您所在小区的额外充电桩奖励与荣誉\n    • 您个人的实验报酬与互动小区的报酬额\n\n（最终报酬将综合第一、第二个社区任务的表现计算。）\n\n作为社区代表，您拥有 20 张选票。\n请按空格键了解投票规则。',
     font: 'STHeiti',
     units: undefined,
     pos: [0, 0], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
@@ -938,7 +992,7 @@ async function experimentInit() {
   vote_red_text = new visual.TextStim({
     win: psychoJS.window,
     name: 'vote_red_text',
-    text: '作为社区代表，您拥有 10 张选票。',
+    text: '作为社区代表，您拥有 20 张选票。',
     font: 'STHeiti',
     units: undefined,
     pos: [0, -0.16], draggable: false, height: 0.032, wrapWidth: 1.4, ori: 0.0,
@@ -955,7 +1009,7 @@ async function experimentInit() {
   text_7 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_7',
-    text: '【投票规则】\n\n我们采用票数兑换积分制。\n您需要决定将这10票如何分配给三个选项：\n\n选项A：每投1票，自己加2分，其他成员不加分；\n\n选项B：每投1票，自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：每投1票，自己和A小区成员各加1分，互动小区成员各减1分。\n\n注意：10票可以分配给三个选项并且须全部投出，\n三个选项投票数之和必须等于10！\n\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
+    text: '【投票规则】\n\n我们采用票数兑换积分制。\n您需要决定将这20票如何分配给三个选项：\n\n选项A：每投1票，自己加2分，其他成员不加分；\n\n选项B：每投1票，自己和A小区成员各加1分，互动小区成员不加分；\n\n选项C：每投1票，自己和A小区成员各加1分，互动小区成员各减1分。\n\n注意：20票可以分配给三个选项并且须全部投出，\n三个选项投票数之和必须等于20！\n\n按空格键进入决策环节，\n你会得知与哪个小区互动。',
     font: 'STHeiti',
     units: 'height',
     pos: [0, 0], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
@@ -971,7 +1025,7 @@ async function experimentInit() {
   rule_red_text = new visual.TextStim({
     win: psychoJS.window,
     name: 'rule_red_text',
-    text: '注意：共10票，可分配给三个选项且须全部投出，\n三个选项投票数之和必须等于10！',
+    text: '注意：共20票，可分配给三个选项且须全部投出，\n三个选项投票数之和必须等于20！',
     font: 'STHeiti',
     units: 'height',
     pos: [0, -0.08], draggable: false, height: 0.03, wrapWidth: 1.4, ori: 0.0,
@@ -1097,7 +1151,7 @@ async function experimentInit() {
   vote_sum_warning = new visual.TextStim({
     win: psychoJS.window,
     name: 'vote_sum_warning',
-    text: '⚠️ 注意：三个选项投票数之和必须等于10！',
+    text: '⚠️ 注意：三个选项投票数之和必须等于20！',
     font: 'STHeiti',
     units: undefined,
     pos: [0, (- 0.38)], draggable: false, height: 0.035, wrapWidth: 1.5, ori: 0.0,
@@ -2016,7 +2070,7 @@ function emotion_loopLoopBegin(emotion_loopLoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.SEQUENTIAL,
       extraInfo: expInfo, originPath: undefined,
-      trialList: [{page_type: 'anger'}, {page_type: 'solidarity'}],
+      trialList: [{page_type: 'anger'}, {page_type: 'solidarity'}, {page_type: 'threat'}],
       seed: undefined, name: 'emotion_loop'
     });
     psychoJS.experiment.addLoop(emotion_loop); // add the loop to the experiment
@@ -3065,6 +3119,12 @@ function Emotion_MeasurementRoutineBegin(snapshot) {
         "4. 即使需要付出个人代价，我也愿意为了维护" + self_name + "的整体利益而努力。",
         "5. 在这个实验任务中，我感觉到" + self_name + "成员是一个整体。"
     ];
+
+    const threat_questions = [
+        "1. 我担心" + opponent_name + "在后续互动中还会抢占我们的资源。",
+        "2. 我感觉" + self_name + "未来的资源安全正受到来自" + opponent_name + "的威胁。",
+        "3. 我认为需要提防" + opponent_name + "进一步的竞争性行为。"
+    ];
     
     // 根据页面类型设置文本和重置滑块
     if (current_page === 'anger') {
@@ -3091,6 +3151,15 @@ function Emotion_MeasurementRoutineBegin(snapshot) {
         emotion_slider_solid_3.reset();
         emotion_slider_solid_4.reset();
         emotion_slider_solid_5.reset();
+    }
+ else if (current_page === 'threat') {
+        emotion_text_threat_1.setText(threat_questions[0]);
+        emotion_text_threat_2.setText(threat_questions[1]);
+        emotion_text_threat_3.setText(threat_questions[2]);
+
+        emotion_slider_threat_1.reset();
+        emotion_slider_threat_2.reset();
+        emotion_slider_threat_3.reset();
     }
     
     psychoJS.experiment.addData('Emotion_Measurement.started', globalClock.getTime());
@@ -3122,6 +3191,14 @@ function Emotion_MeasurementRoutineBegin(snapshot) {
         Emotion_MeasurementComponents.push(emotion_slider_solid_3);
         Emotion_MeasurementComponents.push(emotion_slider_solid_4);
         Emotion_MeasurementComponents.push(emotion_slider_solid_5);
+    }
+ else if (current_page === 'threat') {
+        Emotion_MeasurementComponents.push(emotion_text_threat_1);
+        Emotion_MeasurementComponents.push(emotion_text_threat_2);
+        Emotion_MeasurementComponents.push(emotion_text_threat_3);
+        Emotion_MeasurementComponents.push(emotion_slider_threat_1);
+        Emotion_MeasurementComponents.push(emotion_slider_threat_2);
+        Emotion_MeasurementComponents.push(emotion_slider_threat_3);
     }
     
     for (const thisComponent of Emotion_MeasurementComponents)
@@ -3171,6 +3248,14 @@ function Emotion_MeasurementRoutineEachFrame() {
         const rating5 = emotion_slider_solid_5.getRating();
         if (rating1 !== undefined && rating2 !== undefined && rating3 !== undefined && 
             rating4 !== undefined && rating5 !== undefined) {
+            all_sliders_filled = true;
+        }
+    }
+ else if (current_page === 'threat') {
+        const rating1 = emotion_slider_threat_1.getRating();
+        const rating2 = emotion_slider_threat_2.getRating();
+        const rating3 = emotion_slider_threat_3.getRating();
+        if (rating1 !== undefined && rating2 !== undefined && rating3 !== undefined) {
             all_sliders_filled = true;
         }
     }
@@ -3268,6 +3353,27 @@ function Emotion_MeasurementRoutineEnd(snapshot) {
                 psychoJS.experiment.addData('ig_solid_' + (i+1) + '_RT', rts[i]);
             } else {
                 psychoJS.experiment.addData('ig_solid_' + (i+1), 'None');
+            }
+        }
+    }
+ else if (current_page === 'threat') {
+        // 记录威胁感知 3 题的数据
+        const ratings = [
+            emotion_slider_threat_1.getRating(),
+            emotion_slider_threat_2.getRating(),
+            emotion_slider_threat_3.getRating()
+        ];
+        const rts = [
+            emotion_slider_threat_1.getRT(),
+            emotion_slider_threat_2.getRT(),
+            emotion_slider_threat_3.getRT()
+        ];
+        for (let i = 0; i < 3; i++) {
+            if (ratings[i] !== null && ratings[i] !== undefined) {
+                psychoJS.experiment.addData('threat_percept_' + (i+1), ratings[i]);
+                psychoJS.experiment.addData('threat_percept_' + (i+1) + '_RT', rts[i]);
+            } else {
+                psychoJS.experiment.addData('threat_percept_' + (i+1), 'None');
             }
         }
     }
@@ -4099,15 +4205,15 @@ function Decision_RoutineRoutineBegin(snapshot) {
     input_A.setText('');
     input_A.refresh();
     input_A.setText('');
-    input_A.setPlaceholder('请输入票数（0-10）');
+    input_A.setPlaceholder('请输入票数（0-20）');
     input_B.setText('');
     input_B.refresh();
     input_B.setText('');
-    input_B.setPlaceholder('请输入票数（0-10）');
+    input_B.setPlaceholder('请输入票数（0-20）');
     input_C.setText('');
     input_C.refresh();
     input_C.setText('');
-    input_C.setPlaceholder('请输入票数（0-10）');
+    input_C.setPlaceholder('请输入票数（0-20）');
     opponent_reminder.setText(opponent_status);
     submit_btn.setText('ok');
     // reset submit_btn to account for continued clicks & clear times on/off
@@ -4436,6 +4542,12 @@ function Decision_RoutineRoutineEnd(snapshot) {
     self_score = ((val_a * 2) + val_b + val_c);
     teammate_score = (val_b + val_c);
     opponent_score = (-val_c);
+    // 攻击性敌意指标 C − B（保留负值，连续分析）；三池数值字段
+    const cb_diff = (val_c - val_b);
+    psychoJS.experiment.addData('CB_diff', cb_diff);
+    psychoJS.experiment.addData('pool_A', val_a);
+    psychoJS.experiment.addData('pool_B', val_b);
+    psychoJS.experiment.addData('pool_C', val_c);
     // the Routine "Decision_Routine" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
